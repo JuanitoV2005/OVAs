@@ -11,7 +11,7 @@
     <!-- Aquí puedes poner una navegación superior si la necesitas -->
   </header>
 
-  <main>
+  <main id="main-content">
     <h1>Contenido principal</h1>
     <p>Este es el contenido de la página. Agrega suficiente texto para hacer scroll y verificar que el nav no lo tape.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vel orci eget velit mattis fermentum. Sed commodo, nibh in bibendum mattis, justo nisi luctus est, a dapibus quam massa et nisi.</p>
@@ -20,14 +20,17 @@
   </main>
 
   <nav aria-label="Navegación inferior">
-    <a href="#" aria-label="Anterior">
+    <a href="#" aria-label="Anterior" id="btn-anterior">
       <img src="assets/left-arrow.png" alt="Anterior" />
     </a>
-    <a href="#" aria-label="Capítulos">
+    <a href="#" aria-label="Capítulos" id="btn-capitulos">
         <img src="assets/menu.png" alt="Capítulos" />
     </a>
-    <a href="#" aria-label="Siguiente">
+    <a href="#" aria-label="Siguiente" id="btn-siguiente">
       <img src="assets/right-arrow.png" alt="Siguiente" />
     </a>
+  </nav>
+
+  <script src="main.js"></script>
 </body>
 </html>
