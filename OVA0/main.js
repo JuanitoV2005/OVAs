@@ -13,6 +13,7 @@ const btnSiguiente = document.getElementById('btn-siguiente');
 const btnCapitulos = document.getElementById('btn-capitulos');
 const menuCapitulos = document.getElementById('menu-capitulos');
 
+
 function cargarContenido(indice) {
   if (indice < 0 || indice >= contenidos.length) {
     return; // Índice fuera de rango, no hacer nada

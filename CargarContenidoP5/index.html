@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>SPA con p5.js - Reset y No Loop</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <style>
+    .contenedor-tema {
+      display: none;
+    }
+    .visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <button onclick="mostrarTema('tema1')">Tema 1</button>
+    <button onclick="mostrarTema('tema2')">Tema 2</button>
+  </nav>
+
+  <main>
+    <div id="contenedor-tema1" class="contenedor-tema"></div>
+    <div id="contenedor-tema2" class="contenedor-tema"></div>
+  </main>
+
+  <!-- Incluye los sketches y la lógica -->
+  <script src="sketch1.js"></script>
+  <script src="sketch2.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
