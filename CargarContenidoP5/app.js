@@ -1,30 +1,36 @@
-let sketch1, sketch2;
+let sketch1 = null;
+let sketch2 = null;
 
 function mostrarTema(id) {
-  // Ocultar todos los contenedores y pausar loops
-  document.getElementById('contenedor-tema1').classList.remove('visible');
-  sketch1.noLoop();
+  const main = document.getElementById('main-content');
 
-  document.getElementById('contenedor-tema2').classList.remove('visible');
-  sketch2.noLoop();
-
-  // Mostrar el contenedor seleccionado
-  const contenedor = document.getElementById('contenedor-' + id);
-  contenedor.classList.add('visible');
-
-  // Resetear estado y activar loop del sketch visible
-  if (id === 'tema1') {
-    sketch1.reset();
-    sketch1.loop();
-  } else if (id === 'tema2') {
-    sketch2.reset();
-    sketch2.loop();
+  // Destruir sketches si existen
+  if (sketch1) {
+    sketch1.remove();
+    sketch1 = null;
   }
+  if (sketch2) {
+    sketch2.remove();
+    sketch2 = null;
+  }
+
+  fetch(`${id}.html`)
+    .then(res => res.text())
+    .then(html => {
+      main.innerHTML = html;
+
+      // Esperar a que el DOM se actualice antes de crear el sketch
+      setTimeout(() => {
+        if (id === 'tema1') {
+          sketch1 = new p5(sketchTema1, 'contenedor-sketch1');
+        } else if (id === 'tema2') {
+          sketch2 = new p5(sketchTema2, 'contenedor-sketch2');
+        }
+      }, 0);
+    });
 }
 
+// Inicializar con tema1 al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
-  sketch1 = new p5(sketchTema1, 'contenedor-tema1');
-  sketch2 = new p5(sketchTema2, 'contenedor-tema2');
-
-  mostrarTema('tema1'); // Mostrar tema1 por defecto
+  mostrarTema('tema1');
 });
