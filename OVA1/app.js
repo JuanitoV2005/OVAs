@@ -1,4 +1,16 @@
 const temas = {
+  tema0: {
+    // La ruta al archivo HTML dentro de su carpeta de tema
+    html: 'pages/tema0/index.html',
+    // La ruta al archivo JS del sketch dentro de su carpeta de tema
+    sketchScript: null,
+    // El nombre de la función de sketch definida dentro de ese sketch.js
+    // (Asumiendo que dentro de pages/tema1/sketch.js hay una función llamada sketchTema1)
+    sketchName: null,
+    container: null,
+    instancia: null,
+    nombreMenu: 'Introducción a los primitivos en Java'
+  },
   tema1: {
     // La ruta al archivo HTML dentro de su carpeta de tema
     html: 'pages/tema1/index.html',
@@ -6,10 +18,10 @@ const temas = {
     sketchScript: 'pages/tema1/sketch.js',
     // El nombre de la función de sketch definida dentro de ese sketch.js
     // (Asumiendo que dentro de pages/tema1/sketch.js hay una función llamada sketchTema1)
-    sketchName: 'sketchTema1',
-    container: 'contenedor-sketch1',
+    sketchName: 'primitivosBits',
+    container: 'canvasContainer',
     instancia: null,
-    nombreMenu: 'Introducción al Tema 1'
+    nombreMenu: 'Cómo los primitivos usan bits'
   },
   tema2: {
     html: 'pages/tema2/index.html',
@@ -17,7 +29,7 @@ const temas = {
     sketchName: 'sketchTema2',
     container: 'contenedor-sketch2',
     instancia: null,
-    nombreMenu: 'Profundizando en el Tema 2'
+    nombreMenu: 'Clases Wrapper'
   },
   tema3: {
     html: 'pages/tema3/index.html',
@@ -26,7 +38,7 @@ const temas = {
     sketchName: null,
     container: null,
     instancia: null,
-    nombreMenu: 'Conclusión y Resumen en el Tema 3'
+    nombreMenu: 'Tipos numéricos: int vs Integer'
   }
 };
 
@@ -38,13 +50,6 @@ const menuCapitulos = document.getElementById('menu-capitulos');
 
 const clavesTemas = Object.keys(temas);
 let indiceActual = 0;
-
-// Iniciar app
-cargarSketchesDinamicamente();
-cargarTema(indiceActual);
-// Llamada a funcion del menu
-construirMenu();
-
 
 
 function cargarTema(indice) {
@@ -186,3 +191,16 @@ function construirMenu() {
     }
   }
 }
+
+
+
+
+// Iniciar app
+// cargarSketchesDinamicamente();
+cargarSketchesDinamicamente(() => {
+  cargarTema(indiceActual);
+  construirMenu();
+});
+cargarTema(indiceActual);
+// Llamada a funcion del menu
+construirMenu();
