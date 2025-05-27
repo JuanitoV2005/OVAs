@@ -95,6 +95,7 @@ nav img {
   padding-left: 0 !important;
   margin-left: 0 !important;
 }
+
 .menu-capitulos button {
   all: unset;           /* elimina todos los estilos por defecto */
   cursor: pointer;

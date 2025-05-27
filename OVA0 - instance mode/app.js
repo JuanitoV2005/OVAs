@@ -8,14 +8,16 @@ const temas = {
     // (Asumiendo que dentro de pages/tema1/sketch.js hay una función llamada sketchTema1)
     sketchName: 'sketchTema1',
     container: 'contenedor-sketch1',
-    instancia: null
+    instancia: null,
+    nombreMenu: 'Introducción al Tema 1'
   },
   tema2: {
     html: 'pages/tema2/index.html',
     sketchScript: 'pages/tema2/sketch.js',
     sketchName: 'sketchTema2',
     container: 'contenedor-sketch2',
-    instancia: null
+    instancia: null,
+    nombreMenu: 'Profundizando en el Tema 2'
   },
   tema3: {
     html: 'pages/tema3/index.html',
@@ -23,7 +25,8 @@ const temas = {
     sketchScript: null,
     sketchName: null,
     container: null,
-    instancia: null
+    instancia: null,
+    nombreMenu: 'Conclusión y Resumen en el Tema 3'
   }
 };
 
@@ -150,6 +153,7 @@ btnCapitulos.addEventListener('click', e => {
   menuCapitulos.classList.toggle('visible');
 });
 
+
 function construirMenu() {
   const menuCapitulos = document.getElementById('menu-capitulos');
   if (!menuCapitulos) {
@@ -165,15 +169,16 @@ function construirMenu() {
   // Iterar sobre los temas en el orden en que aparecen en el objeto 'temas'
   for (const key in temas) {
     if (temas.hasOwnProperty(key)) {
-      const tema = temas[key]; // Aunque no se usa directamente en el addEventListener, se mantiene por claridad
+      const tema = temas[key];
       const indiceDelTema = clavesTemasMenu.indexOf(key); // Obtener el índice numérico
 
       const liTema = document.createElement('li');
       const btn = document.createElement('button');
 
-      btn.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+      // Usar el nuevo campo 'nombreMenu', o la clave del tema como fallback
+      btn.textContent = tema.nombreMenu || (key.charAt(0).toUpperCase() + key.slice(1));
 
-      // ¡CORRECCIÓN AQUÍ! Pasar el índice numérico a cargarTema
+      // Pasar el índice numérico a cargarTema
       btn.addEventListener('click', () => cargarTema(indiceDelTema));
 
       liTema.appendChild(btn);
@@ -181,4 +186,3 @@ function construirMenu() {
     }
   }
 }
-
