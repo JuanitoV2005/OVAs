@@ -132,6 +132,30 @@ h1 {
 }
 
 #canvasContainer canvas {
+  width:100%;  
   border: 1px solid #ccc;
   background-color: #ffffff;
+}
+
+#canvasContainer {
+  height: auto !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  main {
+  padding: 0px;
+  padding-bottom: 10vh;
+}
+
+  #canvasContainer {
+    max-width: 100%;
+  }
+
+  canvas {
+    max-width: 100%;
+    height: auto !important;
+  }
 }

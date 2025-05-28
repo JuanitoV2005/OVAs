@@ -40,7 +40,7 @@ function primitivosBits(p) {
   };
 
   p.setup = function () {
-    let canvas = p.createCanvas(800, 200);
+    let canvas = p.createCanvas(700, 200);
     canvas.parent('canvasContainer');
     p.reset();
 
