@@ -1,5 +1,5 @@
 const temas = {
-  tema2: {
+  tema0: {
     html: 'pages/tema2/index.html',
     sketchScript: 'pages/tema2/sketch.js',
     sketchName: 'sketchTema2',
@@ -7,18 +7,7 @@ const temas = {
     instancia: null,
     nombreMenu: '1. Mover peones en tablero'
   },
-  tema0: {
-    // La ruta al archivo HTML dentro de su carpeta de tema
-    html: 'pages/tema0/index.html',
-    // La ruta al archivo JS del sketch dentro de su carpeta de tema
-    sketchScript: null,
-    // El nombre de la función de sketch definida dentro de ese sketch.js
-    // (Asumiendo que dentro de pages/tema1/sketch.js hay una función llamada sketchTema1)
-    sketchName: null,
-    container: null,
-    instancia: null,
-    nombreMenu: 'Introducción a los primitivos en Java'
-  },
+  
   tema1: {
     // La ruta al archivo HTML dentro de su carpeta de tema
     html: 'pages/tema1/index.html',
@@ -30,6 +19,18 @@ const temas = {
     container: 'canvasContainer',
     instancia: null,
     nombreMenu: 'Cómo los primitivos usan bits'
+  },
+  tema2: {
+    // La ruta al archivo HTML dentro de su carpeta de tema
+    html: 'pages/tema0/index.html',
+    // La ruta al archivo JS del sketch dentro de su carpeta de tema
+    sketchScript: null,
+    // El nombre de la función de sketch definida dentro de ese sketch.js
+    // (Asumiendo que dentro de pages/tema1/sketch.js hay una función llamada sketchTema1)
+    sketchName: null,
+    container: null,
+    instancia: null,
+    nombreMenu: 'Introducción a los primitivos en Java'
   },
   
   tema3: {

@@ -1,7 +1,16 @@
 // chessSketch.js
-const sketchTema2 = (p) => {
+// const sketchTema2 = (p) => {
+function sketchTema2 (p) {
     let board;
     let pawnImg, knightImg, bishopImg, rookImg, queenImg, kingImg;
+    let gui = {
+    "background":"#ffffff",
+    "cellColor1":"#7689a0",
+    "cellColor2":"#e7e8f3",
+    "cellLength":50,
+    "pickedColor":"#3d6b4f",
+    "pickedWidth":3
+    }
 
     // Clase ChessBoard
     class ChessBoard {
@@ -14,6 +23,7 @@ const sketchTema2 = (p) => {
             this.pickedColor = pickedColor; // e.g., "#FF0000"
             this.pickedWidth = pickedWidth; // stroke weight for the picked piece
             this.pieces = pieces; // 2D array representing the board pieces
+            this.initialStatePieces = pieces;
         }
 
         drawBoard() {
@@ -240,8 +250,7 @@ const sketchTema2 = (p) => {
     };
 
     p.setup = () => {
-        p.createCanvas(800, 800); // Tamaño del canvas
-
+        p.createCanvas(gui.cellLength * 8+20, gui.cellLength * 8+20); // Tamaño del canvas
         // Inicialización de la matriz de piezas (ejemplo de un tablero inicial)
         const initialPieces = [
             [null, null, null, null, null, null, null, null],
@@ -260,12 +269,12 @@ const sketchTema2 = (p) => {
 
         // Inicializa la instancia del tablero
         board = new ChessBoard(
-            [p.color('#D18B47'), p.color('#FFCE9E')], // Colores del tablero
-            [50, 50], // Posición de la esquina superior izquierda [x, y]
-            80, // Ancho de celda
+            [gui.cellColor1, gui.cellColor2], // Colores del tablero
+            [10, 10], // Posición de la esquina superior izquierda [x, y]
+            gui.cellLength, // Ancho de celda
             [8, 8], // Dimensiones [filas, columnas]
-            p.color(255, 0, 0), // pickedColor (rojo)
-            4, // pickedWidth (grosor del borde)
+            gui.pickedColor, // pickedColor (rojo)
+            gui.pickedWidth, // pickedWidth (grosor del borde)
             initialPieces
         );
 
@@ -342,11 +351,16 @@ p.mouseClicked = () => {
         board.clearPickedPiece(); // Deselecciona cualquier pieza si la había
     }
 };
+
+//     p.reset = () => {
+//         board.pieces = board.initialStatePieces;
+//         board.clearPickedPiece();
+//   };
 };
 
 // Crea una nueva instancia de P5 y asóciala con un elemento HTML (opcional, si quieres un canvas específico)
 // Si no especificas un elemento, P5 creará un canvas dentro del <body>
-new p5(sketchTema2);
+// new p5(sketchTema2);
 
 // Para tener un canvas específico en el HTML, crea un div con un ID:
 // <div id="my-chess-container"></div>
