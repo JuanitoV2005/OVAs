@@ -1,4 +1,5 @@
-// chessSketch.js
+// Define el sketch de p5.js dentro de una función para usar el modo de instancia.
+// 'p' es el objeto que contendrá todas las funciones y propiedades de p5.js.
 const sketchTema2 = (p) => {
     let board;
     let pawnImg, knightImg, bishopImg, rookImg, queenImg, kingImg;
@@ -45,6 +46,7 @@ const sketchTema2 = (p) => {
                             // case 'r': img = rookImg; break;
                             // case 'q': img = queenImg; break;
                             // case 'l': img = kingImg; break; // 'l' for king (rey)
+                            
                             // Add more cases for other pieces (e.g., 'B' for black bishop if separate images)
                             default: continue; // Skip if unknown piece character
                         }
@@ -97,14 +99,13 @@ const sketchTema2 = (p) => {
             this.drawPieces();
         }
 
-        
         // Example method to handle a piece being picked (can be called on mouse click)
         pickPiece(row, col) {
-            if (row >= 0 && row < this.dimensions[0] && col >= 0 && col < this.dimensions[1] && this.pieces[row][col] != null) {
+            if (row >= 0 && row < this.dimensions[0] && col >= 0 && col < this.dimensions[1] && pieces[row][col] != null) {
                 this.pickedPiece = [row, col];
-            } else {
-                this.clearPickedPiece();
+                return true;
             }
+            return false;
         }
 
         // Example method to clear the picked piece
@@ -112,6 +113,7 @@ const sketchTema2 = (p) => {
             this.pickedPiece = null;
         }
 
+        // Detectar si posicion ingresada está dentro del tablero
         isInsideBoard(x,y){
             const boardX = this.location[0];
             const boardY = this.location[1];
@@ -123,12 +125,16 @@ const sketchTema2 = (p) => {
         }
 
         isValidMove(endRow, endCol) {
-            // 1. Validaciones básicas:
-            let startRow = this.pickedPiece[0];
-            let startCol = this.pickedPiece[1];
 
-            const piece = this.pieces[startRow][startCol];
-            if (piece === null) { // No hay pieza en la casilla de inicio
+            // 1. Validaciones básicas:
+            if (!this.pickedPiece) { // No hay pieza seleccionada
+                return false;
+            }
+            startRow = this.pickedPiece[0];
+            startCol = this.pickedPiece[1];
+
+            const piece = [startRow][startCol];
+            if (!piece) { // No hay pieza en la casilla de inicio
                 return false;
             }
 
@@ -137,18 +143,23 @@ const sketchTema2 = (p) => {
                 return false;
             }
 
-            let targetPiece = this.pieces[endRow][endCol];
+            // Asegurarse de que las coordenadas de destino estén dentro del tablero
+            if (!this.isInsideBoard(endRown, endCol)) {
+                return false;
+            }
+
+            targetPiece = this.pieces[endRow][endCol];
 
             // Lógica para el PEÓN NEGRO ('p')
             if (piece === 'p') {
-                const rowDiff = endRow - startRow; // Diferencia en filas (positivo = avance para negras
+                const rowDiff = endRow - startRow; // Diferencia en filas (positivo = avance para negras)
                 const colDiff = Math.abs(endCol - startCol); // Diferencia absoluta en columnas
+
                 // Avance de una casilla
                 if (rowDiff === 1 && colDiff === 0) {
                     // Debe ser una casilla vacía
                     return targetPiece === null;
                 }
-                
 
                 // Avance de dos casillas (solo desde la fila inicial del peón negro, que asumimos es la fila 1)
                 if (startRow === 1 && rowDiff === 2 && colDiff === 0) {
@@ -210,22 +221,25 @@ const sketchTema2 = (p) => {
             // Caso 2: Hay una pieza seleccionada y la casilla actual no está vacía
             if (this.pieces[row][col] !== null) {
                 // Intercambia pieza seleccionada por pieza de la casilla actual
-                this.pickPiece(row, col);
+                this.movePiece(row, col);
                 return;
             }
             // Caso 3: Hay una pieza seleccionada y la casilla actual no contiene una pieza
             // Revisar si la pieza puede moverse a la casilla actual
             if(this.isValidMove(row,col)){
-                this.movePickedPieceTo(row,col);
+                movePickedPieceTo(row,col);
+                return;
             }
             // Caso 4: El movimiento de la pieza no es válido -> deselecciona la pieza actual
             this.clearPickedPiece();
         };
+
+
     }
 
     p.preload = () => {
         // Carga tus imágenes aquí. Asegúrate de que las rutas sean correctas.
-        // Asume que tienes las imágenes en una carpeta 'assets' o similar.
+        // Asume que tienes las imágenes en una carpeta 'assets/chess/'
         try {
             pawnImg = p.loadImage('assets/chess/pawn.png');
             // knightImg = p.loadImage('assets/chess/knight.png');
@@ -242,7 +256,7 @@ const sketchTema2 = (p) => {
     p.setup = () => {
         p.createCanvas(800, 800); // Tamaño del canvas
 
-        // Inicialización de la matriz de piezas (ejemplo de un tablero inicial)
+        // Inicialización de la matriz de piezas
         const initialPieces = [
             [null, null, null, null, null, null, null, null],
             ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
@@ -250,7 +264,7 @@ const sketchTema2 = (p) => {
             [null, null, null, null, null, null, null, null],
             [null, null, null, null, null, null, null, null],
             [null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null], // Usar mayúsculas para piezas blancas si quieres diferenciar
+            [null, null, null, null, null, null, null, null],
             [null, null, null, null, null, null, null, null]
         ];
         // Nota: para un juego real, necesitarías cargar imágenes separadas para piezas blancas y negras,
@@ -271,8 +285,6 @@ const sketchTema2 = (p) => {
 
         // Ejemplo: Simular que la pieza en [1, 0] (un peón) está seleccionada
         board.pickPiece(1, 0);
-        
-        board.interact(p.mouseX, p.mouseY);
     };
 
     p.draw = () => {
@@ -281,19 +293,12 @@ const sketchTema2 = (p) => {
     };
 
     // Puedes añadir eventos de ratón aquí si quieres interactuar con el tablero
-    // p.mouseClicked = () => {
-    //     board.interact(p.mouseX, p.mouseY);
-    //     console.log("Clicked at (" + p.mouseX + ", " + p.mouseY + ")");
-    //     // Lógica para determinar qué celda fue clickeada y actualizar pickedPiece
-    // };
-    // Añade este método dentro de la constante chessSketch = (p) => { ... }
-// Justo después del p.draw = () => { ... }
-p.mouseClicked = () => {
+    p.mouseClicked = () => {
     // Calcula la fila y columna de la celda donde se hizo clic
-    let mouseX = p.mouseX;
-    let mouseY = p.mouseY;
-    board.interact(mouseX, mouseY);
-    return;
+    const mouseX = p.mouseX;
+    const mouseY = p.mouseY;
+
+    // board.interact(mouseX, mouseY);
 
     // Asegúrate de que el clic esté dentro de los límites del tablero
     const boardX = board.location[0];
@@ -301,11 +306,12 @@ p.mouseClicked = () => {
     const boardWidth = board.dimensions[1] * board.cellWidth;
     const boardHeight = board.dimensions[0] * board.cellWidth;
 
-    const clickedInsideBoard =
-        mouseX >= boardX && mouseX < boardX + boardWidth &&
-        mouseY >= boardY && mouseY < boardY + boardHeight;
+    // const clickedInsideBoard =
+    //     mouseX >= boardX && mouseX < boardX + boardWidth &&
+    //     mouseY >= boardY && mouseY < boardY + boardHeight;
+    // if (clickedInsideBoard) {
 
-    if (clickedInsideBoard) {
+    if (board.isInsideBoard(mouseX, mouseY)) {
         // Calcula la fila y columna en la matriz del tablero
         const col = p.floor((mouseX - boardX) / board.cellWidth);
         const row = p.floor((mouseY - boardY) / board.cellWidth);
@@ -322,14 +328,15 @@ p.mouseClicked = () => {
         } else {
             // Caso 2: Ya hay una pieza seleccionada (board.pickedPiece no es null)
             const [pickedRow, pickedCol] = board.pickedPiece;
-
             if (row === pickedRow && col === pickedCol) {
                 // Se hizo clic en la misma celda que ya estaba seleccionada
                 board.clearPickedPiece(); // Deselecciona la pieza actual
-            } else if (pieceInClickedCell !== null) {
+            } 
+            else if (pieceInClickedCell !== null) {
                 // Se hizo clic en otra celda que contiene una pieza
                 board.pickPiece(row, col); // Reemplaza la selección por la nueva pieza
-            } else {
+            } 
+            else {
                 // Se hizo clic en una celda vacía cuando ya había una pieza seleccionada
                 // Esto no está explícitamente en tus reglas, pero comúnmente se deselecciona.
                 // Si quieres que no pase nada, simplemente quita esta sección 'else'.
@@ -337,18 +344,14 @@ p.mouseClicked = () => {
                 board.clearPickedPiece();
             }
         }
-    } else {
-        // Se hizo clic fuera del tablero
-        board.clearPickedPiece(); // Deselecciona cualquier pieza si la había
-    }
-};
-};
+        } else {
+            // Se hizo clic fuera del tablero
+            board.clearPickedPiece(); // Deselecciona cualquier pieza si la había
+        };
+    };
 
-// Crea una nueva instancia de P5 y asóciala con un elemento HTML (opcional, si quieres un canvas específico)
-// Si no especificas un elemento, P5 creará un canvas dentro del <body>
+
+
+};    
+// Crea una nueva instancia de p5.js, pasando nuestra función 'imageSketch'.
 new p5(sketchTema2);
-
-// Para tener un canvas específico en el HTML, crea un div con un ID:
-// <div id="my-chess-container"></div>
-// Y luego en JavaScript:
-// new p5(chessSketch, 'my-chess-container');

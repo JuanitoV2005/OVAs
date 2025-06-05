@@ -131,13 +131,13 @@ h1 {
   gap: 20px;
 }
 
-.canvas-container canvas {
+#canvasContainer canvas {
   width:100%;  
   border: 1px solid #ccc;
   background-color: #ffffff;
 }
 
-.canvas-container {
+#canvasContainer {
   height: auto !important;
   display: flex;
   justify-content: center;
@@ -150,7 +150,7 @@ h1 {
   padding-bottom: 10vh;
 }
 
-  .canvas-container {
+  #canvasContainer {
     max-width: 100%;
   }
 
