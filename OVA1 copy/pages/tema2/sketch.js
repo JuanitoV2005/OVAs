@@ -303,53 +303,13 @@ p.mouseClicked = () => {
     let mouseY = p.mouseY;
     board.interact(mouseX, mouseY);
     return;
-
-    // Asegúrate de que el clic esté dentro de los límites del tablero
-    const boardX = board.location[0];
-    const boardY = board.location[1];
-    const boardWidth = board.dimensions[1] * board.cellWidth;
-    const boardHeight = board.dimensions[0] * board.cellWidth;
-
-    const clickedInsideBoard =
-        mouseX >= boardX && mouseX < boardX + boardWidth &&
-        mouseY >= boardY && mouseY < boardY + boardHeight;
-
-    if (clickedInsideBoard) {
-        // Calcula la fila y columna en la matriz del tablero
-        const col = p.floor((mouseX - boardX) / board.cellWidth);
-        const row = p.floor((mouseY - boardY) / board.cellWidth);
-
-        // Verifica si la celda clicada tiene una pieza
-        const pieceInClickedCell = board.pieces[row][col];
-
-        if (board.pickedPiece === null) {
-            // Caso 1: No hay pieza seleccionada actualmente
-            // Solo se puede seleccionar una celda si no es nula (contiene una pieza)
-            if (pieceInClickedCell !== null) {
-                board.pickPiece(row, col);
-            }
-        } else {
-            // Caso 2: Ya hay una pieza seleccionada (board.pickedPiece no es null)
-            const [pickedRow, pickedCol] = board.pickedPiece;
-
-            if (row === pickedRow && col === pickedCol) {
-                // Se hizo clic en la misma celda que ya estaba seleccionada
-                board.clearPickedPiece(); // Deselecciona la pieza actual
-            } else if (pieceInClickedCell !== null) {
-                // Se hizo clic en otra celda que contiene una pieza
-                board.pickPiece(row, col); // Reemplaza la selección por la nueva pieza
-            } else {
-                // Se hizo clic en una celda vacía cuando ya había una pieza seleccionada
-                // Esto no está explícitamente en tus reglas, pero comúnmente se deselecciona.
-                // Si quieres que no pase nada, simplemente quita esta sección 'else'.
-                // Por ahora, lo dejaré para deseleccionar si se hace clic en un espacio vacío.
-                board.clearPickedPiece();
-            }
-        }
-    } else {
-        // Se hizo clic fuera del tablero
-        board.clearPickedPiece(); // Deselecciona cualquier pieza si la había
-    }
+};
+p.touchStarted = () => {
+    // Calcula la fila y columna de la celda donde se hizo clic
+    let mouseX = p.mouseX;
+    let mouseY = p.mouseY;
+    board.interact(mouseX, mouseY);
+    return;
 };
 
 //     p.reset = () => {
