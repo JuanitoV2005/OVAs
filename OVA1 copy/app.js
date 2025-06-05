@@ -5,7 +5,7 @@ const temas = {
     sketchName: 'sketchTema2',
     container: 'contenedor-sketch2',
     instancia: null,
-    nombreMenu: 'Clases Wrapper'
+    nombreMenu: '1. Mover peones en tablero'
   },
   tema0: {
     // La ruta al archivo HTML dentro de su carpeta de tema
