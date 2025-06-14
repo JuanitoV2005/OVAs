@@ -5,7 +5,7 @@ function quiz1(p) {
     // Nivel 1 (índice 0)
     [
       { id: "q1", question: "¿Cuál es la capital de Francia?", correctAnswer: "París" },
-      { id: "q2", question: "¿Cuál es el océano más grande del mundo?", correctAnswer: "Pacífico" }
+      { id: "q2", question: "¿Cuál es el océano más grande del mundo?", correctAnswer: "Pacífico" , notInput:true}
     ],
     // Nivel 2 (índice 1) - Mostrar 'explicacion-intermedia'
     null, // Este nivel no tiene preguntas
@@ -119,6 +119,11 @@ function quiz1(p) {
     // Esta instancia gestionará la lógica de la interfaz de usuario y la navegación.
     quizNavigator = new QuizNavigator(p, levels, contentVisibilityMap);
     quizNavigator.init(); // Inicializa el QuizNavigator para configurar los elementos DOM y eventos.
+    
+    
+    
+    // // establecer respuesta para q2
+    quizNavigator.setAnswerForGraphicInteractiveQuestion("q2", "Pacífico")
   };
 
   p.draw = function () {

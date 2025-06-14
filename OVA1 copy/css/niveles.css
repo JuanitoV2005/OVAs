@@ -32,6 +32,7 @@ input {
   border: 2px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  margin-top: 0.5rem;
 }
 input.correct {
   border-color: green;

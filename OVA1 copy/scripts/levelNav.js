@@ -96,7 +96,14 @@ class QuizNavigator {
         input.attribute("type", "text");
         input.attribute("id", q.id);
 
-        input.input(() => {
+        // Si no tiene input habilidado
+        if(q.notInput === true){
+          input.attribute("disabled", ""); // <--- CORRECCIÓN AQUÍ
+          input.value("Interactúa con el gráfico");
+        }
+        // else{
+          input.input(() => {
+
           this.answers[q.id] = input.value().trim();
           input.removeClass("correct");
           input.removeClass("incorrect");
@@ -106,7 +113,12 @@ class QuizNavigator {
           if (this.nextBtn) {
             this.nextBtn.attribute("disabled", "");
           }
-        });
+        }
+      );
+        // }
+        
+
+        
 
         div.child(label);
         div.child(input);
@@ -115,6 +127,7 @@ class QuizNavigator {
         }
       });
     }
+
 
     this.updateVerifyButton();
     this.updateLevelIndicator();
@@ -223,6 +236,37 @@ class QuizNavigator {
       } else {
         console.log(finalMessage);
       }
+    }
+  }
+
+  setAnswerForGraphicInteractiveQuestion(questionId, answer) {
+    // Busca la pregunta en el nivel actual para asegurarte de que existe y es del tipo correcto
+    const currentQuestions = this.levels[this.currentLevel];
+    const question = currentQuestions ? currentQuestions.find(q => q.id === questionId) : null;
+
+    if (question) {
+      // Verificar si la pregunta realmente tiene el input deshabilitado
+      const inputDisabled = question.notInput === true;
+      if (!inputDisabled) {
+        console.warn(`Advertencia: Intentando asignar respuesta manualmente a la pregunta '${questionId}', pero no está marcada como 'input: false'.`);
+        return;
+      }
+
+      this.answers[questionId] = answer.trim(); // Almacenar la respuesta
+      this.validationResults[questionId] = null; // Resetear el resultado de validación
+
+      // Actualizar el valor visual del input deshabilitado
+      const inputElement = this.p.select(`#${questionId}`);
+      if (inputElement) {
+        inputElement.value(answer); // Actualiza el texto visible del input
+      }
+
+      // Vuelve a verificar si el botón "Verificar" debe habilitarse
+      // Esto es crucial para que el usuario pueda validar después de interactuar con el gráfico
+      this.isVerified = false; // Se establece en false porque se ha cambiado una respuesta
+      this.updateVerifyButton();
+    } else {
+      console.error(`Error: Pregunta con ID '${questionId}' no encontrada en el nivel actual.`);
     }
   }
 }
