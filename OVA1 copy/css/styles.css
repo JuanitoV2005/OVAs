@@ -12,7 +12,7 @@ html, body {
 
 main {
   padding: 20px;
-  padding-bottom: 10vh;
+  padding-bottom: 10vh !important;
 }
 
 
@@ -157,5 +157,8 @@ h1 {
   canvas {
     max-width: 100%;
     height: auto !important;
+  }
+  main{
+    padding: 10px;
   }
 }

@@ -43,6 +43,8 @@ input.incorrect {
 }
 .buttons {
   text-align: center;
+  display: flex; /* ¡Añade esto! */
+    justify-content: center; /* ¡Añade esto para centrarlos horizontalmente! */
   margin-top: 0;
 }
 #verifyBtn{
@@ -92,15 +94,26 @@ button {
   padding: 0 1.5rem;
 }
 
+.hidden {
+  display: none !important; /* El !important puede ser necesario para anular estilos en línea o específicos */
+}
 
-/* Configuración para celular */
-@media (max-width: 768px) {
+/* En tu media query para móvil, asegúrate que .content sea flex-direction: column; */
+@media (max-width: 600px) {
   .container {
+    display:flex;
     grid-template-columns: 1fr;
     gap: 0;
+    display: flex; /* Asegúrate de que .content sea un contenedor flex */
+    flex-direction: column; /* Apila las tarjetas en móvil */
   }
-  .card, .content{
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+  .card, .content {
+    padding: 0.5rem 0;
+  }
+  .buttons{
+    gap: 0.25rem;
+  }
+  #verifyBtn:disabled, #nextBtn:disabled{
+    padding: 0.6rem 1.5rem;
   }
 }
