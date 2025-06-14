@@ -1,4 +1,16 @@
 const temas = {
+  tema3: {
+    html: 'pages/tema3/index.html',
+    // Si tema4 no tiene un sketch, estas propiedades son null
+    sketchScript: 'pages/tema3/sketch.js',
+    sketchName: 'quiz1',
+    container: 'p5-container',
+    // sketchScript: null,
+    // sketchName: null,
+    // container: null,
+    instancia: null,
+    nombreMenu: 'Tipos numéricos: int vs Integer'
+  },
   tema2: {
     // La ruta al archivo HTML dentro de su carpeta de tema
     html: 'pages/tema0/index.html',
@@ -34,9 +46,9 @@ const temas = {
   },
   
   
-  tema3: {
-    html: 'pages/tema3/index.html',
-    // Si tema3 no tiene un sketch, estas propiedades son null
+  tema4: {
+    html: 'pages/tema4/index.html',
+    // Si tema4 no tiene un sketch, estas propiedades son null
     sketchScript: null,
     sketchName: null,
     container: null,
@@ -49,7 +61,8 @@ const temas = {
 // Requisito: la última linea del script, fuera de la clase,
 // debe ser algo como: window.MiClase = MiClase;
 const scriptsComunes = {
-  objeto1: 'scripts/objeto1.js'
+  objeto1: 'scripts/objeto1.js',
+  levels: 'scripts/levels.js'
 };
 
 const mainContent = document.getElementById('main-content');
