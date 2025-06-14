@@ -62,7 +62,7 @@ const temas = {
 // debe ser algo como: window.MiClase = MiClase;
 const scriptsComunes = {
   objeto1: 'scripts/objeto1.js',
-  levels: 'scripts/levels.js'
+  levelNav: 'scripts/levelNav.js'
 };
 
 const mainContent = document.getElementById('main-content');
