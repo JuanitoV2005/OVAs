@@ -142,7 +142,3 @@ function quiz1(p) {
     }
   };
 }
-
-// Para iniciar el sketch, asegúrate de que haya un contenedor con el ID 'p5-sketch-container' en tu HTML.
-// Por ejemplo: <div id="p5-sketch-container"></div>
-// new p5(quiz1, "p5-sketch-container");
