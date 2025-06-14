@@ -146,7 +146,8 @@ function quiz1(p) {
   // Function to update the level indicator
   function updateLevelIndicator() {
     if (levelIndicator) {
-      levelIndicator.html(`Nivel ${currentLevel + 1} de ${levels.length}`);
+    //   levelIndicator.html(`Nivel ${currentLevel + 1} de ${levels.length}`);
+    levelIndicator.html(`${currentLevel + 1} / ${levels.length}`);
     }
   }
 

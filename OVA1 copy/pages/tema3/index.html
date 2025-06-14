@@ -1,13 +1,18 @@
+<div class="content">
 <h2>Responde las siguientes preguntas</h2>
-  <div class="container">
-    
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+<div class="container">
+    <div class="card" >
+      <div id="p5-container" style="text-align: center;vertical-align: middle;"></div>
+    </div>
+
     <div class="card" id="questionCard">
       
       <div id="questions"></div>
     </div>
-    <div class="card" >
-      <div id="p5-container" style="text-align: center;vertical-align: middle;"></div>
-    </div>
+    
   </div>
 
   <div class="buttons">
@@ -23,148 +28,4 @@
     </div>
   </div>
   
-  <div class="level-counter" id="levelIndicator">Nivel 1 de 3</div>
-
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script> -->
-  <!-- <script>
-    const levels = [
-      [
-        { id: "q1", question: "¿Cuál es la capital de Francia?", correctAnswer: "París" },
-        { id: "q2", question: "¿Cuál es el océano más grande del mundo?", correctAnswer: "Pacífico" }
-      ],
-      [
-        { id: "q3", question: "¿Quién escribió 'Don Quijote'?", correctAnswer: "Cervantes" },
-        { id: "q4", question: "¿Cuántos planetas tiene el sistema solar?", correctAnswer: "8" }
-      ],
-      [
-        { id: "q5", question: "¿En qué año cayó el Muro de Berlín?", correctAnswer: "1989" },
-        { id: "q6", question: "¿Cuál es el país más grande del mundo?", correctAnswer: "Rusia" }
-      ]
-    ];
-
-    let currentLevel = 0;
-    let answers = {};
-    let validationResults = {};
-    let isVerified = false;
-
-    const container = document.getElementById("questions");
-    const verifyBtn = document.getElementById("verifyBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    const levelIndicator = document.getElementById("levelIndicator");
-
-    function setupLevel(level) {
-      container.innerHTML = "";
-      answers = {};
-      validationResults = {};
-      isVerified = false;
-      nextBtn.disabled = true;
-
-      const questions = levels[level];
-
-      questions.forEach((q, index) => {
-        const div = document.createElement("div");
-        div.className = "input-group";
-
-        const label = document.createElement("label");
-        label.textContent = `${index + 1}. ${q.question}`;
-        label.setAttribute("for", q.id);
-
-        const input = document.createElement("input");
-        input.type = "text";
-        input.id = q.id;
-
-        input.addEventListener("input", () => {
-          answers[q.id] = input.value.trim();
-          input.classList.remove("correct", "incorrect");
-          validationResults[q.id] = null;
-          isVerified = false;
-          updateVerifyButton();
-          nextBtn.disabled = true;
-        });
-
-        div.appendChild(label);
-        div.appendChild(input);
-        container.appendChild(div);
-      });
-
-      updateVerifyButton();
-      updateLevelIndicator();
-    }
-
-    function updateVerifyButton() {
-      const currentQuestions = levels[currentLevel];
-      const allFilled = currentQuestions.every(q => answers[q.id]);
-      verifyBtn.disabled = !allFilled;
-    }
-
-    function updateLevelIndicator() {
-      levelIndicator.textContent = `Nivel ${currentLevel + 1} de ${levels.length}`;
-    }
-
-    verifyBtn.addEventListener("click", () => {
-      const currentQuestions = levels[currentLevel];
-      let allCorrect = true;
-
-      currentQuestions.forEach((q) => {
-        const input = document.getElementById(q.id);
-        const answer = (answers[q.id] || "").toLowerCase();
-        const correct = q.correctAnswer.toLowerCase();
-
-        if (answer === correct) {
-          input.classList.add("correct");
-          input.classList.remove("incorrect");
-          validationResults[q.id] = true;
-        } else {
-          input.classList.add("incorrect");
-          input.classList.remove("correct");
-          validationResults[q.id] = false;
-          allCorrect = false;
-        }
-      });
-
-      isVerified = true;
-      nextBtn.disabled = !allCorrect;
-
-      if (allCorrect) {
-        document.getElementById("successModal").style.display = "flex";
-      }
-    });
-
-    function closeModal() {
-      document.getElementById("successModal").style.display = "none";
-    }
-
-    nextBtn.addEventListener("click", () => {
-      currentLevel++;
-      if (currentLevel < levels.length) {
-        setupLevel(currentLevel);
-      } else {
-        alert("🎉 ¡Has completado todos los niveles!");
-      }
-    });
-
-    // Inicializar el primer nivel
-    setupLevel(currentLevel);
-
-    // Sketch P5 instancia
-    function quiz1(p) {
-      p.setup = function () {
-        const canvas = p.createCanvas(400, 400);
-        canvas.parent("p5-container");
-        p.background(240);
-      };
-
-      p.draw = function () {
-        p.background(240);
-        p.fill(100, 150, 255);
-        p.noStroke();
-        p.ellipse(p.width / 2, p.height / 2, 100, 100);
-        p.fill(0);
-        p.textAlign(p.CENTER, p.CENTER);
-        p.text("Quiz", p.width / 2, p.height / 2);
-      };
-    }
-
-    // Iniciar el sketch
-    new p5(quiz1, "p5-container");
-  </script> -->
+  <div class="level-counter" id="levelIndicator">1 / 3</div>

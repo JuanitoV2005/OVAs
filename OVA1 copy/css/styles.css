@@ -11,7 +11,7 @@ html, body {
 }
 
 main {
-  padding: 2rem;
+  padding: 20px;
   padding-bottom: 10vh;
 }
 
@@ -146,7 +146,7 @@ h1 {
 
 @media (max-width: 600px) {
   main {
-  padding: 0px;
+  padding: 0 2rem;
   padding-bottom: 10vh;
 }
 

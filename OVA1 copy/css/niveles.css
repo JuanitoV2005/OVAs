@@ -1,77 +1,106 @@
 body {
-      font-family: sans-serif;
-      background: #ffffff;
-      margin: 0;
-      padding: 2rem;
-    }
-    .level-counter {
-      text-align: center;
-      font-size: 1.2rem;
-      margin-top: 1rem;
-    }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-    }
-    .card {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .input-group {
-      margin-bottom: 1rem;
-    }
-    input {
-      width: 100%;
-      padding: 0.5rem;
-      border: 2px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    input.correct {
-      border-color: green;
-      background-color: #e6ffed;
-    }
-    input.incorrect {
-      border-color: red;
-      background-color: #ffe6e6;
-    }
-    .buttons {
-      text-align: center;
-      margin-top: 2rem;
-    }
-    button {
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      margin: 0 0.5rem;
-      border-radius: 7px;
-      cursor: pointer;
-    }
-    button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-    #successModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-    }
-    #successModal .modal-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 8px;
-      text-align: center;
-    }
+  font-family: sans-serif;
+  background: #ffffff;
+  margin: 0;
+  padding: 2rem;
+}
+.level-counter {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color:#3a3b3c;
+}
+.container {
+  max-width: 1000px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  /* box-shadow: 0 2px 8px rgba(0,0,0,0.1); */
+}
+.input-group {
+  margin-bottom: 1rem;
+}
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input.correct {
+  border-color: green;
+  background-color: #e6ffed;
+}
+input.incorrect {
+  border-color: red;
+  background-color: #ffe6e6;
+}
+.buttons {
+  text-align: center;
+  margin-top: 0;
+}
+#verifyBtn{
+  background-color: #94B43B;
+  color: white;
+  border: none;
+}
+#nextBtn{
+  background-color: #3b9cb4;
+  color: white;
+  border: none;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  margin: 0 0.5rem;
+  border-radius: 7px;
+  cursor: pointer;
+}
+#verifyBtn:disabled,
+#nextBtn:disabled {
+  background-color: #ccc;
+  color: #555;
+  cursor: not-allowed;
+}
+
+#successModal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+#successModal .modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.content{
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 1.5rem;
+}
+
+
+/* Configuración para celular */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .card, .content{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
