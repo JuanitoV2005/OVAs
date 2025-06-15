@@ -40,72 +40,201 @@ function quiz1(p) {
 
   // Objeto para almacenar el estado inicial y actual de los dibujos del canvas por nivel.
   // Esto permite que cada nivel con dibujo tenga un color inicial que puede ser modificado.
-  const levelCanvasStates = {
-    0: { color: p.color(100, 150, 255) }, // Color inicial azul para el nivel 0
-    2: { color: p.color(255, 150, 100) }, // Color inicial naranja para el nivel 2
-    3: { color: p.color(50, 150, 50) }   // Color inicial verde para el nivel 3
+//   const levelCanvasStates = {
+//     0: { color: p.color(100, 150, 255) }, // Color inicial azul para el nivel 0
+//     2: { color: p.color(255, 150, 100) }, // Color inicial naranja para el nivel 2
+//     3: { color: p.color(50, 150, 50) }   // Color inicial verde para el nivel 3
+//   };
+
+  // ELIMINAR NUEVO ESTAS CLASES INVENTADAS
+
+  // Definición de la clase
+    class Circulo {
+    // Constructor: se ejecuta al crear una nueva instancia
+    constructor(p,colorInicial) {
+        this.p = p;
+        this.color = colorInicial; //let color = '#33fcff';
+    }
+
+    draw() {
+        p.background(240); // Fondo gris claro
+        p.fill(this.color); // Usa el color del estado para el relleno
+        p.noStroke(); // Sin borde para la forma
+        p.ellipse(p.width / 2, p.height / 2, 100, 100); // Dibuja un círculo en el centro
+        p.fill(0); // Color de texto negro
+        p.textAlign(p.CENTER, p.CENTER); // Alinea el texto al centro
+        p.textSize(24); // Tamaño de la fuente
+        p.text("Quiz: Geografía", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Geografía"
+    }
+    mousePressed(mouseX, mouseY){
+        this.color = p.color(p.random(255), p.random(255), p.random(255));
+    }
+    }
+
+
+    class Rectangulo {
+    // Constructor: se ejecuta al crear una nueva instancia
+    constructor(p,colorInicial) {
+        this.p = p;
+        this.color = colorInicial; //let color = '#7433ff';
+    }
+
+    draw() {
+        p.background(220); // Fondo un poco más oscuro
+        p.fill(this.color); // Usa el color del estado para el relleno
+        p.rectMode(p.CENTER); // Dibuja rectángulos desde su centro
+        p.rect(p.width / 2, p.height / 2, 120, 80, 10); // Dibuja un rectángulo redondeado
+        p.fill(0); // Color de texto negro
+        p.textAlign(p.CENTER, p.CENTER);
+        p.textSize(20);
+        p.text("Quiz: Historia", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Historia"
+    }
+    mousePressed(mouseX, mouseY){
+        this.color = p.color(p.random(255), p.random(255), p.random(255));
+    }
+    }
+
+    class Triangulo {
+    // Constructor: se ejecuta al crear una nueva instancia
+    constructor(p,colorInicial) {
+        this.p = p;
+        this.color = colorInicial; //let color = '#7433ff';
+    }
+
+    draw() {
+        p.background(240); // Fondo verde claro
+        p.fill(this.color); // Usa el color del estado para el relleno
+        p.noStroke();
+        p.triangle(
+        p.width / 2, p.height / 2 - 40,
+        p.width / 2 - 50, p.height / 2 + 40,
+        p.width / 2 + 50, p.height / 2 + 40
+        ); // Dibuja un triángulo
+        p.fill(0);
+        p.textAlign(p.CENTER, p.CENTER);
+        p.textSize(22);
+        p.text("Quiz: Ciudades", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Ciudades"
+    }
+    mousePressed(mouseX, mouseY){
+        this.color = p.color(p.random(255), p.random(255), p.random(255));
+    }
+    }
+
+
+
+
+
+
+//   // Función para dibujar el canvas para el Nivel 0
+//   function drawLevel0Canvas() {
+//     p.background(240); // Fondo gris claro
+//     p.fill(levelCanvasStates[0].color); // Usa el color del estado para el relleno
+//     p.noStroke(); // Sin borde para la forma
+//     p.ellipse(p.width / 2, p.height / 2, 100, 100); // Dibuja un círculo en el centro
+//     p.fill(0); // Color de texto negro
+//     p.textAlign(p.CENTER, p.CENTER); // Alinea el texto al centro
+//     p.textSize(24); // Tamaño de la fuente
+//     p.text("Quiz: Geografía", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Geografía"
+//   }
+
+//   // Función para dibujar el canvas para el Nivel 2
+//   function drawLevel2Canvas() {
+//     p.background(220); // Fondo un poco más oscuro
+//     p.fill(levelCanvasStates[2].color); // Usa el color del estado para el relleno
+//     p.rectMode(p.CENTER); // Dibuja rectángulos desde su centro
+//     p.rect(p.width / 2, p.height / 2, 120, 80, 10); // Dibuja un rectángulo redondeado
+//     p.fill(0); // Color de texto negro
+//     p.textAlign(p.CENTER, p.CENTER);
+//     p.textSize(20);
+//     p.text("Quiz: Historia", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Historia"
+//   }
+
+//   // Función para dibujar el canvas para el Nivel 3
+//   function drawLevel3Canvas() {
+//     p.background(200, 255, 200); // Fondo verde claro
+//     p.fill(levelCanvasStates[3].color); // Usa el color del estado para el relleno
+//     p.noStroke();
+//     p.triangle(
+//       p.width / 2, p.height / 2 - 40,
+//       p.width / 2 - 50, p.height / 2 + 40,
+//       p.width / 2 + 50, p.height / 2 + 40
+//     ); // Dibuja un triángulo
+//     p.fill(0);
+//     p.textAlign(p.CENTER, p.CENTER);
+//     p.textSize(22);
+//     p.text("Quiz: Ciudades", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Ciudades"
+//   }
+
+//   // Función para niveles que no requieren dibujo en el canvas (solo limpiarlo o hacerlo transparente)
+//   function drawNoCanvas() {
+//     p.background(255, 255, 255, 0); // Fondo transparente
+//   }
+
+
+
+
+
+  // --- Estrategias de dibujo del canvas --- 
+  const circulo = new Circulo(p, '#33fcff');
+  const rect = new Rectangulo(p, '#7433ff');
+  const triangulo = new Triangulo(p, '#8dff33');
+
+  const levelCanvasObjects = {
+    0: circulo,  
+    1: null,
+    2: rect,
+    3: triangulo,
+    4: null 
   };
 
-  // --- Estrategias de dibujo del canvas ---
+  class CanvasController{
+    constructor(p, levelCanvasObjects, quizNavigator){
+      this.p = p;
+      this.levelCanvasObjects = levelCanvasObjects;
+      this.quizNavigator = quizNavigator;
+      this.visualStrategy = levelCanvasObjects[quizNavigator.currentLevel];
+      this.lastLevel = quizNavigator.currentLevel;
+    }
+    setStrategy(levelIndex) {
+        this.visualStrategy = this.levelCanvasObjects[levelIndex];
+    }
 
-  // Función para dibujar el canvas para el Nivel 0
-  function drawLevel0Canvas() {
-    p.background(240); // Fondo gris claro
-    p.fill(levelCanvasStates[0].color); // Usa el color del estado para el relleno
-    p.noStroke(); // Sin borde para la forma
-    p.ellipse(p.width / 2, p.height / 2, 100, 100); // Dibuja un círculo en el centro
-    p.fill(0); // Color de texto negro
-    p.textAlign(p.CENTER, p.CENTER); // Alinea el texto al centro
-    p.textSize(24); // Tamaño de la fuente
-    p.text("Quiz: Geografía", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Geografía"
+    drawNoCanvas() {
+        this.p.background(255, 255, 255, 0); // Fondo transparente
+    }
+    draw(){
+        if(this.visualStrategy && typeof this.visualStrategy.draw === 'function'){
+            this.visualStrategy.draw();
+        }
+        else{
+            this.drawNoCanvas();
+        }
+    }
+    mousePressed(mouseX, mouseY){
+        if(this.visualStrategy && typeof this.visualStrategy.mousePressed === 'function'){
+            this.visualStrategy.mousePressed(mouseX, mouseY);
+        }
+    }
   }
 
-  // Función para dibujar el canvas para el Nivel 2
-  function drawLevel2Canvas() {
-    p.background(220); // Fondo un poco más oscuro
-    p.fill(levelCanvasStates[2].color); // Usa el color del estado para el relleno
-    p.rectMode(p.CENTER); // Dibuja rectángulos desde su centro
-    p.rect(p.width / 2, p.height / 2, 120, 80, 10); // Dibuja un rectángulo redondeado
-    p.fill(0); // Color de texto negro
-    p.textAlign(p.CENTER, p.CENTER);
-    p.textSize(20);
-    p.text("Quiz: Historia", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Historia"
-  }
-
-  // Función para dibujar el canvas para el Nivel 3
-  function drawLevel3Canvas() {
-    p.background(200, 255, 200); // Fondo verde claro
-    p.fill(levelCanvasStates[3].color); // Usa el color del estado para el relleno
-    p.noStroke();
-    p.triangle(
-      p.width / 2, p.height / 2 - 40,
-      p.width / 2 - 50, p.height / 2 + 40,
-      p.width / 2 + 50, p.height / 2 + 40
-    ); // Dibuja un triángulo
-    p.fill(0);
-    p.textAlign(p.CENTER, p.CENTER);
-    p.textSize(22);
-    p.text("Quiz: Ciudades", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Ciudades"
-  }
-
-  // Función para niveles que no requieren dibujo en el canvas (solo limpiarlo o hacerlo transparente)
-  function drawNoCanvas() {
-    p.background(255, 255, 255, 0); // Fondo transparente
-  }
+  let canvasController;
 
   // Función principal para aplicar el patrón Strategy para el dibujo del canvas.
   // Dependiendo del nivel actual del quiz, se selecciona y ejecuta la función de dibujo apropiada.
-  function drawCanvasForLevel(levelIndex) {
-    if (noCanvasDrawingLevels.has(levelIndex)) {
-      drawNoCanvas(); // Si el nivel está en la lista de "no dibujar", se usa esa estrategia
-    } else if (levelIndex === 0) {
-      drawLevel0Canvas(); // Dibujo específico para el nivel 0
-    } else if (levelIndex === 2) {
-      drawLevel2Canvas(); // Dibujo específico para el nivel 2
-    } else if (levelIndex === 3) {
-      drawLevel3Canvas(); // Dibujo específico para el nivel 3
-    }
-  }
+//   function drawCanvasForLevel(levelIndex) {
+//     if (noCanvasDrawingLevels.has(levelIndex)) {
+//       drawNoCanvas(); // Si el nivel está en la lista de "no dibujar", se usa esa estrategia
+//     } else if (levelIndex === 0) {
+//       drawLevel0Canvas(); // Dibujo específico para el nivel 0
+//     } else if (levelIndex === 2) {
+//       drawLevel2Canvas(); // Dibujo específico para el nivel 2
+//     } else if (levelIndex === 3) {
+//       drawLevel3Canvas(); // Dibujo específico para el nivel 3
+//     }
+//   }
+
+
+  // ------ Funciones principales del sketch ------
 
   p.setup = function() {
     console.log(`Iniciando sketchTema3.`);
@@ -120,6 +249,8 @@ function quiz1(p) {
     quizNavigator = new QuizNavigator(p, levels, contentVisibilityMap);
     quizNavigator.init(); // Inicializa el QuizNavigator para configurar los elementos DOM y eventos.
     
+    // Crea una instancia de canvasController
+    canvasController = new CanvasController(p, levelCanvasObjects, quizNavigator);
     
     
     // // establecer respuesta para q2
@@ -130,7 +261,12 @@ function quiz1(p) {
     // En cada fotograma, se llama a esta función para dibujar el canvas.
     // Utiliza el patrón Strategy: la función `drawCanvasForLevel` decide
     // qué "estrategia" de dibujo aplicar basándose en el `currentLevel` del quiz.
-    drawCanvasForLevel(quizNavigator.currentLevel);
+    // drawCanvasForLevel(quizNavigator.currentLevel);
+    if(quizNavigator.currentLevel !== canvasController.lastLevel){
+        canvasController.setStrategy(quizNavigator.currentLevel);
+    }
+    
+    canvasController.draw();
   };
 
   // Esta función se ejecuta cada vez que se presiona el mouse en la ventana.
@@ -138,12 +274,14 @@ function quiz1(p) {
   p.mousePressed = function() {
     // Verifica si el clic ocurrió dentro de los límites del canvas
     if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
-      const currentLevel = quizNavigator.currentLevel;
+    //   const currentLevel = quizNavigator.currentLevel;
       // Solo cambia el color si el nivel actual tiene un dibujo de canvas definido en `levelCanvasStates`
-      if (levelCanvasStates[currentLevel]) {
-        // Genera un color aleatorio (RGB)
-        levelCanvasStates[currentLevel].color = p.color(p.random(255), p.random(255), p.random(255));
-      }
+    //   if (levelCanvasStates[currentLevel]) {
+    //     // Genera un color aleatorio (RGB)
+    //     levelCanvasStates[currentLevel].color = p.color(p.random(255), p.random(255), p.random(255));
+    //   }
+    //   canvasController.visualStrategy.color = p.color(p.random(255), p.random(255), p.random(255));
+      canvasController.mousePressed(p.mouseX, p.mouseY);
     }
   };
 }
