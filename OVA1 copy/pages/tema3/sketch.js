@@ -178,10 +178,45 @@ function quiz1(p) {
   const circulo = new Circulo(p, '#33fcff');
   const rect = new Rectangulo(p, '#7433ff');
   const triangulo = new Triangulo(p, '#8dff33');
+  const initialPieces = [
+            [null, null, null, null, null, null, null, null],
+            ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+            [null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null], // Usar mayúsculas para piezas blancas si quieres diferenciar
+            [null, null, null, null, null, null, null, null]
+        ];
+  const tableroVacio = Array.from({ length: 8 }, () => Array(8).fill(null));
+  let pieceImages={};
+  let gui = {
+    "background":"#ffffff",
+    "cellColor1":"#7689a0",
+    "cellColor2":"#e7e8f3",
+    "cellLength":50,
+    "pickedColor":"#3d6b4f",
+    "pickedWidth":3
+    }
+  // Crea tablero del nivel 1:
+  
+  const tablero = new ChessBoard(
+    p,
+    [gui.cellColor1, gui.cellColor2], // Colores del tablero
+    [0, 0], // Posición de la esquina superior izquierda [x, y]
+    gui.cellLength, // Ancho de celda
+    [8, 8], // Dimensiones [filas, columnas]
+    gui.pickedColor, // pickedColor (rojo)
+    gui.pickedWidth, // pickedWidth (grosor del borde)
+    initialPieces,
+    pieceImages,
+    [0,1,2,3,4,5,6,7]
+  );
+  
 
   const levelCanvasObjects = {
-    0: circulo,  
-    1: null,
+    0: tablero,  
+    1: circulo,
     2: rect,
     3: triangulo,
     4: null 
@@ -205,6 +240,7 @@ function quiz1(p) {
     draw(){
         if(this.visualStrategy && typeof this.visualStrategy.draw === 'function'){
             this.visualStrategy.draw();
+            console.log(this.visualStrategy.pieces);
         }
         else{
             this.drawNoCanvas();
@@ -235,7 +271,23 @@ function quiz1(p) {
 
 
   // ------ Funciones principales del sketch ------
-
+  
+  p.preload = () => {
+        // Carga tus imágenes aquí. Asegúrate de que las rutas sean correctas.
+        // Asume que tienes las imágenes en una carpeta 'assets' o similar.
+        try {
+            pieceImages.pawnImg = p.loadImage('assets/chess/pawn.png');
+            // knightImg = p.loadImage('assets/chess/knight.png');
+            // bishopImg = p.loadImage('assets/chess/bishop.png');
+            // rookImg = p.loadImage('assets/chess/rook.png');
+            // queenImg = p.loadImage('assets/chess/queen.png');
+            // kingImg = p.loadImage('assets/chess/king.png');
+        } catch (e) {
+            console.error("Error loading images: ", e);
+            alert("Could not load one or more chess piece images. Check paths in p.preload().");
+        }
+    };
+  
   p.setup = function() {
     console.log(`Iniciando sketchTema3.`);
 
