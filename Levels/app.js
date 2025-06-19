@@ -9,7 +9,7 @@ const temas = {
     sketchName: null,
     container: null,
     instancia: null,
-    nombreMenu: 'Introducción a los primitivos en Java'
+    nombreMenu: 'Introducción'
   },
   tema1: {
     // La ruta al archivo HTML dentro de su carpeta de tema
@@ -27,9 +27,9 @@ const temas = {
     html: 'pages/tema2/index.html',
     sketchScript: 'pages/tema2/sketch.js',
     sketchName: 'sketchTema2',
-    container: 'contenedor-sketch2',
+    container: 'p5-container',
     instancia: null,
-    nombreMenu: 'Clases Wrapper'
+    nombreMenu: 'Sistemas numéricos'
   },
   tema3: {
     html: 'pages/tema3/index.html',
@@ -40,6 +40,16 @@ const temas = {
     instancia: null,
     nombreMenu: 'Tipos numéricos: int vs Integer'
   }
+};
+
+
+// Scripts que contienen lógica para dibujar algunas clases:
+// Requisito: la última linea del script, fuera de la clase,
+// debe ser algo como: window.MiClase = MiClase;
+const scriptsComunes = {
+  objeto1: 'scripts/objeto1.js',
+  levelNav: 'scripts/levelNav.js',
+  chessBoard: 'scripts/chessBoard.js'
 };
 
 const mainContent = document.getElementById('main-content');
@@ -78,6 +88,7 @@ function cargarTema(indice) {
 
         if (contenedor && typeof sketchFn === 'function') {
           tema.instancia = new p5(sketchFn, tema.container);
+          // tema.instancia = new p5(sketchFn, contenedor); // Otra idea de responsive, no salió
         }
       }
 
@@ -123,31 +134,54 @@ function actualizarBotones() {
 
 
 
+// Cargar scripts necesarios para el OVA
+function cargarScriptsEnOrden(scripts, callback) {
+    console.log(`[cargarScriptsEnOrden] Inicia carga en orden. Scripts a cargar:`, scripts);
+
+    if (scripts.length === 0) {
+        console.log('[cargarScriptsEnOrden] No hay más scripts para cargar. Llamando callback.');
+        callback();
+        return;
+    }
+
+    const [primerScript, ...restoDeScripts] = scripts;
+    console.log(`[cargarScriptsEnOrden] Cargando script: ${primerScript}`);
+
+    const scriptElement = document.createElement('script');
+    scriptElement.src = primerScript;
+    scriptElement.defer = true;
+
+    scriptElement.onload = () => {
+        console.log(`[cargarScriptsEnOrden] Script cargado exitosamente: ${primerScript}`);
+        cargarScriptsEnOrden(restoDeScripts, callback);
+    };
+
+    scriptElement.onerror = (e) => {
+        console.error(`[cargarScriptsEnOrden] ERROR al cargar script: ${primerScript}`, e);
+        // Podrías decidir si quieres continuar cargando los demás o detenerte
+        cargarScriptsEnOrden(restoDeScripts, callback); // Continuar a pesar del error
+    };
+
+    document.head.appendChild(scriptElement);
+}
+
 
 function cargarSketchesDinamicamente(callback) {
-  const scripts = Object.values(temas)
-    .filter(tema => tema.sketchScript)
-    .map(tema => tema.sketchScript);
+    console.log('[cargarSketchesDinamicamente] Iniciando proceso de carga dinámica de sketches.');
 
-  let cargados = 0;
+    const rutasComunes = Object.values(scriptsComunes);
+    console.log('[cargarSketchesDinamicamente] Rutas de scripts comunes:', rutasComunes);
 
-  if (scripts.length === 0) {
-    callback();
-    return;
-  }
+    const scriptsTemas = Object.values(temas)
+        .filter(tema => tema.sketchScript)
+        .map(tema => tema.sketchScript);
+    console.log('[cargarSketchesDinamicamente] Rutas de scripts de temas:', scriptsTemas);
 
-  scripts.forEach(src => {
-    const script = document.createElement('script');
-    script.src = src;
-    script.defer = true;
-    script.onload = () => {
-      cargados++;
-      if (cargados === scripts.length) {
-        callback();
-      }
-    };
-    document.head.appendChild(script);
-  });
+    // Definir el orden de carga: primero comunes, luego temas.
+    const rutasTotales = [...rutasComunes, ...scriptsTemas];
+    console.log('[cargarSketchesDinamicamente] Orden final de scripts a cargar:', rutasTotales);
+
+    cargarScriptsEnOrden(rutasTotales, callback);
 }
 
 

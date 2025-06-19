@@ -11,8 +11,8 @@ html, body {
 }
 
 main {
-  padding: 2rem;
-  padding-bottom: 10vh;
+  padding: 20px;
+  padding-bottom: 10vh !important;
 }
 
 
@@ -131,13 +131,13 @@ h1 {
   gap: 20px;
 }
 
-#canvasContainer canvas {
+.canvas-container canvas {
   width:100%;  
   border: 1px solid #ccc;
   background-color: #ffffff;
 }
 
-#canvasContainer {
+.canvas-container {
   height: auto !important;
   display: flex;
   justify-content: center;
@@ -146,16 +146,19 @@ h1 {
 
 @media (max-width: 600px) {
   main {
-  padding: 0px;
+  padding: 0 2rem;
   padding-bottom: 10vh;
 }
 
-  #canvasContainer {
+  .canvas-container {
     max-width: 100%;
   }
 
   canvas {
     max-width: 100%;
     height: auto !important;
+  }
+  main{
+    padding: 10px;
   }
 }
