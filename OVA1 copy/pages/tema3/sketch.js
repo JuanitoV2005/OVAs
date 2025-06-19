@@ -80,17 +80,17 @@ function quiz1(p) {
     }
 
     draw() {
-        p.background(220); // Fondo un poco más oscuro
-        p.fill(this.color); // Usa el color del estado para el relleno
-        p.rectMode(p.CENTER); // Dibuja rectángulos desde su centro
-        p.rect(p.width / 2, p.height / 2, 120, 80, 10); // Dibuja un rectángulo redondeado
-        p.fill(0); // Color de texto negro
-        p.textAlign(p.CENTER, p.CENTER);
-        p.textSize(20);
-        p.text("Quiz: Historia", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Historia"
+        this.p.background(220); // Fondo un poco más oscuro
+        this.p.fill(this.color); // Usa el color del estado para el relleno
+        this.p.rectMode(this.p.CENTER); // Dibuja rectángulos desde su centro
+        this.p.rect(this.p.width / 2, this.p.height / 2, 120, 80, 10); // Dibuja un rectángulo redondeado
+        this.p.fill(0); // Color de texto negro
+        this.p.textAlign(this.p.CENTER, this.p.CENTER);
+        this.p.textSize(20);
+        this.p.text("Quiz: Historia", this.p.width / 2, this.p.height / 2); // Muestra el texto "Quiz: Historia"
     }
     mousePressed(mouseX, mouseY){
-        this.color = p.color(p.random(255), p.random(255), p.random(255));
+        this.color = this.p.color(this.p.random(255), this.p.random(255), this.p.random(255));
     }
     }
 
@@ -102,21 +102,21 @@ function quiz1(p) {
     }
 
     draw() {
-        p.background(240); // Fondo verde claro
-        p.fill(this.color); // Usa el color del estado para el relleno
-        p.noStroke();
-        p.triangle(
-        p.width / 2, p.height / 2 - 40,
-        p.width / 2 - 50, p.height / 2 + 40,
-        p.width / 2 + 50, p.height / 2 + 40
+        this.p.background(240); // Fondo verde claro
+        this.p.fill(this.color); // Usa el color del estado para el relleno
+        this.p.noStroke();
+        this.p.triangle(
+        this.p.width / 2, this.p.height / 2 - 40,
+        this.p.width / 2 - 50, this.p.height / 2 + 40,
+        this.p.width / 2 + 50, this.p.height / 2 + 40
         ); // Dibuja un triángulo
-        p.fill(0);
-        p.textAlign(p.CENTER, p.CENTER);
-        p.textSize(22);
-        p.text("Quiz: Ciudades", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Ciudades"
+        this.p.fill(0);
+        this.p.textAlign(this.p.CENTER, this.p.CENTER);
+        this.p.textSize(22);
+        this.p.text("Quiz: Ciudades", this.p.width / 2, this.p.height / 2); // Muestra el texto "Quiz: Ciudades"
     }
     mousePressed(mouseX, mouseY){
-        this.color = p.color(p.random(255), p.random(255), p.random(255));
+        this.color = this.p.color(this.p.random(255), this.p.random(255), this.p.random(255));
     }
     }
 
@@ -178,37 +178,22 @@ function quiz1(p) {
   const circulo = new Circulo(p, '#33fcff');
   const rect = new Rectangulo(p, '#7433ff');
   const triangulo = new Triangulo(p, '#8dff33');
-  const initialPieces = [
-            [null, null, null, null, null, null, null, null],
-            ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-            [null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null], // Usar mayúsculas para piezas blancas si quieres diferenciar
-            [null, null, null, null, null, null, null, null]
-        ];
-  const tableroVacio = Array.from({ length: 8 }, () => Array(8).fill(null));
   let pieceImages={};
   let gui = {
     "background":"#ffffff",
     "cellColor1":"#7689a0",
     "cellColor2":"#e7e8f3",
     "cellLength":50,
-    "pickedColor":"#3d6b4f",
-    "pickedWidth":3
     }
+  const tableroVacio = Array(8).fill().map(() => Array(8).fill(null))
   // Crea tablero del nivel 1:
-  
   const tablero = new ChessBoard(
     p,
-    [gui.cellColor1, gui.cellColor2], // Colores del tablero
-    [0, 0], // Posición de la esquina superior izquierda [x, y]
-    gui.cellLength, // Ancho de celda
-    [8, 8], // Dimensiones [filas, columnas]
-    gui.pickedColor, // pickedColor (rojo)
-    gui.pickedWidth, // pickedWidth (grosor del borde)
-    initialPieces,
+    [gui.cellColor1, gui.cellColor2],
+    [0, 0],
+    gui.cellLength,
+    [8, 8],
+    tableroVacio,
     pieceImages,
     [0,1,2,3,4,5,6,7]
   );
@@ -240,7 +225,6 @@ function quiz1(p) {
     draw(){
         if(this.visualStrategy && typeof this.visualStrategy.draw === 'function'){
             this.visualStrategy.draw();
-            console.log(this.visualStrategy.pieces);
         }
         else{
             this.drawNoCanvas();

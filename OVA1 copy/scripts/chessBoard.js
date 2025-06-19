@@ -1,30 +1,13 @@
-// function sketchTema2(p) {
-//     let board;
-//     let this.pieceImages.pawnImg;
-//     let gui = {
-//         "background": "#ffffff",
-//         "cellColor1": "#7689a0",
-//         "cellColor2": "#e7e8f3",
-//         "cellLength": 50,
-//         "pickedColor": "#3d6b4f",
-//         "pickedWidth": 3
-//     }
-
-//     // Variables para mostrar los valores
-//     let binaryDisplay, decimalDisplay, hexDisplay, dataTypeDisplay;
 
 class ChessBoard {
-    constructor(p,colors, location, cellWidth, dimensions, pickedColor, pickedWidth, pieces, pieceImages, playableRows) {
+    constructor(p,colors, location, cellWidth, dimensions, pieces, pieceImages, playableRows) {
         this.p = p;
         this.colors = colors; // [color1, color2]
         this.location = location; // [x, y] - Top-left corner position
         this.cellWidth = cellWidth;
         this.dimensions = dimensions; // [rows, columns]
         this.pickedPiece = null; // null if no piece is picked, otherwise [row, col]
-        this.pickedColor = pickedColor; // e.g., "#FF0000"
-        this.pickedWidth = pickedWidth; // stroke weight for the picked piece
-        this.pieces = pieces; // 2D array representing the board pieces
-        this.initialStatePieces = pieces;
+        this.pieces = pieces;// 2D array representing the board pieces
         this.pieceImages = pieceImages;
         this.playableRows = playableRows; // Array with the index of the rows that are abled for interaction
 
@@ -153,54 +136,18 @@ class ChessBoard {
         const dataType = this.getDataType();
         
         if (this.binaryDisplay && this.decimalDisplay && this.hexDisplay && this.dataTypeDisplay) {
-            binaryDisplay.html(binaryString);
-            decimalDisplay.html(decimalValue.toString());
-            hexDisplay.html(hexValue);
-            dataTypeDisplay.html(dataType);
+            this.binaryDisplay.html(binaryString);
+            this.decimalDisplay.html(decimalValue.toString());
+            this.hexDisplay.html(hexValue);
+            this.dataTypeDisplay.html(dataType);
+        }
+    }
+
+    mousePressed(mouseX, mouseY) {
+        if (this.isInsideBoard(this.p.mouseX, this.p.mouseY)) {
+            const col = this.p.floor((this.p.mouseX - this.location[0]) / this.cellWidth);
+            const row = this.p.floor((this.p.mouseY - this.location[1]) / this.cellWidth);
+            this.togglePiece(row, col);
         }
     }
 }
-
-
-    // this.p.setup = () => {
-    //     let canvas = this.p.createCanvas(gui.cellLength * 8 + 20, gui.cellLength * 8 + 20);
-    //     canvas.parent('contenedor-sketch2');
-        
-    //     // Obtener referencias a los elementos de visualización
-    //     binaryDisplay = this.p.select('#binary-value');
-    //     decimalDisplay = this.p.select('#decimal-value');
-    //     hexDisplay = this.p.select('#hex-value');
-    //     dataTypeDisplay = this.p.select('#data-type');
-
-    //     // Inicializar el tablero vacío
-    //     const initialPieces = Array(8).fill().map(() => Array(8).fill(null));
-
-    //     board = new ChessBoard(
-    //         [gui.cellColor1, gui.cellColor2],
-    //         [10, 10],
-    //         gui.cellLength,
-    //         [8, 8],
-    //         gui.pickedColor,
-    //         gui.pickedWidth,
-    //         initialPieces
-    //     );
-
-    //     // Actualizar la visualización inicial
-    //     board.updateDisplays();
-    // };
-
-    // p.draw = () => {
-    //     p.background(220);
-    //     board.draw();
-    // };
-
-    // p.mouseClicked = () => {
-    //     if (board.isInsideBoard(p.mouseX, p.mouseY)) {
-    //         const col = p.floor((p.mouseX - board.location[0]) / board.cellWidth);
-    //         const row = p.floor((p.mouseY - board.location[1]) / board.cellWidth);
-    //         board.togglePiece(row, col);
-    //     }
-    // };
-// }
-
-// new p5(sketchTema2);

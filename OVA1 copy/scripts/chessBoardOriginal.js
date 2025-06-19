@@ -1,5 +1,5 @@
 class ChessBoard {
-        constructor(p,colors, location, cellWidth, dimensions, pickedColor, pickedWidth, pieces, pieceImages, playableRows) {
+        constructor(p,colors, location, cellWidth, dimensions, pickedColor, pickedWidth, pieceImages, playableRows) {
             this.p = p;
             this.colors = colors; // [color1, color2]
             this.location = location; // [x, y] - Top-left corner position
@@ -9,7 +9,6 @@ class ChessBoard {
             this.pickedColor = pickedColor; // e.g., "#FF0000"
             this.pickedWidth = pickedWidth; // stroke weight for the picked piece
             this.pieces = pieces; // 2D array representing the board pieces
-            this.initialStatePieces = pieces;
             this.pieceImages = pieceImages;
             this.playableRows = playableRows; // Array with the index of the rows that are abled for interaction
         }
