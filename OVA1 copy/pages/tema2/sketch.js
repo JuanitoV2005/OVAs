@@ -1,243 +1,266 @@
-// chessSketch.js
-// const sketchTema2 = (p) => {
-function sketchTema2 (p) {
-    let board;
-    let pawnImg, knightImg, bishopImg, rookImg, queenImg, kingImg;
-    let gui = {
+// La función quiz1 ahora se enfoca en la inicialización de P5.js y la gestión del canvas
+function sketchTema2(p) {
+  // Datos del quiz
+  const levels = [
+    // Nivel 1 (índice 0)
+    [
+      { id: "q1", question: "¿Cuál es la capital de Francia?", correctAnswer: "París" },
+      { id: "q2", question: "¿Cuál es el océano más grande del mundo?", correctAnswer: "Pacífico" , notInput:true}
+    ],
+    // Nivel 2 (índice 1) - Mostrar 'explicacion-intermedia'
+    null, // Este nivel no tiene preguntas
+    // Nivel 3 (índice 2) - Mostrar 'intro' (por defecto)
+    [
+      { id: "q5", question: "¿En qué año cayó el Muro de Berlín?", correctAnswer: "1989" },
+      { id: "q6", question: "¿Cuál es el país más grande del mundo?", correctAnswer: "Rusia" }
+    ],
+    // Nivel 4 (índice 3) - Mostrar 'intro' (por defecto), preguntas adicionales si las hubiera
+    [
+        { id: "q7", question: "¿Cuál es la capital de Italia?", correctAnswer: "Roma" },
+        { id: "q8", question: "¿Dónde está la Torre Eiffel?", correctAnswer: "París" }
+    ],
+    // Nivel 5 (índice 4) - Mostrar 'conclusion'
+    null // Este nivel no tiene preguntas
+  ];
+
+  // Mapeo de niveles a los IDs de los divs de contenido a mostrar
+  const contentVisibilityMap = {
+    0: ['intro','chessBoardInfo'],//'intro',
+    1: ['explicacion-intermedia'],
+    2: ['intro'],
+    3: ['intro'],
+    4: ['conclusion']
+  };
+
+  let quizNavigator; // Variable para la instancia del QuizNavigator
+
+  // Define los niveles que NO deben dibujar nada en el canvas de P5.js.
+  // Los niveles 1 y 4 no tienen preguntas, se asocian a contenido de texto DOM.
+  const noCanvasDrawingLevels = new Set([1, 4]);
+
+  // Objeto para almacenar el estado inicial y actual de los dibujos del canvas por nivel.
+  // Esto permite que cada nivel con dibujo tenga un color inicial que puede ser modificado.
+//   const levelCanvasStates = {
+//     0: { color: p.color(100, 150, 255) }, // Color inicial azul para el nivel 0
+//     2: { color: p.color(255, 150, 100) }, // Color inicial naranja para el nivel 2
+//     3: { color: p.color(50, 150, 50) }   // Color inicial verde para el nivel 3
+//   };
+
+  // ELIMINAR NUEVO ESTAS CLASES INVENTADAS
+
+  // Definición de la clase
+    class Circulo {
+    // Constructor: se ejecuta al crear una nueva instancia
+    constructor(p,colorInicial) {
+        this.p = p;
+        this.color = colorInicial; //let color = '#33fcff';
+    }
+
+    draw() {
+        p.background(240); // Fondo gris claro
+        p.fill(this.color); // Usa el color del estado para el relleno
+        p.noStroke(); // Sin borde para la forma
+        p.ellipse(p.width / 2, p.height / 2, 100, 100); // Dibuja un círculo en el centro
+        p.fill(0); // Color de texto negro
+        p.textAlign(p.CENTER, p.CENTER); // Alinea el texto al centro
+        p.textSize(24); // Tamaño de la fuente
+        p.text("Quiz: Geografía", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Geografía"
+    }
+    mousePressed(mouseX, mouseY){
+        this.color = p.color(p.random(255), p.random(255), p.random(255));
+    }
+    }
+
+
+    class Rectangulo {
+    // Constructor: se ejecuta al crear una nueva instancia
+    constructor(p,colorInicial) {
+        this.p = p;
+        this.color = colorInicial; //let color = '#7433ff';
+    }
+
+    draw() {
+        this.p.background(220); // Fondo un poco más oscuro
+        this.p.fill(this.color); // Usa el color del estado para el relleno
+        this.p.rectMode(this.p.CENTER); // Dibuja rectángulos desde su centro
+        this.p.rect(this.p.width / 2, this.p.height / 2, 120, 80, 10); // Dibuja un rectángulo redondeado
+        this.p.fill(0); // Color de texto negro
+        this.p.textAlign(this.p.CENTER, this.p.CENTER);
+        this.p.textSize(20);
+        this.p.text("Quiz: Historia", this.p.width / 2, this.p.height / 2); // Muestra el texto "Quiz: Historia"
+    }
+    mousePressed(mouseX, mouseY){
+        this.color = this.p.color(this.p.random(255), this.p.random(255), this.p.random(255));
+    }
+    }
+
+    class Triangulo {
+    // Constructor: se ejecuta al crear una nueva instancia
+    constructor(p,colorInicial) {
+        this.p = p;
+        this.color = colorInicial; //let color = '#7433ff';
+    }
+
+    draw() {
+        this.p.background(240); // Fondo verde claro
+        this.p.fill(this.color); // Usa el color del estado para el relleno
+        this.p.noStroke();
+        this.p.triangle(
+        this.p.width / 2, this.p.height / 2 - 40,
+        this.p.width / 2 - 50, this.p.height / 2 + 40,
+        this.p.width / 2 + 50, this.p.height / 2 + 40
+        ); // Dibuja un triángulo
+        this.p.fill(0);
+        this.p.textAlign(this.p.CENTER, this.p.CENTER);
+        this.p.textSize(22);
+        this.p.text("Quiz: Ciudades", this.p.width / 2, this.p.height / 2); // Muestra el texto "Quiz: Ciudades"
+    }
+    mousePressed(mouseX, mouseY){
+        this.color = this.p.color(this.p.random(255), this.p.random(255), this.p.random(255));
+    }
+    }
+
+
+
+
+
+
+//   // Función para dibujar el canvas para el Nivel 0
+//   function drawLevel0Canvas() {
+//     p.background(240); // Fondo gris claro
+//     p.fill(levelCanvasStates[0].color); // Usa el color del estado para el relleno
+//     p.noStroke(); // Sin borde para la forma
+//     p.ellipse(p.width / 2, p.height / 2, 100, 100); // Dibuja un círculo en el centro
+//     p.fill(0); // Color de texto negro
+//     p.textAlign(p.CENTER, p.CENTER); // Alinea el texto al centro
+//     p.textSize(24); // Tamaño de la fuente
+//     p.text("Quiz: Geografía", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Geografía"
+//   }
+
+//   // Función para dibujar el canvas para el Nivel 2
+//   function drawLevel2Canvas() {
+//     p.background(220); // Fondo un poco más oscuro
+//     p.fill(levelCanvasStates[2].color); // Usa el color del estado para el relleno
+//     p.rectMode(p.CENTER); // Dibuja rectángulos desde su centro
+//     p.rect(p.width / 2, p.height / 2, 120, 80, 10); // Dibuja un rectángulo redondeado
+//     p.fill(0); // Color de texto negro
+//     p.textAlign(p.CENTER, p.CENTER);
+//     p.textSize(20);
+//     p.text("Quiz: Historia", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Historia"
+//   }
+
+//   // Función para dibujar el canvas para el Nivel 3
+//   function drawLevel3Canvas() {
+//     p.background(200, 255, 200); // Fondo verde claro
+//     p.fill(levelCanvasStates[3].color); // Usa el color del estado para el relleno
+//     p.noStroke();
+//     p.triangle(
+//       p.width / 2, p.height / 2 - 40,
+//       p.width / 2 - 50, p.height / 2 + 40,
+//       p.width / 2 + 50, p.height / 2 + 40
+//     ); // Dibuja un triángulo
+//     p.fill(0);
+//     p.textAlign(p.CENTER, p.CENTER);
+//     p.textSize(22);
+//     p.text("Quiz: Ciudades", p.width / 2, p.height / 2); // Muestra el texto "Quiz: Ciudades"
+//   }
+
+//   // Función para niveles que no requieren dibujo en el canvas (solo limpiarlo o hacerlo transparente)
+//   function drawNoCanvas() {
+//     p.background(255, 255, 255, 0); // Fondo transparente
+//   }
+
+
+
+
+
+  // --- Estrategias de dibujo del canvas --- 
+  const circulo = new Circulo(p, '#33fcff');
+  const rect = new Rectangulo(p, '#7433ff');
+  const triangulo = new Triangulo(p, '#8dff33');
+  let pieceImages={};
+  let gui = {
     "background":"#ffffff",
     "cellColor1":"#7689a0",
     "cellColor2":"#e7e8f3",
     "cellLength":50,
-    "pickedColor":"#3d6b4f",
-    "pickedWidth":3
+    }
+  const tableroVacio = Array(8).fill().map(() => Array(8).fill(null))
+  // Crea tablero del nivel 1:
+  const tablero = new ChessBoard(
+    p,
+    [gui.cellColor1, gui.cellColor2],
+    [0, 0],
+    gui.cellLength,
+    [8, 8],
+    tableroVacio,
+    pieceImages,
+    [0,1,2,3,4,5,6,7]
+  );
+  
+
+  const levelCanvasObjects = {
+    0: tablero,  
+    1: circulo,
+    2: rect,
+    3: triangulo,
+    4: null 
+  };
+
+  class CanvasController{
+    constructor(p, levelCanvasObjects, quizNavigator){
+      this.p = p;
+      this.levelCanvasObjects = levelCanvasObjects;
+      this.quizNavigator = quizNavigator;
+      this.visualStrategy = levelCanvasObjects[quizNavigator.currentLevel];
+      this.lastLevel = quizNavigator.currentLevel;
+    }
+    setStrategy(levelIndex) {
+        this.visualStrategy = this.levelCanvasObjects[levelIndex];
     }
 
-    // Clase ChessBoard
-    class ChessBoard {
-        constructor(colors, location, cellWidth, dimensions, pickedColor, pickedWidth, pieces) {
-            this.colors = colors; // [color1, color2]
-            this.location = location; // [x, y] - Top-left corner position
-            this.cellWidth = cellWidth;
-            this.dimensions = dimensions; // [rows, columns]
-            this.pickedPiece = null; // null if no piece is picked, otherwise [row, col]
-            this.pickedColor = pickedColor; // e.g., "#FF0000"
-            this.pickedWidth = pickedWidth; // stroke weight for the picked piece
-            this.pieces = pieces; // 2D array representing the board pieces
-            this.initialStatePieces = pieces;
-        }
-
-        drawBoard() {
-            for (let r = 0; r < this.dimensions[0]; r++) {
-                for (let c = 0; c < this.dimensions[1]; c++) {
-                    const x = this.location[0] + c * this.cellWidth;
-                    const y = this.location[1] + r * this.cellWidth;
-                    const colorIndex = (r + c) % 2;
-                    p.fill(this.colors[colorIndex]);
-                    p.noStroke();
-                    p.rect(x, y, this.cellWidth, this.cellWidth);
-                }
-            }
-        }
-
-        drawPieces() {
-            for (let r = 0; r < this.dimensions[0]; r++) {
-                for (let c = 0; c < this.dimensions[1]; c++) {
-                    const pieceChar = this.pieces[r][c];
-                    if (pieceChar) { // If there's a piece in this cell
-                        const centerX = this.location[0] + c * this.cellWidth + this.cellWidth / 2;
-                        const centerY = this.location[1] + r * this.cellWidth + this.cellWidth / 2;
-
-                        let img;
-                        switch (pieceChar.toLowerCase()) {
-                            case 'p': img = pawnImg; break;
-                            // case 'k': img = knightImg; break;
-                            // case 'b': img = bishopImg; break;
-                            // case 'r': img = rookImg; break;
-                            // case 'q': img = queenImg; break;
-                            // case 'l': img = kingImg; break; // 'l' for king (rey)
-                            // Add more cases for other pieces (e.g., 'B' for black bishop if separate images)
-                            default: continue; // Skip if unknown piece character
-                        }
-
-                        if (img) {
-                            // Calculate image size to fit within the cell
-                            let imgWidth, imgHeight;
-                            const aspectRatio = img.width / img.height;
-
-                            if (img.width > img.height) {
-                                imgWidth = this.cellWidth * 0.8; // 80% of cell width
-                                imgHeight = imgWidth / aspectRatio;
-                            } else {
-                                imgHeight = this.cellWidth * 0.8; // 80% of cell height
-                                imgWidth = imgHeight * aspectRatio;
-                            }
-
-                            // Ensure it doesn't exceed cell dimensions
-                            if (imgWidth > this.cellWidth) {
-                                imgWidth = this.cellWidth;
-                                imgHeight = imgWidth / aspectRatio;
-                            }
-                            if (imgHeight > this.cellWidth) {
-                                imgHeight = this.cellWidth;
-                                imgWidth = imgHeight * aspectRatio;
-                            }
-
-                            // Draw image centered in the cell
-                            p.image(img, centerX - imgWidth / 2, centerY - imgHeight / 2, imgWidth, imgHeight);
-                        }
-                    }
-                }
-            }
-        }
-
-        draw() {
-            this.drawBoard();
-
-            // If a piece is picked, draw a border around its cell
-            if (this.pickedPiece) {
-                const [r, c] = this.pickedPiece;
-                const x = this.location[0] + c * this.cellWidth;
-                const y = this.location[1] + r * this.cellWidth;
-                p.noFill();
-                p.stroke(this.pickedColor);
-                p.strokeWeight(this.pickedWidth);
-                p.rect(x, y, this.cellWidth, this.cellWidth);
-            }
-
-            this.drawPieces();
-        }
-
-        
-        // Example method to handle a piece being picked (can be called on mouse click)
-        pickPiece(row, col) {
-            if (row >= 0 && row < this.dimensions[0] && col >= 0 && col < this.dimensions[1] && this.pieces[row][col] != null) {
-                this.pickedPiece = [row, col];
-            } else {
-                this.clearPickedPiece();
-            }
-        }
-
-        // Example method to clear the picked piece
-        clearPickedPiece() {
-            this.pickedPiece = null;
-        }
-
-        isInsideBoard(x,y){
-            const boardX = this.location[0];
-            const boardY = this.location[1];
-            const boardWidth = this.dimensions[1] * this.cellWidth;
-            const boardHeight = this.dimensions[0] * this.cellWidth;
-
-            return (x >= boardX && x < boardX + boardWidth &&
-                    y >= boardY && y < boardY + boardHeight);
-        }
-
-        isValidMove(endRow, endCol) {
-            // 1. Validaciones básicas:
-            let startRow = this.pickedPiece[0];
-            let startCol = this.pickedPiece[1];
-
-            const piece = this.pieces[startRow][startCol];
-            if (piece === null) { // No hay pieza en la casilla de inicio
-                return false;
-            }
-
-            // No mover a la misma casilla
-            if (startRow === endRow && startCol === endCol) {
-                return false;
-            }
-
-            let targetPiece = this.pieces[endRow][endCol];
-
-            // Lógica para el PEÓN NEGRO ('p')
-            if (piece === 'p') {
-                const rowDiff = endRow - startRow; // Diferencia en filas (positivo = avance para negras
-                const colDiff = Math.abs(endCol - startCol); // Diferencia absoluta en columnas
-                // Avance de una casilla
-                if (rowDiff === 1 && colDiff === 0) {
-                    // Debe ser una casilla vacía
-                    return targetPiece === null;
-                }
-                
-
-                // Avance de dos casillas (solo desde la fila inicial del peón negro, que asumimos es la fila 1)
-                if (startRow === 1 && rowDiff === 2 && colDiff === 0) {
-                    // La casilla intermedia (fila 2, misma columna) y la casilla final deben estar vacías
-                    const middleCellEmpty = this.pieces[startRow + 1][startCol] === null;
-                    const targetCellEmpty = targetPiece === null;
-                    return middleCellEmpty && targetCellEmpty;
-                }
-
-                // // Captura diagonal
-                // if (rowDiff === 1 && colDiff === 1) {
-                //     // Debe haber una pieza en la casilla de destino y debe ser una pieza blanca (oponente)
-                //     // Aquí asumimos que las piezas blancas son mayúsculas ('P', 'R', etc.)
-                //     return targetPiece !== null && targetPiece === targetPiece.toUpperCase() && targetPiece !== targetPiece.toLowerCase();
-                // }
-
-                // Si no es ninguno de los movimientos válidos para un peón negro
-                return false;
-            }
-
-            // --- Lógica para otras piezas (si las tienes implementadas) ---
-            // else if (piece === 'P') { // Peón blanco
-            //     // Lógica para peón blanco
-            // }
-            // else if (piece === 'r' || piece === 'R') { // Torre
-            //     // Lógica para torre
-            // }
-            // ... etc.
-
-            // Si la pieza no es un peón negro (y no se ha implementado otra lógica),
-            // o si el movimiento no es válido para el peón negro.
-            return false;
-        }
-
-        movePickedPieceTo(row,col){
-            let piece = this.pieces[this.pickedPiece[0]][this.pickedPiece[1]];
-            this.pieces[this.pickedPiece[0]][this.pickedPiece[1]] = null;
-            this.pieces[row][col] = piece;
-            this.clearPickedPiece();
-        }
-
-        interact(mouseX, mouseY){
-            // 1. Validaciones básicas:
-            if (!this.isInsideBoard(mouseX, mouseY)) {
-                this.clearPickedPiece()
-                return;
-            }
-            const boardX = board.location[0];
-            const boardY = board.location[1];
-            const col = p.floor((mouseX - boardX) / board.cellWidth);
-            const row = p.floor((mouseY - boardY) / board.cellWidth);
-            
-            if (this.pickedPiece === null) { // Puede seleccionar una pieza
-                // Caso 1: No hay pieza seleccionada actualmente
-                // Solo se puede seleccionar una celda si no es nula (contiene una pieza)
-                this.pickPiece(row, col);
-                return;
-            }
-            // Caso 2: Hay una pieza seleccionada y la casilla actual no está vacía
-            if (this.pieces[row][col] !== null) {
-                // Intercambia pieza seleccionada por pieza de la casilla actual
-                this.pickPiece(row, col);
-                return;
-            }
-            // Caso 3: Hay una pieza seleccionada y la casilla actual no contiene una pieza
-            // Revisar si la pieza puede moverse a la casilla actual
-            if(this.isValidMove(row,col)){
-                this.movePickedPieceTo(row,col);
-            }
-            // Caso 4: El movimiento de la pieza no es válido -> deselecciona la pieza actual
-            this.clearPickedPiece();
-        };
+    drawNoCanvas() {
+        this.p.background(255, 255, 255, 0); // Fondo transparente
     }
+    draw(){
+        if(this.visualStrategy && typeof this.visualStrategy.draw === 'function'){
+            this.visualStrategy.draw();
+        }
+        else{
+            this.drawNoCanvas();
+        }
+    }
+    mousePressed(mouseX, mouseY){
+        if(this.visualStrategy && typeof this.visualStrategy.mousePressed === 'function'){
+            this.visualStrategy.mousePressed(mouseX, mouseY);
+        }
+    }
+  }
 
-    p.preload = () => {
+  let canvasController;
+
+  // Función principal para aplicar el patrón Strategy para el dibujo del canvas.
+  // Dependiendo del nivel actual del quiz, se selecciona y ejecuta la función de dibujo apropiada.
+//   function drawCanvasForLevel(levelIndex) {
+//     if (noCanvasDrawingLevels.has(levelIndex)) {
+//       drawNoCanvas(); // Si el nivel está en la lista de "no dibujar", se usa esa estrategia
+//     } else if (levelIndex === 0) {
+//       drawLevel0Canvas(); // Dibujo específico para el nivel 0
+//     } else if (levelIndex === 2) {
+//       drawLevel2Canvas(); // Dibujo específico para el nivel 2
+//     } else if (levelIndex === 3) {
+//       drawLevel3Canvas(); // Dibujo específico para el nivel 3
+//     }
+//   }
+
+
+  // ------ Funciones principales del sketch ------
+  
+  p.preload = () => {
         // Carga tus imágenes aquí. Asegúrate de que las rutas sean correctas.
         // Asume que tienes las imágenes en una carpeta 'assets' o similar.
         try {
-            pawnImg = p.loadImage('assets/chess/pawn.png');
+            pieceImages.pawnImg = p.loadImage('assets/chess/pawn.png');
             // knightImg = p.loadImage('assets/chess/knight.png');
             // bishopImg = p.loadImage('assets/chess/bishop.png');
             // rookImg = p.loadImage('assets/chess/rook.png');
@@ -248,81 +271,53 @@ function sketchTema2 (p) {
             alert("Could not load one or more chess piece images. Check paths in p.preload().");
         }
     };
+  
+  p.setup = function() {
+    console.log(`Iniciando sketchTema3.`);
 
-    p.setup = () => {
-        p.createCanvas(gui.cellLength * 8+20, gui.cellLength * 8+20); // Tamaño del canvas
-        // Inicialización de la matriz de piezas (ejemplo de un tablero inicial)
-        const initialPieces = [
-            [null, null, null, null, null, null, null, null],
-            ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-            [null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null], // Usar mayúsculas para piezas blancas si quieres diferenciar
-            [null, null, null, null, null, null, null, null]
-        ];
-        // Nota: para un juego real, necesitarías cargar imágenes separadas para piezas blancas y negras,
-        // o usar una convención para el caracter (ej. 'p' minúscula para negras, 'P' mayúscula para blancas).
-        // Para este ejemplo, estamos usando solo 'p' y 'P' para peones, y el resto en minúsculas.
-        // Si no tienes imágenes separadas, las piezas 'P' se verán iguales a 'p'.
+    // Configuración inicial del canvas P5.js
+    const canvas = p.createCanvas(400, 400);
+    canvas.parent("p5-container"); // Asocia el canvas al div HTML con id "p5-container"
+    p.background(240); // Establece el color de fondo inicial del canvas
 
-        // Inicializa la instancia del tablero
-        board = new ChessBoard(
-            [gui.cellColor1, gui.cellColor2], // Colores del tablero
-            [10, 10], // Posición de la esquina superior izquierda [x, y]
-            gui.cellLength, // Ancho de celda
-            [8, 8], // Dimensiones [filas, columnas]
-            gui.pickedColor, // pickedColor (rojo)
-            gui.pickedWidth, // pickedWidth (grosor del borde)
-            initialPieces
-        );
+    // Crea una instancia de QuizNavigator, pasando 'p' y los datos del quiz.
+    // Esta instancia gestionará la lógica de la interfaz de usuario y la navegación.
+    quizNavigator = new QuizNavigator(p, levels, contentVisibilityMap);
+    quizNavigator.init(); // Inicializa el QuizNavigator para configurar los elementos DOM y eventos.
+    
+    // Crea una instancia de canvasController
+    canvasController = new CanvasController(p, levelCanvasObjects, quizNavigator);
+    
+    
+    // // establecer respuesta para q2
+    quizNavigator.setAnswerForGraphicInteractiveQuestion("q2", "Pacífico")
+  };
 
-        // Ejemplo: Simular que la pieza en [1, 0] (un peón) está seleccionada
-        board.pickPiece(1, 0);
-        
-        board.interact(p.mouseX, p.mouseY);
-    };
+  p.draw = function () {
+    // En cada fotograma, se llama a esta función para dibujar el canvas.
+    // Utiliza el patrón Strategy: la función `drawCanvasForLevel` decide
+    // qué "estrategia" de dibujo aplicar basándose en el `currentLevel` del quiz.
+    // drawCanvasForLevel(quizNavigator.currentLevel);
+    if(quizNavigator.currentLevel !== canvasController.lastLevel){
+        canvasController.setStrategy(quizNavigator.currentLevel);
+    }
+    
+    canvasController.draw();
+  };
 
-    p.draw = () => {
-        p.background(220); // Color de fondo del canvas
-        board.draw(); // Llama al método draw del tablero
-    };
-
-    // Puedes añadir eventos de ratón aquí si quieres interactuar con el tablero
-    // p.mouseClicked = () => {
-    //     board.interact(p.mouseX, p.mouseY);
-    //     console.log("Clicked at (" + p.mouseX + ", " + p.mouseY + ")");
-    //     // Lógica para determinar qué celda fue clickeada y actualizar pickedPiece
-    // };
-    // Añade este método dentro de la constante chessSketch = (p) => { ... }
-// Justo después del p.draw = () => { ... }
-p.mouseClicked = () => {
-    // Calcula la fila y columna de la celda donde se hizo clic
-    let mouseX = p.mouseX;
-    let mouseY = p.mouseY;
-    board.interact(mouseX, mouseY);
-    return;
-};
-p.touchStarted = () => {
-    // Calcula la fila y columna de la celda donde se hizo clic
-    let mouseX = p.mouseX;
-    let mouseY = p.mouseY;
-    board.interact(mouseX, mouseY);
-    return;
-};
-
-//     p.reset = () => {
-//         board.pieces = board.initialStatePieces;
-//         board.clearPickedPiece();
-//   };
-};
-
-// Crea una nueva instancia de P5 y asóciala con un elemento HTML (opcional, si quieres un canvas específico)
-// Si no especificas un elemento, P5 creará un canvas dentro del <body>
-// new p5(sketchTema2);
-
-// Para tener un canvas específico en el HTML, crea un div con un ID:
-// <div id="my-chess-container"></div>
-// Y luego en JavaScript:
-// new p5(chessSketch, 'my-chess-container');
+  // Esta función se ejecuta cada vez que se presiona el mouse en la ventana.
+  // Aquí la usamos para detectar clics en el canvas y cambiar el color de la figura.
+  p.mousePressed = function() {
+    // Verifica si el clic ocurrió dentro de los límites del canvas
+    if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
+    //   const currentLevel = quizNavigator.currentLevel;
+      // Solo cambia el color si el nivel actual tiene un dibujo de canvas definido en `levelCanvasStates`
+    //   if (levelCanvasStates[currentLevel]) {
+    //     // Genera un color aleatorio (RGB)
+    //     levelCanvasStates[currentLevel].color = p.color(p.random(255), p.random(255), p.random(255));
+    //   }
+    //   canvasController.visualStrategy.color = p.color(p.random(255), p.random(255), p.random(255));
+      canvasController.mousePressed(p.mouseX, p.mouseY);
+    }
+  };
+}

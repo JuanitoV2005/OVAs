@@ -1,37 +1,16 @@
 const temas = {
-  tema3: {
-    html: 'pages/tema3/index.html',
-    // Si tema4 no tiene un sketch, estas propiedades son null
-    sketchScript: 'pages/tema3/sketch.js',
-    sketchName: 'quiz1',
-    container: 'p5-container',
-    // sketchScript: null,
-    // sketchName: null,
-    // container: null,
-    instancia: null,
-    nombreMenu: 'Tipos numéricos: int vs Integer'
-  },
-  tema2: {
+  tema0: {
     // La ruta al archivo HTML dentro de su carpeta de tema
     html: 'pages/tema0/index.html',
     // La ruta al archivo JS del sketch dentro de su carpeta de tema
-    sketchScript: 'pages/tema0/sketch.js',
+    sketchScript: null,
     // El nombre de la función de sketch definida dentro de ese sketch.js
     // (Asumiendo que dentro de pages/tema1/sketch.js hay una función llamada sketchTema1)
-    sketchName: 'sketchTema0',
-    container: 'contenedor-sketch0',
+    sketchName: null,
+    container: null,
     instancia: null,
-    nombreMenu: 'Introducción a los primitivos en Java'
+    nombreMenu: 'Introducción'
   },
-  tema0: {
-    html: 'pages/tema2/index.html',
-    sketchScript: 'pages/tema2/sketch.js',
-    sketchName: 'sketchTema2',
-    container: 'contenedor-sketch2',
-    instancia: null,
-    nombreMenu: '1. Mover peones en tablero'
-  },
-  
   tema1: {
     // La ruta al archivo HTML dentro de su carpeta de tema
     html: 'pages/tema1/index.html',
@@ -44,11 +23,17 @@ const temas = {
     instancia: null,
     nombreMenu: 'Cómo los primitivos usan bits'
   },
-  
-  
-  tema4: {
-    html: 'pages/tema4/index.html',
-    // Si tema4 no tiene un sketch, estas propiedades son null
+  tema2: {
+    html: 'pages/tema2/index.html',
+    sketchScript: 'pages/tema2/sketch.js',
+    sketchName: 'sketchTema2',
+    container: 'p5-container',
+    instancia: null,
+    nombreMenu: 'Sistemas numéricos'
+  },
+  tema3: {
+    html: 'pages/tema3/index.html',
+    // Si tema3 no tiene un sketch, estas propiedades son null
     sketchScript: null,
     sketchName: null,
     container: null,
@@ -56,6 +41,7 @@ const temas = {
     nombreMenu: 'Tipos numéricos: int vs Integer'
   }
 };
+
 
 // Scripts que contienen lógica para dibujar algunas clases:
 // Requisito: la última linea del script, fuera de la clase,
