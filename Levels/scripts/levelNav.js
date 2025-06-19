@@ -64,38 +64,40 @@ class QuizNavigator {
     // Controlar la visibilidad de los divs de contenido al cambiar de nivel
     this.updateContentVisibility();
 
-    // Determinar si el nivel actual tiene preguntas
-    const hasQuestions = (questions && questions.length > 0);
+    // Filtra las preguntas que no son solo enunciados para determinar si hay preguntas a calificar
+    const gradedQuestions = questions ? questions.filter(q => !q.isStatement) : [];
+    const hasGradedQuestions = gradedQuestions.length > 0;
 
     // Ajustar la visibilidad del contenedor de preguntas
-    if (hasQuestions) {
+    if (questions && questions.length > 0) { // Si hay cualquier tipo de "pregunta" (incluyendo enunciados)
       this.p.select(".container").style("display", "flex");
       this.p.select("#questionCard").style("display", "block");
     } else {
       this.p.select(".container").style("display", "none");
+      this.p.select("#questionCard").style("display", "none"); // Ocultar también la tarjeta de preguntas
     }
 
     // Ajustar la visibilidad y estado de los botones
     if (this.verifyBtn) {
-      if (hasQuestions) {
-        this.verifyBtn.style("display", "inline-block"); // Mostrar el botón Verificar
+      if (hasGradedQuestions) { // Solo mostrar si hay preguntas a calificar
+        this.verifyBtn.style("display", "inline-block");
         this.verifyBtn.attribute("disabled", ""); // Deshabilitarlo inicialmente
       } else {
-        this.verifyBtn.style("display", "none"); // Ocultar el botón Verificar
+        this.verifyBtn.style("display", "none"); // Ocultar si no hay preguntas a calificar
       }
     }
 
     if (this.nextBtn) {
       this.nextBtn.style("display", "inline-block"); // Siempre mostrar el botón Siguiente
-      if (hasQuestions) {
-        this.nextBtn.attribute("disabled", ""); // Deshabilitarlo si hay preguntas
+      if (hasGradedQuestions) {
+        this.nextBtn.attribute("disabled", ""); // Deshabilitarlo si hay preguntas a calificar
       } else {
-        this.nextBtn.removeAttribute("disabled"); // Habilitarlo si no hay preguntas (es un nivel de contenido)
+        this.nextBtn.removeAttribute("disabled"); // Habilitarlo si no hay preguntas (es un nivel de contenido o solo enunciados)
       }
     }
 
-    // Si hay preguntas, poblar el contenedor de preguntas
-    if (hasQuestions) {
+    // Si hay preguntas (o enunciados), poblar el contenedor
+    if (questions && questions.length > 0) {
       questions.forEach((q, index) => {
         const div = this.p.createDiv("");
         div.class("input-group");
@@ -103,68 +105,68 @@ class QuizNavigator {
         const label = this.p.createElement("label", `${index + 1}. ${q.question}`);
         label.attribute("for", q.id);
 
-        const input = this.p.createInput("");
-        input.attribute("type", "text");
-        input.attribute("id", q.id);
-
-        // Si no tiene input habilidado
-        if(q.notInput === true){
-          input.attribute("disabled", ""); // <--- CORRECCIÓN AQUÍ
-          input.value("Interactúa con el gráfico");
-        }
-        // else{
-          input.input(() => {
-
-          this.answers[q.id] = input.value().trim();
-          input.removeClass("correct");
-          input.removeClass("incorrect");
-          this.validationResults[q.id] = null;
-          this.isVerified = false;
-          this.updateVerifyButton();
-          if (this.nextBtn) {
-            this.nextBtn.attribute("disabled", "");
-          }
-        }
-      );
-        // }
-        
-
-        
-
         div.child(label);
-        div.child(input);
+
+        // Si no es un enunciado, crea el input
+        if (!q.isStatement) {
+          const input = this.p.createInput("");
+          input.attribute("type", "text");
+          input.attribute("id", q.id);
+
+          // Si tiene notInput === true, deshabilitar y poner texto predeterminado
+          if (q.notInput === true) {
+            input.attribute("disabled", "");
+            input.value("Interactúa con el gráfico");
+          }
+
+          input.input(() => {
+            this.answers[q.id] = input.value().trim();
+            input.removeClass("correct");
+            input.removeClass("incorrect");
+            this.validationResults[q.id] = null;
+            this.isVerified = false;
+            this.updateVerifyButton();
+            if (this.nextBtn) {
+              this.nextBtn.attribute("disabled", "");
+            }
+          });
+          div.child(input);
+        }
+
         if (this.container) {
           this.container.child(div);
         }
       });
     }
 
-
     this.updateVerifyButton();
     this.updateLevelIndicator();
   }
 
   // Controla la visibilidad de los divs de contenido
-updateContentVisibility() {
-  const currentLevelContentIds = this.contentVisibilityMap[this.currentLevel] || []; // Obtiene el arreglo de IDs para el nivel actual, o un arreglo vacío si no existe.
+  updateContentVisibility() {
+    const currentLevelContentIds = this.contentVisibilityMap[this.currentLevel] || []; // Obtiene el arreglo de IDs para el nivel actual, o un arreglo vacío si no existe.
 
-  this.specificContentDivs.forEach(id => {
-    const div = document.getElementById(id);
-    if (div) {
-      if (currentLevelContentIds.includes(id)) { // Verifica si el ID actual está incluido en el arreglo de IDs del nivel
-        div.classList.remove('hidden');
-      } else {
-        div.classList.add('hidden');
+    this.specificContentDivs.forEach(id => {
+      const div = document.getElementById(id);
+      if (div) {
+        if (currentLevelContentIds.includes(id)) { // Verifica si el ID actual está incluido en el arreglo de IDs del nivel
+          div.classList.remove('hidden');
+        } else {
+          div.classList.add('hidden');
+        }
       }
-    }
-  });
-}
+    });
+  }
 
   // Actualiza el botón de verificar
   updateVerifyButton() {
     const currentQuestions = this.levels[this.currentLevel];
-    if (currentQuestions && currentQuestions.length > 0) {
-      const allFilled = currentQuestions.every(q => this.answers[q.id]);
+    // Solo considera las preguntas que no son solo enunciados
+    const gradedQuestions = currentQuestions ? currentQuestions.filter(q => !q.isStatement) : [];
+
+    if (gradedQuestions.length > 0) {
+      const allFilled = gradedQuestions.every(q => this.answers[q.id]);
       if (this.verifyBtn) {
         if (allFilled) {
           this.verifyBtn.removeAttribute("disabled");
@@ -187,9 +189,12 @@ updateContentVisibility() {
   // Verifica las respuestas
   verifyAnswers() {
     const currentQuestions = this.levels[this.currentLevel];
+    // Solo verifica las preguntas que no son solo enunciados
+    const gradedQuestions = currentQuestions ? currentQuestions.filter(q => !q.isStatement) : [];
+
     let allCorrect = true;
 
-    currentQuestions.forEach((q) => {
+    gradedQuestions.forEach((q) => {
       const input = this.p.select(`#${q.id}`);
       if (input) {
         const answer = (this.answers[q.id] || "").toLowerCase();
@@ -256,10 +261,10 @@ updateContentVisibility() {
     const question = currentQuestions ? currentQuestions.find(q => q.id === questionId) : null;
 
     if (question) {
-      // Verificar si la pregunta realmente tiene el input deshabilitado
+      // Verificar si la pregunta realmente tiene el input deshabilitado o es un enunciado
       const inputDisabled = question.notInput === true;
-      if (!inputDisabled) {
-        console.warn(`Advertencia: Intentando asignar respuesta manualmente a la pregunta '${questionId}', pero no está marcada como 'input: false'.`);
+      if (!inputDisabled || question.isStatement) { // Si es un enunciado, no debería llamarse a esta función
+        console.warn(`Advertencia: Intentando asignar respuesta manualmente a la pregunta '${questionId}', pero no está marcada como 'input: false' o es un enunciado.`);
         return;
       }
 

@@ -1,6 +1,6 @@
 
 class ChessBoard {
-    constructor(p,colors, location, cellWidth, dimensions, pieces, pieceImages, playableRows) {
+    constructor(p,colors, location, cellWidth, dimensions, pieces, pieceImages, playableRange) {
         this.p = p;
         this.colors = colors; // [color1, color2]
         this.location = location; // [x, y] - Top-left corner position
@@ -9,7 +9,7 @@ class ChessBoard {
         this.pickedPiece = null; // null if no piece is picked, otherwise [row, col]
         this.pieces = pieces;// 2D array representing the board pieces
         this.pieceImages = pieceImages;
-        this.playableRows = playableRows; // Array with the index of the rows that are abled for interaction
+        this.playableRange = { ...playableRange }; // minR, maxR, minC, maxC
 
         // Variables para mostrar displays:
         this.binaryDisplay = this.p.select('#binary-value');
@@ -19,17 +19,57 @@ class ChessBoard {
 
     }
 
+    // drawBoard() {
+    //     for (let r = 0; r < this.dimensions[0]; r++) {
+    //         for (let c = 0; c < this.dimensions[1]; c++) {
+    //             const x = this.location[0] + c * this.cellWidth;
+    //             const y = this.location[1] + r * this.cellWidth;
+    //             const colorIndex = (r + c) % 2;
+    //             this.p.fill(this.colors[colorIndex]);
+    //             this.p.noStroke();
+    //             this.p.rect(x, y, this.cellWidth, this.cellWidth);
+    //         }
+    //     }
+    // }
     drawBoard() {
         for (let r = 0; r < this.dimensions[0]; r++) {
             for (let c = 0; c < this.dimensions[1]; c++) {
                 const x = this.location[0] + c * this.cellWidth;
                 const y = this.location[1] + r * this.cellWidth;
-                const colorIndex = (r + c) % 2;
-                this.p.fill(this.colors[colorIndex]);
+
+                // Cambia el color de relleno basado en si la celda es jugable
+                if (this.isInPlayableRange(r, c)) {
+                    const colorIndex = (r + c) % 2;
+                    this.p.fill(this.colors[colorIndex]);
+                    
+                } else {
+                    // Colores alternos para celdas no jugables (como un tablero de ajedrez)
+                    if ((r + c) % 2 === 0) {
+                        this.p.fill(240, 240, 240); // Gris claro
+                    } else {
+                        this.p.fill(200, 200, 200); // Gris oscuro
+                    }
+                }
                 this.p.noStroke();
                 this.p.rect(x, y, this.cellWidth, this.cellWidth);
             }
         }
+
+        // Adicionalmente, dibujar rectángulo que encierra el área jugable
+        const playableX = this.location[0] + this.playableRange.minC * this.cellWidth;
+        const playableY = this.location[1] + this.playableRange.minR * this.cellWidth;
+
+        const playableWidth = (this.playableRange.maxC - this.playableRange.minC + 1) * this.cellWidth;
+        const playableHeight = (this.playableRange.maxR - this.playableRange.minR + 1) * this.cellWidth;
+
+        // Configura el color y grosor del borde
+        this.p.stroke(255);      // Color blanco para el borde
+        this.p.strokeWeight(3);  // Grosor de 3 píxeles
+
+        this.p.noFill();         // Asegúrate de que el rectángulo no tenga relleno
+
+        // Dibuja el rectángulo que encierra el área jugable
+        this.p.rect(playableX, playableY, playableWidth, playableHeight);
     }
 
     drawPieces() {
@@ -58,6 +98,14 @@ class ChessBoard {
         this.drawPieces();
     }
 
+    isInPlayableRange(r, c) {
+        return (
+            r >= this.playableRange.minR &&
+            r <= this.playableRange.maxR &&
+            c >= this.playableRange.minC &&
+            c <= this.playableRange.maxC
+        );
+    }
     isInsideBoard(x, y) {
         const boardX = this.location[0];
         const boardY = this.location[1];
@@ -205,8 +253,11 @@ class ChessBoard {
         if (this.isInsideBoard(this.p.mouseX, this.p.mouseY)) {
             const col = this.p.floor((this.p.mouseX - this.location[0]) / this.cellWidth);
             const row = this.p.floor((this.p.mouseY - this.location[1]) / this.cellWidth);
-            this.togglePiece(row, col);
-            this.updateDisplays();
+            if(this.isInPlayableRange(row, col)){
+                this.togglePiece(row, col);
+                this.updateDisplays();
+            }
+            
         }
     }
 }
