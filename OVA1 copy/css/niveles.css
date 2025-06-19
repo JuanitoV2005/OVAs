@@ -23,6 +23,21 @@ body {
   border-radius: 8px;
   /* box-shadow: 0 2px 8px rgba(0,0,0,0.1); */
 }
+.card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+
+/* --- REGLAS ESPECÍFICAS PARA EL SPAN CON EL VALOR BINARIO LARGO --- */
+/* (o podrías aplicar esto a todos los spans de valor si son los que quieres controlar) */
+.card p{
+  max-width: 400px;
+}
+.card p span {
+    word-break: break-all; /* ¡Esto es la clave para romper cadenas largas sin espacios! */
+}
 .input-group {
   margin-bottom: 1rem;
 }

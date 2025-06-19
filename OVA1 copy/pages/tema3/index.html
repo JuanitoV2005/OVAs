@@ -23,8 +23,15 @@
 
 
 <div class="container">
-    <div class="card" >
+    <div class="card" class="hidden">
       <div id="p5-container" style="text-align: center;vertical-align: middle;"></div>
+      <div id="chessBoardInfo">
+        <p style="word-break: break-all;">Binario: <span id="binary-value">00000000</span></p>
+        <p style="word-break: break-all;">Decimal: <span id="decimal-value">0</span></p>
+        <p style="word-break: break-all;">Hexadecimal: <span id="hex-value">0x0</span></p>
+        <p style="word-break: break-all;">Tipo de dato: <span id="data-type">boolean</span></p>
+      </div>
+      
     </div>
 
     <div class="card" id="questionCard">
@@ -32,9 +39,7 @@
       <div id="questions"></div>
     </div>
     
-  </div>
-
-  
+  </div>  
 
   <div id="successModal">
     <div class="modal-content">

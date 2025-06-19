@@ -3,6 +3,7 @@ class QuizNavigator {
     this.p = p;
     this.levels = levels;
     this.contentVisibilityMap = contentVisibilityMap;
+    this.specificContentDivs = this.getAllUniqueContentDivIds(contentVisibilityMap);
     this.currentLevel = 0;
     this.answers = {};
     this.validationResults = {};
@@ -15,6 +16,16 @@ class QuizNavigator {
     this.levelIndicator = null;
     this.successModal = null;
     this.closeBtn = null;
+  }
+  // Para obtener specificContentDivs
+  getAllUniqueContentDivIds(map) {
+    const allIds = new Set(); // Usamos un Set para almacenar IDs únicos automáticamente
+    for (const level in map) {
+      if (Array.isArray(map[level])) {
+        map[level].forEach(id => allIds.add(id));
+      }
+    }
+    return Array.from(allIds); // Convertimos el Set de nuevo a un Array
   }
 
   // Inicializa los elementos DOM y los eventos
@@ -134,20 +145,20 @@ class QuizNavigator {
   }
 
   // Controla la visibilidad de los divs de contenido
-  updateContentVisibility() {
-    const specificContentDivs = ['intro', 'explicacion-intermedia', 'conclusion'];
+updateContentVisibility() {
+  const currentLevelContentIds = this.contentVisibilityMap[this.currentLevel] || []; // Obtiene el arreglo de IDs para el nivel actual, o un arreglo vacío si no existe.
 
-    specificContentDivs.forEach(id => {
-      const div = document.getElementById(id);
-      if (div) {
-        if (id === this.contentVisibilityMap[this.currentLevel]) {
-          div.classList.remove('hidden');
-        } else {
-          div.classList.add('hidden');
-        }
+  this.specificContentDivs.forEach(id => {
+    const div = document.getElementById(id);
+    if (div) {
+      if (currentLevelContentIds.includes(id)) { // Verifica si el ID actual está incluido en el arreglo de IDs del nivel
+        div.classList.remove('hidden');
+      } else {
+        div.classList.add('hidden');
       }
-    });
-  }
+    }
+  });
+}
 
   // Actualiza el botón de verificar
   updateVerifyButton() {

@@ -25,11 +25,11 @@ function quiz1(p) {
 
   // Mapeo de niveles a los IDs de los divs de contenido a mostrar
   const contentVisibilityMap = {
-    0: 'intro',
-    1: 'explicacion-intermedia',
-    2: 'intro',
-    3: 'intro',
-    4: 'conclusion'
+    0: ['intro','chessBoardInfo'],//'intro',
+    1: ['explicacion-intermedia'],
+    2: ['intro'],
+    3: ['intro'],
+    4: ['conclusion']
   };
 
   let quizNavigator; // Variable para la instancia del QuizNavigator

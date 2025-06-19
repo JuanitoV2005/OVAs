@@ -16,6 +16,7 @@ class ChessBoard {
         this.decimalDisplay = this.p.select('#decimal-value'); 
         this.hexDisplay = this.p.select('#hex-value');
         this.dataTypeDisplay = this.p.select('#data-type'); 
+
     }
 
     drawBoard() {
@@ -129,25 +130,83 @@ class ChessBoard {
         return "double";
     }
 
+    // Función sin aplicar separación de cifras:
+    // updateDisplays() {
+    //     const binaryString = this.getBinaryString();
+    //     const decimalValue = this.getDecimalValue();
+    //     const hexValue = this.getHexValue();
+    //     const dataType = this.getDataType();
+        
+    //     if (this.binaryDisplay && this.decimalDisplay && this.hexDisplay && this.dataTypeDisplay) {
+    //         this.binaryDisplay.html(binaryString);
+    //         this.decimalDisplay.html(decimalValue.toString());
+    //         this.hexDisplay.html(hexValue);
+    //         this.dataTypeDisplay.html(dataType);
+    //     }
+    // }
+
+    // -------- Inicio funciones para updateDisplay con separación de cifras ---------
+    /**
+     * Formatea una cadena binaria para insertar espacios cada 8 bits (1 byte).
+     * @param {string} binaryString - La cadena binaria sin formato.
+     * @returns {string} La cadena binaria formateada con espacios.
+     */
+    _formatBinary(binaryString) {
+        return binaryString.replace(/(.{8})/g, '$1 ').trim();
+    }
+
+    /**
+     * Formatea una cadena hexadecimal para insertar espacios cada 2 dígitos.
+     * @param {string} hexString - La cadena hexadecimal (incluyendo el "0x").
+     * @returns {string} La cadena hexadecimal formateada con espacios.
+     */
+    _formatHex(hexString) {
+        const hexWithoutPrefix = hexString.startsWith('0x') ? hexString.substring(2) : hexString;
+        const formatted = hexWithoutPrefix.replace(/(.{2})/g, '$1 ').trim();
+        return '0x' + formatted;
+    }
+
+    /**
+     * Formatea un número decimal para insertar espacios cada 3 dígitos.
+     * @param {BigInt} decimalValue - El valor decimal (puede ser BigInt).
+     * @returns {string} La cadena decimal formateada con espacios.
+     */
+    _formatDecimal(decimalValue) {
+        let formatted = decimalValue.toLocaleString('en-US'); // Usa comas como separador de miles
+        formatted = formatted.replace(/,/g, ' '); // Reemplaza comas por espacios
+        return formatted;
+    }
+
+    // --- MÉTODO updateDisplays() ahora usa los métodos auxiliares ---
     updateDisplays() {
         const binaryString = this.getBinaryString();
         const decimalValue = this.getDecimalValue();
         const hexValue = this.getHexValue();
         const dataType = this.getDataType();
-        
+
+        // Aplicamos el formato usando los métodos auxiliares de la clase
+        const formattedBinary = this._formatBinary(binaryString);
+        const formattedDecimal = this._formatDecimal(decimalValue);
+        const formattedHex = this._formatHex(hexValue);
+
         if (this.binaryDisplay && this.decimalDisplay && this.hexDisplay && this.dataTypeDisplay) {
-            this.binaryDisplay.html(binaryString);
-            this.decimalDisplay.html(decimalValue.toString());
-            this.hexDisplay.html(hexValue);
+            this.binaryDisplay.html(formattedBinary);
+            this.decimalDisplay.html(formattedDecimal);
+            this.hexDisplay.html(formattedHex);
             this.dataTypeDisplay.html(dataType);
+        } else {
+            console.warn("One or more display elements for ChessBoard not found in DOM for updateDisplays.");
         }
     }
+
+    // -------- Fin funciones para updateDisplay con separación de cifras ---------
 
     mousePressed(mouseX, mouseY) {
         if (this.isInsideBoard(this.p.mouseX, this.p.mouseY)) {
             const col = this.p.floor((this.p.mouseX - this.location[0]) / this.cellWidth);
             const row = this.p.floor((this.p.mouseY - this.location[1]) / this.cellWidth);
             this.togglePiece(row, col);
+            this.updateDisplays();
         }
     }
 }
