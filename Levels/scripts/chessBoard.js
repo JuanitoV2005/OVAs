@@ -45,9 +45,9 @@ class ChessBoard {
                 } else {
                     // Colores alternos para celdas no jugables (como un tablero de ajedrez)
                     if ((r + c) % 2 === 0) {
-                        this.p.fill(240, 240, 240); // Gris claro
-                    } else {
                         this.p.fill(200, 200, 200); // Gris oscuro
+                    } else {
+                        this.p.fill(240, 240, 240); // Gris claro
                     }
                 }
                 this.p.noStroke();
