@@ -1,12 +1,5 @@
 const temas = {
-  tema2: {
-    html: 'pages/tema2/index.html',
-    sketchScript: 'pages/tema2/sketch.js',
-    sketchName: 'sketchTema2',
-    container: 'p5-container',
-    instancia: null,
-    nombreMenu: 'Sistemas numéricos'
-  },tema0: {
+  tema0: {
     // La ruta al archivo HTML dentro de su carpeta de tema
     html: 'pages/tema0/index.html',
     // La ruta al archivo JS del sketch dentro de su carpeta de tema
@@ -30,7 +23,14 @@ const temas = {
     instancia: null,
     nombreMenu: 'Cómo los primitivos usan bits'
   },
-  
+  tema2: {
+    html: 'pages/tema2/index.html',
+    sketchScript: 'pages/tema2/sketch.js',
+    sketchName: 'sketchTema2',
+    container: 'p5-container',
+    instancia: null,
+    nombreMenu: 'Sistemas numéricos'
+  },
   tema3: {
     html: 'pages/tema3/index.html',
     // Si tema3 no tiene un sketch, estas propiedades son null

@@ -156,7 +156,7 @@ function sketchTema2(p) {
 
     // Crea una instancia de QuizNavigator, pasando 'p' y los datos del quiz.
     // Esta instancia gestionará la lógica de la interfaz de usuario y la navegación.
-    quizNavigator.currentLevel = 3; // <-- Eliminar luego!
+    // quizNavigator.currentLevel = 3; // <-- Eliminar luego!
     quizNavigator.init(); // Inicializa el QuizNavigator para configurar los elementos DOM y eventos.
     
     
