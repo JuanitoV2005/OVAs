@@ -195,6 +195,26 @@ function sketchTema2(p) {
     //   }
     //   canvasController.visualStrategy.color = p.color(p.random(255), p.random(255), p.random(255));
       canvasController.mousePressed(p.mouseX, p.mouseY);
+
+      // Enviar a quizNavigator respuesta del canvas existente hasta el momento
+      if (quizNavigator.currentLevel == 3) {
+          levels.forEach((level) => {
+          if (!Array.isArray(level)) return; // Saltar niveles null
+
+          level.forEach((question) => {
+            if (question.notInput) {
+              const questionID = question.id;
+              const numDigits = question.correctAnswer.length;
+              let answer = canvasController.visualStrategy.getBinaryString();
+              answer = answer.slice(-numDigits); // Para evitar entregar 64 bits sin necesitarlo
+
+              quizNavigator.setAnswerForGraphicInteractiveQuestion(questionID, answer);
+            }
+          });
+          });
+          }
+
+
     }
   };
 }
