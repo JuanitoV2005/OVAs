@@ -2,27 +2,35 @@
 function sketchTema2(p) {
   // Datos del quiz
   const levels = [
-    // Nivel 1 (índice 0)
-    null,
+    // Introducción (indice 0)
+    null, // --> este nivel no tiene preguntas
+    // Reto 1 (indice 1)
     [
       { id: "q1", question: "Si ubicas un peón. ¿Qué número se forma?", correctAnswer: "1" },
-      { id: "q2", question: "Si retiras el peón. ¿Qé número se forma?", correctAnswer: "0" },
+      { id: "q2", question: "Si retiras el peón. ¿Qué número se forma?", correctAnswer: "0" },
       { id: "q3", question: "Si necesitaras guardar la respuesta a una pregunta 'sí o no', ¿cómo usarías esta casilla para representar un 'sí'?", isStatement: true}    
     ],
-    null,
-    // Nivel 2 (índice 1) - Mostrar 'explicacion-intermedia'
-    null, // Este nivel no tiene preguntas
-    // Nivel 3 (índice 2) - Mostrar 'intro' (por defecto)
+    // Reto 2 (indice 2)
+    [
+      { id: "q1", question: "¿Qué numéro forma un peón sobre la casilla izquierda?", correctAnswer: "2" },
+      { id: "q2", question: "Usando solo estas dos casillas, ¿cuántos números distintos puedes formar?", correctAnswer: "4" },
+      { id: "q3", question: "¿Cuál es el número más grande que se puede representar?", correctAnswer: "3"}    
+    ],
+    // Reto 3 (indice 3)
+    [
+      { id: "q1", question: "Según la fórmula citada, ¿cuántos números diferentes puedes representar con 3 casillas?", correctAnswer: "8" },
+      { id: "q2", question: "En esta configuración, ¿cuál es el valor del peón MÁS significativo?", correctAnswer: "4" },
+      { id: "q3", question: "En esta configuración, ¿cuál es el valor del peón MENOS significativo?", correctAnswer: "1"},
+      { id: "q4", question: "Usa el tablero para colocar peones y formar el número 5", correctAnswer: "101", notInput:true}    
+    ],
     [
       { id: "q5", question: "¿En qué año cayó el Muro de Berlín?", correctAnswer: "1989" },
       { id: "q6", question: "¿Cuál es el país más grande del mundo?", correctAnswer: "Rusia" , notInput:true}
     ],
-    // Nivel 4 (índice 3) - Mostrar 'intro' (por defecto), preguntas adicionales si las hubiera
     [
         { id: "q7", question: "¿Cuál es la capital de Italia?", correctAnswer: "Roma" },
         { id: "q8", question: "¿Dónde está la Torre Eiffel?", correctAnswer: "París" }
     ],
-    // Nivel 5 (índice 4) - Mostrar 'conclusion'
     null // Este nivel no tiene preguntas
   ];
 
@@ -30,17 +38,13 @@ function sketchTema2(p) {
   const contentVisibilityMap = {
     0: ['intro'],
     1: ['enunciado1','decimal-label'],
-    2: ['chessBoardInfo','','explicacion-intermedia', 'hex-label','binary-label',"data-type-label"],
-    3: ['intro'],
-    4: ['intro'],
+    2: ['enunciado2','explicacion-intermedia','decimal-label' ],
+    3: ['enunciado3','decimal-label'],
+    4: ['intro','hex-label','binary-label',"data-type-label"],
     5: ['conclusion']
   };
 
   let quizNavigator = new QuizNavigator(p, levels, contentVisibilityMap); // Variable para la instancia del QuizNavigator
-
-  // Define los niveles que NO deben dibujar nada en el canvas de P5.js.
-  // Los niveles 1 y 4 no tienen preguntas, se asocian a contenido de texto DOM.
-  const noCanvasDrawingLevels = new Set([1, 4]);
 
   
   // --- Estrategias de dibujo del canvas --- 
@@ -64,13 +68,35 @@ function sketchTema2(p) {
     pieceImages,
     {minR:7,maxR:7,minC:7,maxC:7}
   );
+
+  const tablero2 = new ChessBoard(
+    p,
+    [gui.cellColor1, gui.cellColor2],
+    [0, 0],
+    gui.cellLength,
+    [8, 8],
+    tableroVacio,
+    pieceImages,
+    {minR:7,maxR:7,minC:6,maxC:7}
+  );
+
+  const tablero3 = new ChessBoard(
+    p,
+    [gui.cellColor1, gui.cellColor2],
+    [0, 0],
+    gui.cellLength,
+    [8, 8],
+    tableroVacio,
+    pieceImages,
+    {minR:7,maxR:7,minC:5,maxC:7}
+  );
   
 
   const levelCanvasObjects = {
     0: null,
     1: tablero1,  
-    2: null,
-    3: null,
+    2: tablero2,
+    3: tablero3,
     4: null,
     5: null 
   };
@@ -122,7 +148,6 @@ function sketchTema2(p) {
     };
 
   p.setup = function() {
-    console.log(`Iniciando sketchTema3.`);
 
     // Configuración inicial del canvas P5.js
     const canvas = p.createCanvas(400, 400);
@@ -131,14 +156,18 @@ function sketchTema2(p) {
 
     // Crea una instancia de QuizNavigator, pasando 'p' y los datos del quiz.
     // Esta instancia gestionará la lógica de la interfaz de usuario y la navegación.
+    // quizNavigator.currentLevel = 3; // <-- Eliminar luego!
     quizNavigator.init(); // Inicializa el QuizNavigator para configurar los elementos DOM y eventos.
+    
+    
     
     // Crea una instancia de canvasController
     canvasController = new CanvasController(p, levelCanvasObjects, quizNavigator);
     
     
     // // establecer respuesta para q2
-    quizNavigator.setAnswerForGraphicInteractiveQuestion("q2", "Pacífico")
+    // quizNavigator.setAnswerForGraphicInteractiveQuestion("q2", "Pacífico");
+    
   };
 
   p.draw = function () {
@@ -166,6 +195,26 @@ function sketchTema2(p) {
     //   }
     //   canvasController.visualStrategy.color = p.color(p.random(255), p.random(255), p.random(255));
       canvasController.mousePressed(p.mouseX, p.mouseY);
+
+      // Enviar a quizNavigator respuesta del canvas existente hasta el momento
+      if (quizNavigator.currentLevel == 3) {
+          levels.forEach((level) => {
+          if (!Array.isArray(level)) return; // Saltar niveles null
+
+          level.forEach((question) => {
+            if (question.notInput) {
+              const questionID = question.id;
+              const numDigits = question.correctAnswer.length;
+              let answer = canvasController.visualStrategy.getBinaryString();
+              answer = answer.slice(-numDigits); // Para evitar entregar 64 bits sin necesitarlo
+
+              quizNavigator.setAnswerForGraphicInteractiveQuestion(questionID, answer);
+            }
+          });
+          });
+          }
+
+
     }
   };
 }
