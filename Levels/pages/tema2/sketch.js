@@ -64,7 +64,7 @@ function sketchTema2(p) {
     [0, 0],
     gui.cellLength,
     [8, 8],
-    tableroVacio,
+    tableroVacio.map(fila => [...fila]),
     pieceImages,
     {minR:7,maxR:7,minC:7,maxC:7}
   );
@@ -75,7 +75,7 @@ function sketchTema2(p) {
     [0, 0],
     gui.cellLength,
     [8, 8],
-    tableroVacio,
+    tableroVacio.map(fila => [...fila]),
     pieceImages,
     {minR:7,maxR:7,minC:6,maxC:7}
   );
@@ -86,7 +86,7 @@ function sketchTema2(p) {
     [0, 0],
     gui.cellLength,
     [8, 8],
-    tableroVacio,
+    tableroVacio.map(fila => [...fila]),
     pieceImages,
     {minR:7,maxR:7,minC:5,maxC:7}
   );
