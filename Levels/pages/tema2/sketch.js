@@ -7,7 +7,7 @@ function sketchTema2(p) {
     // Reto 1 (indice 1)
     [
       { id: "q1", question: "Si ubicas un peón. ¿Qué número se forma?", correctAnswer: "1" },
-      { id: "q2", question: "Si retiras el peón. ¿Qué número se forma?", correctAnswer: "0" },
+      { id: "q2", question: "Ahora, si retiras el peón. ¿Qué número obtienes?", correctAnswer: "0" },
       { id: "q3", question: "Si necesitaras guardar la respuesta a una pregunta 'sí o no', ¿cómo usarías esta casilla para representar un 'sí'?", isStatement: true}    
     ],
     // Reto 2 (indice 2)
@@ -19,8 +19,8 @@ function sketchTema2(p) {
     // Reto 3 (indice 3)
     [
       { id: "q1", question: "Según la fórmula citada, ¿cuántos números diferentes puedes representar con 3 casillas?", correctAnswer: "8" },
-      { id: "q2", question: "En esta configuración, ¿cuál es el valor del peón MÁS significativo?", correctAnswer: "4" },
-      { id: "q3", question: "En esta configuración, ¿cuál es el valor del peón MENOS significativo?", correctAnswer: "1"},
+      { id: "q2", question: "En esta configuración, ¿cuál es el valor del peón MÁS significativo? (Pista: activa solo esa casilla y observa el número en pantalla)", correctAnswer: "4" },
+      { id: "q3", question: "En esta configuración, ¿cuál es el valor del peón MENOS significativo? (Pista: activa solo esa casilla y observa el número en pantalla)", correctAnswer: "1"},
       { id: "q4", question: "Usa el tablero para colocar peones y formar el número 5", correctAnswer: "101", notInput:true}    
     ],
     [
