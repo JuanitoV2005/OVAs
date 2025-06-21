@@ -4,35 +4,32 @@
 <h1>Sistemas numéricos</h1>
 
 <div class="content" id="intro" style="min-height: 450px; max-width: 650px;">
-<br>
-<p>Desde los videojuegos más complejos hasta la música que escuchas y las fotos que compartes, todo lo que ves en tus pantallas tiene un secreto en común.</p>
-<p>Un lenguaje silencioso, invisible, pero increíblemente poderoso que lo hace posible. Es la base de cómo los computadores guardan y recuerdan cada pedazo de información.</p>
-<p>Por lo tanto, es fundamental para entender nuestro mundo digital.</p>
-<br>
-<p>Te invitamos a un desafío práctico. Con lógica y un poco de ingenio, descubrirás cómo este lenguaje esencial permite a las máquinas procesar y almacenar datos.</p>
-<p>Usa los tableros y piezas para descifrar los patrones y las combinaciones que están en el corazón de toda operación digital.</p>
+  <br>
+  <p>Desde los videojuegos más complejos hasta la música que escuchas y las fotos que compartes, todo lo que ves en tus pantallas tiene un secreto en común.</p>
+  <p>Un lenguaje silencioso, invisible, pero increíblemente poderoso que lo hace posible. Es la base de cómo los computadores guardan y recuerdan cada pieza de información.</p>
+  <p>Por lo tanto, es fundamental para entender nuestro mundo digital.</p>
+  <p>Te invitamos a un desafío práctico. Con lógica y un poco de ingenio, descubrirás cómo este lenguaje esencial permite a las máquinas procesar y almacenar datos.</p>
+  <p>Usa los tableros y piezas para descifrar los patrones y las combinaciones que están en el corazón de toda operación digital.</p>
 </div>
 
 
 <div class="content" id="enunciado1" >
-<h2>Reto 1</h2>
-<p>Imagina una casilla que puede estar ocupada por un peón o vacía. Esa diferencia entre "algo" y "nada" representa la forma más básica de información digital. A ese valor con solo dos posibles estados lo llamamos bit: la unidad mínima de información en computación.</p>
+  <h2>Reto 1</h2>
+  <p>Imagina una casilla que puede estar ocupada por un peón o vacía. Esa diferencia entre "algo" y "nada" representa la forma más básica de información digital. A ese valor con solo dos posibles estados lo llamamos bit: la unidad mínima de información en computación.</p>
 
 </div>
-<div class="content" id="enunciado2">
-<h2>Reto 2</h2>
-<p>Si con una sola casilla podíamos representar dos cosas diferentes (un peón o ninguna), ¿qué crees que pasará si agregamos un espacio más?</p>
-<p>En este nivel, el desafío es explorar las combinaciones posibles usando dos peones en dos casillas. Presta mucha atención a cómo, de repente, podemos "contar" más cosas, y cómo cada posición de la casilla influye en el número formado.</p>
+  <div class="content" id="enunciado2">
+  <h2>Reto 2</h2>
+  <p>Con una sola casilla podíamos representar dos cosas diferentes (un peón o ninguna). En este nivel, el objetivo es explorar qué combinaciones son posibles si tenemos dos casillas.</p>
+  <p><b>Pero ojo, aquí viene lo interesante:</b> no todas las posiciones valen lo mismo.</p>
+  <p>Compruébalo interactuando con el tablero, y descubre cuánto aumenta el número al marcar ciertas casillas.</p>
 </div>
 
 <div class="content" id="enunciado3"> 
   <h2>Reto 3</h2>
-<p>Habrás notado, que con cada casilla que añadimos, se duplican las combinaciones. Esto sigue la fórmula <b>2ⁿ</b>, donde n es el número de casillas. 
-En este reto, trabajaremos con 3 casillas. ¡Más espacio para representar números!</p>
-
-<p>Pero hay algo importante: no todas las posiciones valen lo mismo. Algunas casillas tienen más "peso" que otras. ¿Te has fijado cuál casilla cambia más el número cuando se activa?</p>
-
-<p>En computación, a estas posiciones se les llama <b>bit más significativo</b> (el que más cambia el número) y <b>bit menos significativo</b> (el que menos lo cambia).</p>
+  <p>Habrás notado, que con cada casilla que añadimos, se duplican las combinaciones. Esto sigue la fórmula <b>2^n</b>, donde <i>n</i> es el número de casillas. 
+  En este reto, trabajaremos con 3 casillas.</p>
+  <p>Como mencionamos antes, no todas las casillas afectan el número de la misma forma: cada una tiene un "peso" diferente. En computación, la casilla que más cambia el valor se llama <b>bit más significativo</b>, y la que menos lo cambia, <b>bit menos significativo</b>.</p>
 </div>
 
 
@@ -46,10 +43,10 @@ En este reto, trabajaremos con 3 casillas. ¡Más espacio para representar núme
 <div class="container">
     <div class="card" class="hidden">
       <div id="p5-container" style="text-align: center;vertical-align: middle;"></div>
-      <p id="binary-label" style="word-break: break-all;">Binario: <span id="binary-value">00000000</span></p>
-      <p id="decimal-label" style="word-break: break-all;">Decimal: <span id="decimal-value">0</span></p>
-      <p id="hex-label" style="word-break: break-all;">Hexadecimal: <span id="hex-value">0x0</span></p>
-      <p id="data-type-label" style="word-break: break-all;">Tipo de dato: <span id="data-type">boolean</span></p>
+      <p class="number-otput-label" id="binary-label">Binario: <span id="binary-value">00000000</span></p>
+      <p class="number-otput-label" id="decimal-label">Decimal: <span id="decimal-value">0</span></p>
+      <p class="number-otput-label" id="hex-label" >Hexadecimal: <span id="hex-value">0x0</span></p>
+      <p class="number-otput-label" id="data-type-label" >Tipo de dato: <span id="data-type">boolean</span></p>
 
       
     </div>

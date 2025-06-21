@@ -133,3 +133,17 @@ button {
     padding: 0.6rem 1.5rem;
   }
 }
+
+
+/* Estilos de las cajas de texto con conversión del tablero a sistemas numéricos */
+#decimal-label{
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #f0f8ff; /* azul claro */
+  border: 2px solid #007acc; /* un azul que contraste */
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 8px;
+  text-align: center;
+  word-break: break-all;
+}
