@@ -23,9 +23,34 @@ function sketchTema2(p) {
       { id: "q3", question: "En esta configuración, ¿cuál es el valor del peón MENOS significativo? (Pista: activa solo esa casilla y observa el número en pantalla)", correctAnswer: "1"},
       { id: "q4", question: "Usa el tablero para colocar peones y formar el número 5", correctAnswer: "101", notInput:true}    
     ],
+    // Reto 4 (indice 4)
     [
-      { id: "q5", question: "¿En qué año cayó el Muro de Berlín?", correctAnswer: "1989" },
-      { id: "q6", question: "¿Cuál es el país más grande del mundo?", correctAnswer: "Rusia" , notInput:true}
+      {
+        id: "q1",
+        question: "¿Cuál es el número más alto que se puede representar con 4 bits?",
+        correctAnswer: "15"
+      },
+      
+      {
+        id: "q2",
+        question: "¿Cuánto es 9 en hexadecimal? Incluye '0x' al inicio de la respuesta. (Pista: escribe el número en el tablero y revisa la conversión hexadecimal que aparece en pantalla)",
+        correctAnswer: "0x9",
+      },
+      {
+        id: "q3",
+        question: "¿Qué letra hexadecimal corresponde al número decimal 10? Incluye '0x' al inicio de la respuesta.",
+        correctAnswer: "0xA",
+      },
+      {
+        id: "q4",
+        question: "¿Cuál es el dígito hexadecimal del número decimal 15? Incluye '0x' al inicio de la respuesta.",
+        correctAnswer: "0xF",
+      },
+      {
+        id: "q5",
+        question: "Escribe en el tablero el número 11 con peones",
+        correctAnswer: "1011", notInput:true
+      }
     ],
     [
         { id: "q7", question: "¿Cuál es la capital de Italia?", correctAnswer: "Roma" },
@@ -40,8 +65,8 @@ function sketchTema2(p) {
     1: ['enunciado1','decimal-label'],
     2: ['enunciado2','explicacion-intermedia','decimal-label' ],
     3: ['enunciado3','decimal-label'],
-    4: ['intro','hex-label','binary-label',"data-type-label"],
-    5: ['conclusion']
+    4: ['enunciado4','hex-label','binary-label','decimal-label'],
+    5: ['conclusion',,"data-type-label"]
   };
 
   let quizNavigator = new QuizNavigator(p, levels, contentVisibilityMap); // Variable para la instancia del QuizNavigator
@@ -90,6 +115,16 @@ function sketchTema2(p) {
     pieceImages,
     {minR:7,maxR:7,minC:5,maxC:7}
   );
+  const tablero4 = new ChessBoard(
+    p,
+    [gui.cellColor1, gui.cellColor2],
+    [0, 0],
+    gui.cellLength,
+    [8, 8],
+    tableroVacio.map(fila => [...fila]),
+    pieceImages,
+    {minR:7,maxR:7,minC:4,maxC:7}
+  );
   
 
   const levelCanvasObjects = {
@@ -97,7 +132,7 @@ function sketchTema2(p) {
     1: tablero1,  
     2: tablero2,
     3: tablero3,
-    4: null,
+    4: tablero4,
     5: null 
   };
 
@@ -156,7 +191,7 @@ function sketchTema2(p) {
 
     // Crea una instancia de QuizNavigator, pasando 'p' y los datos del quiz.
     // Esta instancia gestionará la lógica de la interfaz de usuario y la navegación.
-    // quizNavigator.currentLevel = 3; // <-- Eliminar luego!
+    // quizNavigator.currentLevel = 4; // <-- Eliminar luego!
     quizNavigator.init(); // Inicializa el QuizNavigator para configurar los elementos DOM y eventos.
     
     
@@ -196,25 +231,24 @@ function sketchTema2(p) {
     //   canvasController.visualStrategy.color = p.color(p.random(255), p.random(255), p.random(255));
       canvasController.mousePressed(p.mouseX, p.mouseY);
 
-      // Enviar a quizNavigator respuesta del canvas existente hasta el momento
-      if (quizNavigator.currentLevel == 3) {
-          levels.forEach((level) => {
-          if (!Array.isArray(level)) return; // Saltar niveles null
+    // Enviar a quiz navigator respuesta de las preguntas que toman la configuración del tablero:
+    const currentLevel = levels[quizNavigator.currentLevel];
 
-          level.forEach((question) => {
-            if (question.notInput) {
-              const questionID = question.id;
-              const numDigits = question.correctAnswer.length;
-              let answer = canvasController.visualStrategy.getBinaryString();
-              answer = answer.slice(-numDigits); // Para evitar entregar 64 bits sin necesitarlo
+    if (Array.isArray(currentLevel)) {
+      currentLevel.forEach((question) => {
+        if (question.notInput) {
+          const questionID = question.id;
+          const numDigits = question.correctAnswer.length;
+          let answer = canvasController.visualStrategy.getBinaryString();
+          answer = answer.slice(-numDigits); // Solo los bits necesarios
 
-              quizNavigator.setAnswerForGraphicInteractiveQuestion(questionID, answer);
-            }
-          });
-          });
-          }
-
-
+          quizNavigator.setAnswerForGraphicInteractiveQuestion(questionID, answer);
+        }
+      });
     }
+    }
+  }
+
+
+
   };
-}
