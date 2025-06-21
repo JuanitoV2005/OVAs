@@ -52,6 +52,35 @@ function sketchTema2(p) {
         correctAnswer: "1011", notInput:true
       }
     ],
+    // Reto 5 (indice 5)
+    [
+      {
+        id: "q1",
+        question: "¿Cuál es el número más alto que se puede representar con 8 bits (1 byte)?",
+        correctAnswer: "255"
+      },
+      {
+        id: "q2",
+        question: "¿Cuántos dígitos hexadecimales se necesitan para representar un byte completo?",
+        correctAnswer: "2"
+      },
+      {
+        id: "q3",
+          question: "Intenta crear el número más grande posible usando exactamente 4 peones en las 8 casillas. ¿Qué número decimal lograste?",
+          correctAnswer: "240"
+      },
+      {
+        id: "q4",
+        question: "¿Qué valor hexadecimal representa el número decimal 255? Incluye '0x' al inicio.",
+        correctAnswer: "0xFF"
+      },
+      {
+        id: "q5",
+        question: "Escribe en el tablero el número 170",
+        correctAnswer: "10101010",
+        notInput: true
+      }
+    ],
     // Reto 6 (indice 6)
     [
       {
@@ -95,8 +124,9 @@ function sketchTema2(p) {
     2: ['enunciado2','explicacion-intermedia','decimal-label' ],
     3: ['enunciado3','decimal-label'],
     4: ['enunciado4','hex-label','binary-label','decimal-label'],
-    5: ['enunciado6','hex-label','decimal-label'],
-    6: ['conclusion',,"data-type-label"]
+    5: ['enunciado5','hex-label','binary-label','decimal-label'],
+    6: ['enunciado6','hex-label','decimal-label'],
+    7: ['conclusion',"data-type-label"]
   };
 
   let quizNavigator = new QuizNavigator(p, levels, contentVisibilityMap); // Variable para la instancia del QuizNavigator
@@ -155,6 +185,16 @@ function sketchTema2(p) {
     pieceImages,
     {minR:7,maxR:7,minC:4,maxC:7}
   );
+  const tablero5 = new ChessBoard(
+    p,
+    [gui.cellColor1, gui.cellColor2],
+    [0, 0],
+    gui.cellLength,
+    [8, 8],
+    tableroVacio.map(fila => [...fila]),
+    pieceImages,
+    {minR:7,maxR:7,minC:0,maxC:7} // Todas las 8 columnas de la última fila
+  );
   // Crear tablero Hexadecimal
   const tablero6 = new ChessBoard(
     p,
@@ -175,8 +215,9 @@ function sketchTema2(p) {
     2: tablero2,
     3: tablero3,
     4: tablero4,
-    5: tablero6,
-    6: null 
+    5: tablero5,
+    6: tablero6, // El que antes era 5 ahora es 6
+    7: null // Y agregamos un nuevo índice para el final
   };
 
   class CanvasController{
@@ -234,7 +275,7 @@ function sketchTema2(p) {
 
     // Crea una instancia de QuizNavigator, pasando 'p' y los datos del quiz.
     // Esta instancia gestionará la lógica de la interfaz de usuario y la navegación.
-    // quizNavigator.currentLevel = 4; // <-- Eliminar luego!
+    quizNavigator.currentLevel = 4; // <-- Eliminar luego!
     quizNavigator.init(); // Inicializa el QuizNavigator para configurar los elementos DOM y eventos.
     
     
