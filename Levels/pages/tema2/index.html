@@ -32,6 +32,30 @@
   <p>Como mencionamos antes, no todas las casillas afectan el número de la misma forma: cada una tiene un "peso" diferente. En computación, la casilla que más cambia el valor se llama <b>bit más significativo</b>, y la que menos lo cambia, <b>bit menos significativo</b>.</p>
 </div>
 
+<div class="content" id="enunciado4">
+  <h2>¿Qué es un nibble?</h2>
+  <p>Un <b>nibble</b> es un grupo de 4 bits. En otras palabras, cuando usamos 4 casillas, estamos trabajando con un nibble.</p>
+  <p>Con estos 4 bits, podemos representar números desde el 0 hasta el 15. Esto se calcula con:<br>- 2^4 = 16 números diferentes posibles.<br>- 2^4 - 1 = 15 : el número máximo representado.</p>
+  
+  <p><b>¿Qué tiene de especial un nibble?</b></p>
+  <p>Los nibbles son muy útiles porque están directamente relacionados con otro sistema numérico muy usado en computación: el <strong>hexadecimal</strong>.</p>
+
+  <ul>
+    <li>Cada 4 bits representan exactamente <strong>un dígito hexadecimal</strong>.</li>
+    <li>Por ejemplo:</li>
+    <ul>
+      <li><code>0000</code> = <strong>0</strong></li>
+      <li><code>1010</code> = <strong>A</strong></li>
+      <li><code>1111</code> = <strong>F</strong></li>
+    </ul>
+  </ul>
+
+  <p>Gracias al sistema hexadecimal, podemos escribir grandes cantidades de información binaria de forma más <strong>corta y legible</strong> usando solo letras y números del <strong>0 al F</strong>. </p>
+  <p>Por eso, notarás que los <i>colores en diseño web</i>, <i>direcciones de memoria</i>, y muchos lenguajes de bajo nivel usan hexadecimal todo el tiempo.</p></p>
+
+  <h2>Reto 4</h2>
+
+</div> 
 
 <div class="content hidden" id="conclusion" style="min-height: 600px;">
 
@@ -43,10 +67,13 @@
 <div class="container">
     <div class="card" class="hidden">
       <div id="p5-container" style="text-align: center;vertical-align: middle;"></div>
-      <p class="number-otput-label" id="binary-label">Binario: <span id="binary-value">00000000</span></p>
-      <p class="number-otput-label" id="decimal-label">Decimal: <span id="decimal-value">0</span></p>
-      <p class="number-otput-label" id="hex-label" >Hexadecimal: <span id="hex-value">0x0</span></p>
-      <p class="number-otput-label" id="data-type-label" >Tipo de dato: <span id="data-type">boolean</span></p>
+      <div class="number-output">
+        <p id="binary-label">Binario: <span id="binary-value">00000000</span></p>
+        <p id="decimal-label">Decimal: <span id="decimal-value">0</span></p>
+        <p id="hex-label" >Hexadecimal: <span id="hex-value">0x0</span></p>
+        <p id="data-type-label" >Tipo de dato: <span id="data-type">boolean</span></p>
+      </div>
+      
 
       
     </div>
