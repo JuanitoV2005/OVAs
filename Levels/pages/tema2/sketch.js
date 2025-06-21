@@ -52,6 +52,35 @@ function sketchTema2(p) {
         correctAnswer: "1011", notInput:true
       }
     ],
+    // Reto 6 (indice 6)
+    [
+      {
+        id: "q1",
+        question: "Para representar el color rojo puro 0xF800 en las primeras 16 casillas (Bits 0-15) de tu tablero, ¿cuántos peones necesitas colocar?",
+        correctAnswer: "5"
+      },
+      {
+        id: "q2",
+        question: "Un segmento de memoria ocupa del Bit 16 al Bit 31 en tu tablero. ¿Cuántos dígitos hexadecimales se usan para representar este segmento?",
+        correctAnswer: "4"
+      },
+      {
+        id: "q3",
+        question: "Si las 64 casillas de tu tablero estuvieran llenas de peones, ¿cuántos dígitos hexadecimales se necesitarían para representar este número completo?",
+        correctAnswer: "16"
+      },
+      {
+        id: "q4",
+        question: "Un patrón de 16 bits consecutivos activados (1111111111111111) aparece en memoria. ¿Cuántos dígitos hexadecimales mínimos lo representan?",
+        correctAnswer: "4"
+      },
+      {
+        id: "q5",
+        question: "Para representar el número 0xA5C3 en 16 casillas consecutivas de tu tablero, ¿cuántos peones necesitas colocar? Pista: Convierte 0xA5C3 a binario y cuenta los '1's.",
+        correctAnswer: "7"
+      }
+    ],
+    // Separacíon
     [
         { id: "q7", question: "¿Cuál es la capital de Italia?", correctAnswer: "Roma" },
         { id: "q8", question: "¿Dónde está la Torre Eiffel?", correctAnswer: "París" }
@@ -66,7 +95,8 @@ function sketchTema2(p) {
     2: ['enunciado2','explicacion-intermedia','decimal-label' ],
     3: ['enunciado3','decimal-label'],
     4: ['enunciado4','hex-label','binary-label','decimal-label'],
-    5: ['conclusion',,"data-type-label"]
+    5: ['enunciado6','hex-label','decimal-label'],
+    6: ['conclusion',,"data-type-label"]
   };
 
   let quizNavigator = new QuizNavigator(p, levels, contentVisibilityMap); // Variable para la instancia del QuizNavigator
@@ -125,6 +155,18 @@ function sketchTema2(p) {
     pieceImages,
     {minR:7,maxR:7,minC:4,maxC:7}
   );
+  // Crear tablero Hexadecimal
+  const tablero6 = new ChessBoard(
+    p,
+    [gui.cellColor1, gui.cellColor2],
+    [0, 0],
+    gui.cellLength,
+    [8, 8],
+    tableroVacio.map(fila => [...fila]),
+    pieceImages,
+    {minR:0,maxR:7,minC:0,maxC:7}
+  );
+  
   
 
   const levelCanvasObjects = {
@@ -133,7 +175,8 @@ function sketchTema2(p) {
     2: tablero2,
     3: tablero3,
     4: tablero4,
-    5: null 
+    5: tablero6,
+    6: null 
   };
 
   class CanvasController{
