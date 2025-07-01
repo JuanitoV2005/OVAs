@@ -209,21 +209,6 @@ class ChessBoard {
         return "double";
     }
 
-    // Función sin aplicar separación de cifras:
-    // updateDisplays() {
-    //     const binaryString = this.getBinaryString();
-    //     const decimalValue = this.getDecimalValue();
-    //     const hexValue = this.getHexValue();
-    //     const dataType = this.getDataType();
-        
-    //     if (this.binaryDisplay && this.decimalDisplay && this.hexDisplay && this.dataTypeDisplay) {
-    //         this.binaryDisplay.html(binaryString);
-    //         this.decimalDisplay.html(decimalValue.toString());
-    //         this.hexDisplay.html(hexValue);
-    //         this.dataTypeDisplay.html(dataType);
-    //     }
-    // }
-
     // -------- Inicio funciones para updateDisplay con separación de cifras ---------
     /**
      * Formatea una cadena binaria para insertar espacios cada 8 bits (1 byte).
@@ -279,6 +264,17 @@ class ChessBoard {
     }
 
     // -------- Fin funciones para updateDisplay con separación de cifras ---------
+
+    resetBoardAndDisplays() {
+        // Set all pieces on the board to null (empty)
+        for (let r = 0; r < this.dimensions[0]; r++) {
+            for (let c = 0; c < this.dimensions[1]; c++) {
+                this.pieces[r][c] = null;
+            }
+        }
+        // Call updateDisplays to reflect the empty board state in the HTML
+        this.updateDisplays();
+    }
 
     mousePressed(mouseX, mouseY) {
         if (this.isInsideBoard(this.p.mouseX, this.p.mouseY)) {

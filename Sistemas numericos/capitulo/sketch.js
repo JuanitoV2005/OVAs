@@ -220,13 +220,14 @@ function sketchTema2(p) {
     7: null // Y agregamos un nuevo índice para el final
   };
 
-  class CanvasController{
-    constructor(p, levelCanvasObjects, quizNavigator){
-      this.p = p;
-      this.levelCanvasObjects = levelCanvasObjects;
-      this.quizNavigator = quizNavigator;
-      this.visualStrategy = levelCanvasObjects[quizNavigator.currentLevel];
-      this.lastLevel = quizNavigator.currentLevel;
+  class CanvasController {
+    constructor(p, levelCanvasObjects, quizNavigator) {
+        this.p = p;
+        this.levelCanvasObjects = levelCanvasObjects;
+        this.quizNavigator = quizNavigator;
+        // Initialize visualStrategy and lastLevel based on the initial currentLevel
+        this.lastLevel = this.quizNavigator.currentLevel;
+        this.visualStrategy = this.levelCanvasObjects[this.lastLevel]; // Set initial strategy
     }
     setStrategy(levelIndex) {
         this.visualStrategy = this.levelCanvasObjects[levelIndex];
@@ -235,20 +236,35 @@ function sketchTema2(p) {
     drawNoCanvas() {
         this.p.background(255, 255, 255, 0); // Fondo transparente
     }
-    draw(){
-        if(this.visualStrategy && typeof this.visualStrategy.draw === 'function'){
-            this.visualStrategy.draw();
+    draw() {
+        // Check if the level has changed by comparing currentLevel with lastLevel
+        if (this.quizNavigator.currentLevel !== this.lastLevel) {
+            // Update the visual strategy to the new level's object
+            this.setStrategy(this.quizNavigator.currentLevel);
+
+            // If the new strategy is a ChessBoard instance, reset its state and displays
+            // We check for the method to ensure it's a ChessBoard or similar object
+            if (this.visualStrategy && typeof this.visualStrategy.resetBoardAndDisplays === 'function') {
+                this.visualStrategy.resetBoardAndDisplays();
+            }
+
+            // Update lastLevel to the current level after handling the change
+            this.lastLevel = this.quizNavigator.currentLevel;
         }
-        else{
+
+        // Always draw the current visual strategy
+        if (this.visualStrategy && typeof this.visualStrategy.draw === 'function') {
+            this.visualStrategy.draw();
+        } else {
             this.drawNoCanvas();
         }
     }
-    mousePressed(mouseX, mouseY){
-        if(this.visualStrategy && typeof this.visualStrategy.mousePressed === 'function'){
+    mousePressed(mouseX, mouseY) {
+        if (this.visualStrategy && typeof this.visualStrategy.mousePressed === 'function') {
             this.visualStrategy.mousePressed(mouseX, mouseY);
         }
     }
-  }
+}
 
   let canvasController;
 
@@ -286,11 +302,7 @@ function sketchTema2(p) {
     
   };
 
-  p.draw = function () {
-    if(quizNavigator.currentLevel !== canvasController.lastLevel){
-        canvasController.setStrategy(quizNavigator.currentLevel);
-    }
-    
+  p.draw = function () {    
     canvasController.draw();
   };
 
