@@ -134,9 +134,7 @@ class QuizNavigator {
             this.validationResults[q.id] = null;
             this.isVerified = false;
             this.updateVerifyButton();
-            if (this.nextBtn) {
-              this.nextBtn.attribute("disabled", "");
-            }
+            
           });
           div.child(input);
         }
@@ -232,13 +230,33 @@ class QuizNavigator {
     });
 
     this.isVerified = true;
-    if (this.nextBtn) {
-      if (allCorrect) {
-        this.nextBtn.removeAttribute("disabled");
-      } else {
-        this.nextBtn.attribute("disabled", "");
-      }
-    }
+    
+
+        // Si estamos en el último nivel, mostrar modal de finalización
+        if (this.currentLevel >= this.levels.length - 1) {
+          const finalMessage = "🎉 ¡Has completado todos los niveles!";
+          if (this.successModal) {
+            this.successModal.html(`
+            <div class="modal-content">
+              <button class="close-modal" id="closeXBtn">&times;</button>
+              <h2>¡Felicidades!</h2>
+              <p>${finalMessage}</p>
+              <button id="closeFinalModalBtn">Reiniciar Quiz</button>
+            </div>
+          `);
+            this.p.select("#closeFinalModalBtn").mousePressed(() => {
+              this.successModal.style("display", "none");
+              this.currentLevel = 0;
+              this.setupLevel(this.currentLevel);
+            });
+            this.successModal.style("display", "flex");
+          } else {
+            console.log(finalMessage);
+          }
+        } 
+        this.p.select("#closeXBtn").mousePressed(() => {
+          this.successModal.style("display", "none");
+        });
   }
 
   // Cierra el modal
@@ -250,6 +268,7 @@ class QuizNavigator {
       this.updateContentVisibility();
     }
   }
+  
 
   // Avanza al siguiente nivel
   goToNextLevel() {
