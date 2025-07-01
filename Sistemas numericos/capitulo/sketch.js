@@ -106,15 +106,9 @@ function sketchTema2(p) {
       {
         id: "q5",
         question: "Para representar el número 0xA5C3 en 16 casillas consecutivas de tu tablero, ¿cuántos peones necesitas colocar? Pista: Convierte 0xA5C3 a binario y cuenta los '1's.",
-        correctAnswer: "7"
+        correctAnswer: "8"
       }
-    ],
-    // Separacíon
-    [
-        { id: "q7", question: "¿Cuál es la capital de Italia?", correctAnswer: "Roma" },
-        { id: "q8", question: "¿Dónde está la Torre Eiffel?", correctAnswer: "París" }
-    ],
-    null // Este nivel no tiene preguntas
+    ]
   ];
 
   // Mapeo de niveles a los IDs de los divs de contenido a mostrar

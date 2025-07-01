@@ -90,12 +90,18 @@ class QuizNavigator {
     }
 
     if (this.nextBtn) {
-      this.nextBtn.style("display", "inline-block"); // Siempre mostrar el botón Siguiente
-      if (hasGradedQuestions) {
-        // this.nextBtn.attribute("disabled", ""); // Deshabilitarlo si hay preguntas a calificar
+
+      // this.nextBtn.style("display", "inline-block"); // Siempre mostrar el botón Siguiente
+      if (this.currentLevel >= this.levels.length - 1) {
+        this.nextBtn.style("display", "none"); // Ocultar en el último nivel
       } else {
-        this.nextBtn.removeAttribute("disabled"); // Habilitarlo si no hay preguntas (es un nivel de contenido o solo enunciados)
+        this.nextBtn.style("display", "inline-block"); // Mostrar en otros niveles
       }
+      // if (hasGradedQuestions) {
+      //   // this.nextBtn.attribute("disabled", ""); // Deshabilitarlo si hay preguntas a calificar
+      // } else {
+      //   this.nextBtn.removeAttribute("disabled"); // Habilitarlo si no hay preguntas (es un nivel de contenido o solo enunciados)
+      // }
     }
 
     // Si hay preguntas (o enunciados), poblar el contenedor
