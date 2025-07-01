@@ -1,0 +1,159 @@
+<!-- <div class="content">   
+<h2>Responde las siguientes preguntas</h2>
+</div> -->
+<h1>Sistemas numéricos</h1>
+
+<div class="content" id="intro" style="min-height: 450px; max-width: 650px;">
+  <br>
+  <p>Desde los videojuegos más complejos hasta la música que escuchas y las fotos que compartes, todo lo que ves en tus pantallas tiene un secreto en común.</p>
+  <p>Un lenguaje silencioso, invisible, pero increíblemente poderoso que lo hace posible. Es la base de cómo los computadores guardan y recuerdan cada pieza de información.</p>
+  <p>Por lo tanto, es fundamental para entender nuestro mundo digital.</p>
+  <p>Te invitamos a un desafío práctico. Con lógica y un poco de ingenio, descubrirás cómo este lenguaje esencial permite a las máquinas procesar y almacenar datos.</p>
+  <p>Usa los tableros y piezas para descifrar los patrones y las combinaciones que están en el corazón de toda operación digital.</p>
+</div>
+
+
+<div class="content" id="enunciado1" >
+  <h2>Reto 1</h2>
+  <p>Imagina una casilla que puede estar ocupada por un peón o vacía. Esa diferencia entre "algo" y "nada" representa la forma más básica de información digital. A ese valor con solo dos posibles estados lo llamamos bit: la unidad mínima de información en computación.</p>
+
+</div>
+  <div class="content" id="enunciado2">
+  <h2>Reto 2</h2>
+  <p>Con una sola casilla podíamos representar dos cosas diferentes (un peón o ninguna). En este nivel, el objetivo es explorar qué combinaciones son posibles si tenemos dos casillas.</p>
+  <p><b>Pero ojo, aquí viene lo interesante:</b> no todas las posiciones valen lo mismo.</p>
+  <p>Compruébalo interactuando con el tablero, y descubre cuánto aumenta el número al marcar ciertas casillas.</p>
+</div>
+
+<div class="content" id="enunciado3"> 
+  <h2>Reto 3</h2>
+  <p>Habrás notado, que con cada casilla que añadimos, se duplican las combinaciones. Esto sigue la fórmula <b>2^n</b>, donde <i>n</i> es el número de casillas. 
+  En este reto, trabajaremos con 3 casillas.</p>
+  <p>Como mencionamos antes, no todas las casillas afectan el número de la misma forma: cada una tiene un "peso" diferente. En computación, la casilla que más cambia el valor se llama <b>bit más significativo</b>, y la que menos lo cambia, <b>bit menos significativo</b>.</p>
+</div>
+
+<div class="content" id="enunciado4">
+  <h2>¿Qué es un nibble?</h2>
+  <p>Un <b>nibble</b> es un grupo de 4 bits. En otras palabras, cuando usamos 4 casillas, estamos trabajando con un nibble.</p>
+  <p>Con estos 4 bits, podemos representar números desde el 0 hasta el 15. Esto se calcula con:<br>- 2^4 = 16 números diferentes posibles.<br>- 2^4 - 1 = 15 : el número máximo representado.</p>
+  
+  <p><b>¿Qué tiene de especial un nibble?</b></p>
+  <p>Los nibbles son muy útiles porque están directamente relacionados con otro sistema numérico muy usado en computación: el <strong>hexadecimal</strong>.</p>
+
+  <ul>
+    <li>Cada 4 bits representan exactamente <strong>un dígito hexadecimal</strong>.</li>
+    <li>Por ejemplo:</li>
+    <ul>
+      <li><code>0000</code> = <strong>0</strong></li>
+      <li><code>1010</code> = <strong>A</strong></li>
+      <li><code>1111</code> = <strong>F</strong></li>
+    </ul>
+  </ul>
+
+  <p>Gracias al sistema hexadecimal, podemos escribir grandes cantidades de información binaria de forma más <strong>corta y legible</strong> usando solo letras y números del <strong>0 al F</strong>. </p>
+  <p>Por eso, notarás que los <i>colores en diseño web</i>, <i>direcciones de memoria</i>, y muchos lenguajes de bajo nivel usan hexadecimal todo el tiempo.</p></p>
+
+  <h2>Reto 4</h2>
+
+</div> 
+
+<div class="content" id="enunciado5">
+  <h2>¿Qué es un byte?</h2>
+  <p>Ahora trabajaremos con un byte completo (8 bits). Un byte puede representar números desde 0 hasta 255.</p>
+  
+  <p><b>Propiedades clave de un byte:</b></p>
+  <ul>
+    <li>2^8 = 256 números diferentes posibles</li>
+    <li>2^8 - 1 = 255 : el número máximo representable</li>
+    <li>Puede representar exactamente 2 dígitos hexadecimales (de 0x00 a 0xFF)</li>
+  </ul>
+
+  <p><b>Usos comunes de los bytes:</b></p>
+  <ul>
+    <li>Representación de caracteres ASCII</li>
+    <li>Valores de color en imágenes (canales RGB)</li>
+    <li>Almacenamiento de números pequeños de manera eficiente</li>
+  </ul>
+
+  <h2>Reto 5</h2>
+</div>
+
+
+<div class="content" id="enunciado6">
+  <h2>¿Qué es el sistema Hexadecimal?</h2>
+  <p></p>
+  <p>El sistema hexadecimal es un sistema numérico de base 16 que utiliza dieciséis símbolos: los dígitos del 0 al 9 y las letras de la A a la F. Fue estandarizado por IBM en 1963.</p>
+  
+  <p>Cada dígito hexadecimal representa un nibble, lo que significa que dos dígitos hexadecimales representan un <strong>byte completo</strong>. Donde los números del <strong>1 al 9 representan su análogo en decimal</strong>, y las letras de la <strong>A a la F representan los números del 10 al 15 en decimal</strong>. Por ejemplo:</p>
+  <ul>
+    <li>0x8 = 4 bits = (8 × 16⁰) = 8</li>
+    <li>0xA = 4 bits = (10 × 16⁰) = 10</li>
+    <li>0xF = 4 bits = (15 × 16⁰) = 15</li>
+    <li>0x8F = 8 bits = (8 × 16¹) + (15 × 16⁰) = 143</li>
+    <li>0xAF = 8 bits = (10 × 16¹) + (15 × 16⁰) = 175</li>
+    <li>0xFF = 8 bits = (15 × 16¹) + (15 × 16⁰) = 255</li>
+  </ul>
+
+  <p><strong>¿Qué tiene de especial el sistema Hexadecimal?</strong></p>
+  <p>Su principal ventaja es su relación directa y elegante con el sistema binario, permitiendo una alineación perfecta con la arquitectura de los sistemas informáticos donde la unidad fundamental es el byte. Esto lo hace más práctico que otros sistemas como el octal.</p>
+  
+  <p>Es omnipresente en la programación:</p>
+  <ul>
+    <li><strong>Diseño web:</strong> Para definir colores (ej. #FFFFFF para blanco).</li>
+    <li><strong>Desarrollo de software de bajo nivel:</strong> Para especificar direcciones de memoria.</li>
+    <li><strong>Otros usos:</strong> Depuración (debugging), configuración de direcciones MAC o IPv6, y manipulación de archivos binarios.</li>
+  </ul>
+
+  <p>En esencia, el hexadecimal actúa como un puente vital entre el lenguaje binario de las máquinas y un formato más legible y manipulable para los humanos, facilitando la comprensión de cómo se almacenan y procesan los datos a un nivel fundamental.</p>
+   
+  <h2>Reto 6</h2>
+
+</div>
+
+
+<div class="content hidden" id="conclusion" style="min-height: 600px;">
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+
+
+
+<div class="container">
+    <div class="card" class="hidden">
+      <div id="p5-container" style="text-align: center;vertical-align: middle;"></div>
+      <div class="number-output">
+        <p id="binary-label">Binario: <span id="binary-value">00000000</span></p>
+        <p id="decimal-label">Decimal: <span id="decimal-value">0</span></p>
+        <p id="hex-label" >Hexadecimal: <span id="hex-value">0x0</span></p>
+        <p id="data-type-label" >Tipo de dato: <span id="data-type">boolean</span></p>
+      </div>
+      
+
+      
+    </div>
+
+    <div class="card" id="questionCard">
+      
+      <div id="questions"></div>
+    </div>
+    
+  </div>  
+
+  <div id="successModal">
+    <div class="modal-content">
+      <h2>🎉 ¡Excelente trabajo!</h2>
+      <p>Has respondido correctamente todas las preguntas de este nivel.</p>
+       <button id="closeModalBtn">Continuar</button> <!-- ID añadido aquí -->
+    </div>
+  </div>
+  
+  
+</div>
+
+<div class="footer-fixed">
+  <div class="buttons" >
+      <button id="verifyBtn" disabled>Verificar</button>
+      <button id="nextBtn">Siguiente</button>
+  </div>
+  <div class="level-counter" id="levelIndicator">1 / 3</div>
+</div>
