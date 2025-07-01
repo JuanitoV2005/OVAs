@@ -57,8 +57,8 @@ h1 {
 
 @media (max-width: 600px) {
   main {
-  padding: 0 2rem;
-  padding-bottom: 10vh;
+  padding: 5px;
+  padding-bottom: 10px !important;
 }
 
   .canvas-container {
@@ -68,8 +68,5 @@ h1 {
   canvas {
     max-width: 100%;
     height: auto !important;
-  }
-  main{
-    padding: 10px;
   }
 }

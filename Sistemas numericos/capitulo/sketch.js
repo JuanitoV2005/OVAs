@@ -129,7 +129,6 @@ function sketchTema2(p) {
     7: ['conclusion',"data-type-label"]
   };
 
-  // let quizNavigator = new QuizNavigator(p, levels, contentVisibilityMap); // Variable para la instancia del QuizNavigator
   let quizNavigator;
 
   
@@ -276,7 +275,6 @@ function sketchTema2(p) {
 
     // Crea una instancia de QuizNavigator, pasando 'p' y los datos del quiz.
     // Esta instancia gestionará la lógica de la interfaz de usuario y la navegación.
-    // quizNavigator.currentLevel = 4; // <-- Eliminar luego!
     quizNavigator = new QuizNavigator(p, levels, contentVisibilityMap); // Variable para la instancia del QuizNavigator
 
     quizNavigator.init(); // Inicializa el QuizNavigator para configurar los elementos DOM y eventos.
@@ -286,17 +284,9 @@ function sketchTema2(p) {
     // Crea una instancia de canvasController
     canvasController = new CanvasController(p, levelCanvasObjects, quizNavigator);
     
-    
-    // // establecer respuesta para q2
-    // quizNavigator.setAnswerForGraphicInteractiveQuestion("q2", "Pacífico");
-    
   };
 
   p.draw = function () {
-    // En cada fotograma, se llama a esta función para dibujar el canvas.
-    // Utiliza el patrón Strategy: la función `drawCanvasForLevel` decide
-    // qué "estrategia" de dibujo aplicar basándose en el `currentLevel` del quiz.
-    // drawCanvasForLevel(quizNavigator.currentLevel);
     if(quizNavigator.currentLevel !== canvasController.lastLevel){
         canvasController.setStrategy(quizNavigator.currentLevel);
     }
@@ -309,14 +299,7 @@ function sketchTema2(p) {
   p.mousePressed = function() {
     // Verifica si el clic ocurrió dentro de los límites del canvas
     if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
-    //   const currentLevel = quizNavigator.currentLevel;
-      // Solo cambia el color si el nivel actual tiene un dibujo de canvas definido en `levelCanvasStates`
-    //   if (levelCanvasStates[currentLevel]) {
-    //     // Genera un color aleatorio (RGB)
-    //     levelCanvasStates[currentLevel].color = p.color(p.random(255), p.random(255), p.random(255));
-    //   }
-    //   canvasController.visualStrategy.color = p.color(p.random(255), p.random(255), p.random(255));
-      canvasController.mousePressed(p.mouseX, p.mouseY);
+        canvasController.mousePressed(p.mouseX, p.mouseY);
 
     // Enviar a quiz navigator respuesta de las preguntas que toman la configuración del tablero:
     const currentLevel = levels[quizNavigator.currentLevel];

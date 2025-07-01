@@ -61,21 +61,23 @@ class QuizNavigator {
 
     const questions = this.levels[level];
 
+    
+
     // Controlar la visibilidad de los divs de contenido al cambiar de nivel
     this.updateContentVisibility();
+
+    // Reetablecer en blanco las cajas con conversion a asistemas numéricos
+    if (this.binaryDisplay) this.binaryDisplay.html("0"); // Default 8-bit binary, or "0" depending on initial state
+    if (this.decimalDisplay) this.decimalDisplay.html("0");
+    if (this.hexDisplay) this.hexDisplay.html("0x0");
+    if (this.dataTypeDisplay) this.dataTypeDisplay.html(""); // Or "Ningún bit activo" if that's the true initial state
+
 
     // Filtra las preguntas que no son solo enunciados para determinar si hay preguntas a calificar
     const gradedQuestions = questions ? questions.filter(q => !q.isStatement) : [];
     const hasGradedQuestions = gradedQuestions.length > 0;
 
-    // Ajustar la visibilidad del contenedor de preguntas
-    if (questions && questions.length > 0) { // Si hay cualquier tipo de "pregunta" (incluyendo enunciados)
-      this.p.select(".container").style("display", "flex");
-      this.p.select("#questionCard").style("display", "block");
-    } else {
-      this.p.select(".container").style("display", "none");
-      this.p.select("#questionCard").style("display", "none"); // Ocultar también la tarjeta de preguntas
-    }
+    
 
     // Ajustar la visibilidad y estado de los botones
     if (this.verifyBtn) {
@@ -139,6 +141,16 @@ class QuizNavigator {
       });
     }
 
+    // Ajustar la visibilidad del contenedor de preguntas
+    if (questions && questions.length > 0) { // Si hay cualquier tipo de "pregunta" (incluyendo enunciados)
+      this.p.select(".container").style("display", "flex");
+      this.p.select("#questionCard").style("display", "block");
+    } else {
+      this.p.select(".container").style("display", "none");
+      this.p.select("#questionCard").style("display", "none"); // Ocultar también la tarjeta de preguntas
+    }
+    
+    
     this.updateVerifyButton();
     this.updateLevelIndicator();
   }

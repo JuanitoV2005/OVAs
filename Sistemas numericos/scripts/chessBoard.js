@@ -18,19 +18,6 @@ class ChessBoard {
         this.dataTypeDisplay = this.p.select('#data-type'); 
 
     }
-
-    // drawBoard() {
-    //     for (let r = 0; r < this.dimensions[0]; r++) {
-    //         for (let c = 0; c < this.dimensions[1]; c++) {
-    //             const x = this.location[0] + c * this.cellWidth;
-    //             const y = this.location[1] + r * this.cellWidth;
-    //             const colorIndex = (r + c) % 2;
-    //             this.p.fill(this.colors[colorIndex]);
-    //             this.p.noStroke();
-    //             this.p.rect(x, y, this.cellWidth, this.cellWidth);
-    //         }
-    //     }
-    // }
     drawBoard() {
         for (let r = 0; r < this.dimensions[0]; r++) {
             for (let c = 0; c < this.dimensions[1]; c++) {
@@ -121,7 +108,56 @@ class ChessBoard {
         this.updateDisplays();
     }
 
+    // getBinaryString() {
+    //     let binaryString = '';
+    //     // Recorremos todas las filas y columnas en orden MSB (0,0) a LSB (7,7)
+    //     for (let r = 0; r < 8; r++) {
+    //         for (let c = 0; c < 8; c++) {
+    //             binaryString += this.pieces[r][c] ? '1' : '0';
+    //         }
+    //     }
+    //     return binaryString;
+    // }
     getBinaryString() {
+        let fullBinaryString = '';
+        // Recorremos todas las filas y columnas en orden MSB (0,0) a LSB (7,7)
+        for (let r = 0; r < 8; r++) {
+            for (let c = 0; c < 8; c++) {
+                fullBinaryString += this.pieces[r][c] ? '1' : '0';
+            }
+        }
+
+        const dataType = this.getDataType(); // Get the data type
+        let requiredBits;
+
+        // Determine the number of bits required based on the data type
+        switch (dataType) {
+            case "boolean":
+                requiredBits = 1;
+                break;
+            case "byte":
+                requiredBits = 8;
+                break;
+            case "short":
+                requiredBits = 16;
+                break;
+            case "int o float":
+                requiredBits = 32;
+                break;
+            case "long o double":
+                requiredBits = 64; // Use all 64 bits for long or double
+                break;
+            case "Ningún bit activo":
+                return "0"; // Return "0" if no bits are active
+            default:
+                requiredBits = 64; // Default to 64 bits if data type is not recognized or larger
+        }
+
+        // Return the slice of the binary string from the right (LSB side)
+        return fullBinaryString.slice(-requiredBits);
+    }
+
+    getDecimalValue() {
         let binaryString = '';
         // Recorremos todas las filas y columnas en orden MSB (0,0) a LSB (7,7)
         for (let r = 0; r < 8; r++) {
@@ -129,11 +165,6 @@ class ChessBoard {
                 binaryString += this.pieces[r][c] ? '1' : '0';
             }
         }
-        return binaryString;
-    }
-
-    getDecimalValue() {
-        const binaryString = this.getBinaryString();
         // Usamos BigInt para manejar valores de 64 bits
         return BigInt('0b' + binaryString);
     }
