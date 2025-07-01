@@ -7,12 +7,17 @@
 
 html, body {
   height: 100%;
-  font-family: sans-serif;
+  font-family: sans-serif !important;
+
+  
 }
 
 main {
   padding: 20px;
-  padding-bottom: 10vh !important;
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 1.5rem;
+  /* padding-bottom: 10vh !important; */
 }
 
 

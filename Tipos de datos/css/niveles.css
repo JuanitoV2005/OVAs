@@ -104,11 +104,11 @@ button {
   text-align: center;
 }
 
-.content{
+/* .content{
   max-width: 1000px;
   margin: auto;
   padding: 0 1.5rem;
-}
+} */
 
 .content ul {
   padding-left: 1.5rem;       /* Sangría para el contenido de la lista */
@@ -132,6 +132,26 @@ button {
   display: none !important; /* El !important puede ser necesario para anular estilos en línea o específicos */
 }
 
+
+/* Estilos de las cajas de texto con conversión del tablero a sistemas numéricos */
+.number-output{
+  font-size: 1.2rem;
+  background-color: #f0f8ff; /* azul claro */
+  border: 2px solid #007acc; /* un azul que contraste */
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 8px;
+  text-align: center;
+  word-break: break-all;
+}
+
+.data-range{
+  display: block;
+  margin:auto;
+  width:70% !important;
+}
+
+
 /* En tu media query para móvil, asegúrate que .content sea flex-direction: column; */
 @media (max-width: 600px) {
   .container {
@@ -150,17 +170,7 @@ button {
   #verifyBtn:disabled, #nextBtn:disabled{
     padding: 0.6rem 1.5rem;
   }
-}
-
-
-/* Estilos de las cajas de texto con conversión del tablero a sistemas numéricos */
-.number-output{
-  font-size: 1.2rem;
-  background-color: #f0f8ff; /* azul claro */
-  border: 2px solid #007acc; /* un azul que contraste */
-  padding: 10px;
-  margin-top: 20px;
-  border-radius: 8px;
-  text-align: center;
-  word-break: break-all;
+  .data-range{
+    width:100% !important;
+  }
 }
