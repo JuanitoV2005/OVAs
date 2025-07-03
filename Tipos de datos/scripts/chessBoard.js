@@ -18,63 +18,112 @@ class ChessBoard {
         this.dataTypeDisplay = this.p.select('#data-type'); 
 
     }
+    // drawBoard() {
+    //     for (let r = 0; r < this.dimensions[0]; r++) {
+    //         for (let c = 0; c < this.dimensions[1]; c++) {
+    //             const x = this.location[0] + c * this.cellWidth;
+    //             const y = this.location[1] + r * this.cellWidth;
 
-    drawBoard() {
-        for (let r = 0; r < this.dimensions[0]; r++) {
-            for (let c = 0; c < this.dimensions[1]; c++) {
-                const x = this.location[0] + c * this.cellWidth;
-                const y = this.location[1] + r * this.cellWidth;
-
-                // Cambia el color de relleno basado en si la celda es jugable
-                if (this.isInPlayableRange(r, c)) {
-                    const colorIndex = (r + c) % 2;
-                    this.p.fill(this.colors[colorIndex]);
+    //             // Cambia el color de relleno basado en si la celda es jugable
+    //             if (this.isInPlayableRange(r, c)) {
+    //                 const colorIndex = (r + c) % 2;
+    //                 this.p.fill(this.colors[colorIndex]);
                     
+    //             } else {
+    //                 // Colores alternos para celdas no jugables (como un tablero de ajedrez)
+    //                 if ((r + c) % 2 === 0) {
+    //                     this.p.fill(200, 200, 200); // Gris oscuro
+    //                 } else {
+    //                     this.p.fill(240, 240, 240); // Gris claro
+    //                 }
+    //             }
+    //             this.p.noStroke();
+    //             this.p.rect(x, y, this.cellWidth, this.cellWidth);
+    //         }
+    //     }
+
+    //     // Adicionalmente, dibujar rectángulo que encierra el área jugable
+    //     const playableX = this.location[0] + this.playableRange.minC * this.cellWidth;
+    //     const playableY = this.location[1] + this.playableRange.minR * this.cellWidth;
+
+    //     const playableWidth = (this.playableRange.maxC - this.playableRange.minC + 1) * this.cellWidth;
+    //     const playableHeight = (this.playableRange.maxR - this.playableRange.minR + 1) * this.cellWidth;
+
+    //     // Configura el color y grosor del borde
+    //     this.p.stroke(255);      // Color blanco para el borde
+    //     this.p.strokeWeight(3);  // Grosor de 3 píxeles
+
+    //     this.p.noFill();         // Asegúrate de que el rectángulo no tenga relleno
+
+    //     // Dibuja el rectángulo que encierra el área jugable
+    //     this.p.rect(playableX, playableY, playableWidth, playableHeight);
+    // }
+    drawBoard() {
+    for (let r = 0; r < this.dimensions[0]; r++) {
+        for (let c = 0; c < this.dimensions[1]; c++) {
+            const x = this.location[0] + c * this.cellWidth;
+            const y = this.location[1] + r * this.cellWidth;
+
+            // Cambia el color de relleno basado en si la celda es jugable
+            if (this.isInPlayableRange(r, c)) {
+                const colorIndex = (r + c) % 2;
+                this.p.fill(this.colors[colorIndex]);
+            } else {
+                if ((r + c) % 2 === 0) {
+                    this.p.fill(200, 200, 200);
                 } else {
-                    // Colores alternos para celdas no jugables (como un tablero de ajedrez)
-                    if ((r + c) % 2 === 0) {
-                        this.p.fill(200, 200, 200); // Gris oscuro
-                    } else {
-                        this.p.fill(240, 240, 240); // Gris claro
-                    }
+                    this.p.fill(240, 240, 240);
                 }
-                this.p.noStroke();
-                this.p.rect(x, y, this.cellWidth, this.cellWidth);
             }
+            this.p.noStroke();
+            this.p.rect(x, y, this.cellWidth, this.cellWidth);
         }
 
-        // Adicionalmente, dibujar rectángulo que encierra el área jugable
-        const playableX = this.location[0] + this.playableRange.minC * this.cellWidth;
-        const playableY = this.location[1] + this.playableRange.minR * this.cellWidth;
+        // // Dibuja el número de fila a la izquierda y derecha del tablero
+        const y = this.location[1] + r * this.cellWidth + this.cellWidth / 2;
+        const rowNumber = this.dimensions[0] - r;  // Invertir numeración (desde abajo hacia arriba)
+        const leftX = this.location[0] - 10;       // Posición a la izquierda del tablero
+        const rightX = this.location[0] + this.dimensions[1] * this.cellWidth + 10; // Derecha
 
-        const playableWidth = (this.playableRange.maxC - this.playableRange.minC + 1) * this.cellWidth;
-        const playableHeight = (this.playableRange.maxR - this.playableRange.minR + 1) * this.cellWidth;
-
-        // Configura el color y grosor del borde
-        this.p.stroke(255);      // Color blanco para el borde
-        this.p.strokeWeight(3);  // Grosor de 3 píxeles
-
-        this.p.noFill();         // Asegúrate de que el rectángulo no tenga relleno
-
-        // Dibuja el rectángulo que encierra el área jugable
-        this.p.rect(playableX, playableY, playableWidth, playableHeight);
+        this.p.textSize(15); // Asegura tamaño de texto visible
+        this.p.fill(0); // Color negro
+        this.p.noStroke();
+        this.p.textAlign(this.p.RIGHT, this.p.CENTER);
+        this.p.text(rowNumber, leftX, y);
+        this.p.textAlign(this.p.LEFT, this.p.CENTER);
+        this.p.text(rowNumber, rightX, y);
     }
+
+    // Dibuja el rectángulo del área jugable
+    const playableX = this.location[0] + this.playableRange.minC * this.cellWidth;
+    const playableY = this.location[1] + this.playableRange.minR * this.cellWidth;
+    const playableWidth = (this.playableRange.maxC - this.playableRange.minC + 1) * this.cellWidth;
+    const playableHeight = (this.playableRange.maxR - this.playableRange.minR + 1) * this.cellWidth;
+
+    this.p.stroke(255);
+    this.p.strokeWeight(3);
+    this.p.noFill();
+    this.p.rect(playableX, playableY, playableWidth, playableHeight);
+}
 
     drawPieces() {
         for (let r = 0; r < this.dimensions[0]; r++) {
             for (let c = 0; c < this.dimensions[1]; c++) {
-                if (this.pieces[r][c]) {
+                const pieceCode = this.pieces[r][c];
+                if (pieceCode) {
                     const centerX = this.location[0] + c * this.cellWidth + this.cellWidth / 2;
                     const centerY = this.location[1] + r * this.cellWidth + this.cellWidth / 2;
-                    
-                    if (this.pieceImages.pawnImg) {
+                    const img = this.pieceImages[pieceCode];
+
+                    if (img) {
                         const imgSize = this.cellWidth * 0.8;
-                        this.p.image(this.pieceImages.pawnImg, centerX - imgSize/2, centerY - imgSize/2, imgSize, imgSize);
+                        this.p.image(img, centerX - imgSize / 2, centerY - imgSize / 2, imgSize, imgSize);
                     } else {
+                        // fallback: dibuja una letra si no hay imagen cargada para ese código
                         this.p.fill(0);
                         this.p.textAlign(this.p.CENTER, this.p.CENTER);
                         this.p.textSize(this.cellWidth * 0.6);
-                        this.p.text('P', centerX, centerY);
+                        this.p.text(pieceCode, centerX, centerY);
                     }
                 }
             }
@@ -109,7 +158,56 @@ class ChessBoard {
         this.updateDisplays();
     }
 
+    // getBinaryString() {
+    //     let binaryString = '';
+    //     // Recorremos todas las filas y columnas en orden MSB (0,0) a LSB (7,7)
+    //     for (let r = 0; r < 8; r++) {
+    //         for (let c = 0; c < 8; c++) {
+    //             binaryString += this.pieces[r][c] ? '1' : '0';
+    //         }
+    //     }
+    //     return binaryString;
+    // }
     getBinaryString() {
+        let fullBinaryString = '';
+        // Recorremos todas las filas y columnas en orden MSB (0,0) a LSB (7,7)
+        for (let r = 0; r < 8; r++) {
+            for (let c = 0; c < 8; c++) {
+                fullBinaryString += this.pieces[r][c] ? '1' : '0';
+            }
+        }
+
+        const dataType = this.getDataType(); // Get the data type
+        let requiredBits;
+
+        // Determine the number of bits required based on the data type
+        switch (dataType) {
+            case "boolean":
+                requiredBits = 1;
+                break;
+            case "byte":
+                requiredBits = 8;
+                break;
+            case "short":
+                requiredBits = 16;
+                break;
+            case "int o float":
+                requiredBits = 32;
+                break;
+            case "long o double":
+                requiredBits = 64; // Use all 64 bits for long or double
+                break;
+            case "Ningún bit activo":
+                return "0"; // Return "0" if no bits are active
+            default:
+                requiredBits = 64; // Default to 64 bits if data type is not recognized or larger
+        }
+
+        // Return the slice of the binary string from the right (LSB side)
+        return fullBinaryString.slice(-requiredBits);
+    }
+
+    getDecimalValue() {
         let binaryString = '';
         // Recorremos todas las filas y columnas en orden MSB (0,0) a LSB (7,7)
         for (let r = 0; r < 8; r++) {
@@ -117,11 +215,6 @@ class ChessBoard {
                 binaryString += this.pieces[r][c] ? '1' : '0';
             }
         }
-        return binaryString;
-    }
-
-    getDecimalValue() {
-        const binaryString = this.getBinaryString();
         // Usamos BigInt para manejar valores de 64 bits
         return BigInt('0b' + binaryString);
     }
@@ -165,6 +258,7 @@ class ChessBoard {
         // Para valores de double (64 bits)
         return "double";
     }
+
     // -------- Inicio funciones para updateDisplay con separación de cifras ---------
     /**
      * Formatea una cadena binaria para insertar espacios cada 8 bits (1 byte).
@@ -220,6 +314,17 @@ class ChessBoard {
     }
 
     // -------- Fin funciones para updateDisplay con separación de cifras ---------
+
+    resetBoardAndDisplays() {
+        // Set all pieces on the board to null (empty)
+        for (let r = 0; r < this.dimensions[0]; r++) {
+            for (let c = 0; c < this.dimensions[1]; c++) {
+                this.pieces[r][c] = null;
+            }
+        }
+        // Call updateDisplays to reflect the empty board state in the HTML
+        this.updateDisplays();
+    }
 
     mousePressed(mouseX, mouseY) {
         if (this.isInsideBoard(this.p.mouseX, this.p.mouseY)) {
