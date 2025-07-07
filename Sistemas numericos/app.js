@@ -36,6 +36,8 @@ function cargarTema(indice) {
     .then(html => {
       mainContent.innerHTML = html;
 
+
+
       // Eliminar instancias previas
       for (const key of clavesTemas) {
         if (temas[key].instancia) {
@@ -119,7 +121,22 @@ function cargarSketchesDinamicamente(callback) {
 }
 
 
+
 // Iniciar app
 cargarSketchesDinamicamente(() => {
   cargarTema(indiceActual);
 });
+
+window.onload = () => {
+    pipwerks.SCORM.version = "1.2";
+    const success = pipwerks.SCORM.init();
+    if (!success) {
+    console.error("No se pudo inicializar la conexión SCORM.");
+    }
+};
+
+window.onunload = window.onbeforeunload = function () {
+  if (typeof pipwerks !== "undefined" && pipwerks.SCORM) {
+    pipwerks.SCORM.quit();
+  }
+};
