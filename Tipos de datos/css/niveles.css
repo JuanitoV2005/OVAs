@@ -48,6 +48,7 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 input.correct {
   border-color: green;
@@ -69,6 +70,11 @@ input.incorrect {
   border: none;
 }
 #nextBtn{
+  background-color: #3b9cb4;
+  color: white;
+  border: none;
+}
+#previousBtn{
   background-color: #3b9cb4;
   color: white;
   border: none;
@@ -104,11 +110,11 @@ button {
   text-align: center;
 }
 
-/* .content{
+.content{
   max-width: 1000px;
   margin: auto;
   padding: 0 1.5rem;
-} */
+}
 
 .content ul {
   padding-left: 1.5rem;       /* Sangría para el contenido de la lista */
@@ -128,8 +134,32 @@ button {
   margin-bottom: 8px;         /* Espacio entre ítems */
 }
 
+.content img{
+  width: 80%;
+  display: block;
+  margin:auto;
+}
+
 .hidden {
   display: none !important; /* El !important puede ser necesario para anular estilos en línea o específicos */
+}
+
+/* En tu media query para móvil, asegúrate que .content sea flex-direction: column; */
+@media (max-width: 600px) {
+  .container {
+    display:flex;
+    grid-template-columns: 1fr;
+    gap: 0;
+    display: flex; /* Asegúrate de que .content sea un contenedor flex */
+    flex-direction: column; /* Apila las tarjetas en móvil */
+  }
+  .card, .content {
+    padding: 0.5rem 0;
+  }
+
+  #verifyBtn:disabled, #nextBtn:disabled{
+    padding: 0.6rem 1.5rem;
+  }
 }
 
 
@@ -145,32 +175,61 @@ button {
   word-break: break-all;
 }
 
-.data-range{
-  display: block;
-  margin:auto;
-  width:70% !important;
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #555;
+}
+.modal-content {
+  position: relative;
 }
 
 
-/* En tu media query para móvil, asegúrate que .content sea flex-direction: column; */
+/* Estilos por defecto para pantallas grandes (el texto sigue visible, las imágenes ocultas) */
+.button-text {
+    display: inline;
+}
+
+.button-icon-img {
+    display: none; /* Las imágenes están ocultas por defecto */
+    /* *** Ajusta estos valores para el tamaño de las flechas *** */
+    height: 24px;   /* Altura fija para la imagen, ajústala según tus flechas */
+    width: auto;    /* Ancho automático para mantener la proporción de la imagen */
+    vertical-align: middle; /* Ayuda a centrar verticalmente la imagen dentro del botón */
+}
+
+/* ---------------------------------------------------- */
+
+/* Media Query para pantallas pequeñas (600px o menos) */
 @media (max-width: 600px) {
-  .container {
-    display:flex;
-    grid-template-columns: 1fr;
-    gap: 0;
-    display: flex; /* Asegúrate de que .content sea un contenedor flex */
-    flex-direction: column; /* Apila las tarjetas en móvil */
-  }
-  .card, .content {
-    padding: 0.5rem 0;
-  }
-  .buttons{
-    gap: 0.25rem;
-  }
-  #verifyBtn:disabled, #nextBtn:disabled{
-    padding: 0.6rem 1.5rem;
-  }
-  .data-range{
-    width:100% !important;
-  }
+    #previousBtn,
+    #nextBtn {
+        /* Ajustes para el botón cuando muestra la imagen */
+        padding: 8px 12px; /* Un padding que funcione bien con el tamaño de la flecha */
+        min-width: unset;  /* Asegura que el botón pueda encogerse */
+        width: auto;       /* El ancho se ajusta al contenido (la flecha) */
+        display: flex;     /* Usamos flexbox para centrar la imagen */
+        justify-content: center; /* Centra horizontalmente la flecha */
+        align-items: center;     /* Centra verticalmente la flecha */
+    }
+
+    .button-text {
+        display: none; /* Oculta el texto en pantallas pequeñas */
+    }
+
+    .button-icon-img {
+        display: block; /* Muestra las imágenes de las flechas */
+        /* Las propiedades de tamaño ya definidas arriba aplican aquí */
+    }
+
+    .content img{
+      width: 100%;
+    }
 }
+

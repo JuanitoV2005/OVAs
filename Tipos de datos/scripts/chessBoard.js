@@ -1,110 +1,65 @@
-
 class ChessBoard {
-    constructor(p,colors, location, cellWidth, dimensions, pieces, pieceImages, playableRange) {
+    constructor(p, colors, location, cellWidth, dimensions, pieces, pieceImages, playableRange) {
         this.p = p;
-        this.colors = colors; // [color1, color2]
-        this.location = location; // [x, y] - Top-left corner position
+        this.colors = colors;
+        this.location = location;
         this.cellWidth = cellWidth;
-        this.dimensions = dimensions; // [rows, columns]
-        this.pickedPiece = null; // null if no piece is picked, otherwise [row, col]
-        this.pieces = pieces;// 2D array representing the board pieces
+        this.dimensions = dimensions;
+        this.pieces = pieces;
         this.pieceImages = pieceImages;
-        this.playableRange = { ...playableRange }; // minR, maxR, minC, maxC
+        this.playableRange = { ...playableRange };
 
-        // Variables para mostrar displays:
+        this.assignedCodeMap = Array.from({ length: dimensions[0] }, () =>
+            Array(dimensions[1]).fill(null)
+        );
+
         this.binaryDisplay = this.p.select('#binary-value');
         this.decimalDisplay = this.p.select('#decimal-value'); 
         this.hexDisplay = this.p.select('#hex-value');
-        this.dataTypeDisplay = this.p.select('#data-type'); 
-
+        this.dataTypeDisplay = this.p.select('#data-type');
     }
-    // drawBoard() {
-    //     for (let r = 0; r < this.dimensions[0]; r++) {
-    //         for (let c = 0; c < this.dimensions[1]; c++) {
-    //             const x = this.location[0] + c * this.cellWidth;
-    //             const y = this.location[1] + r * this.cellWidth;
 
-    //             // Cambia el color de relleno basado en si la celda es jugable
-    //             if (this.isInPlayableRange(r, c)) {
-    //                 const colorIndex = (r + c) % 2;
-    //                 this.p.fill(this.colors[colorIndex]);
-                    
-    //             } else {
-    //                 // Colores alternos para celdas no jugables (como un tablero de ajedrez)
-    //                 if ((r + c) % 2 === 0) {
-    //                     this.p.fill(200, 200, 200); // Gris oscuro
-    //                 } else {
-    //                     this.p.fill(240, 240, 240); // Gris claro
-    //                 }
-    //             }
-    //             this.p.noStroke();
-    //             this.p.rect(x, y, this.cellWidth, this.cellWidth);
-    //         }
-    //     }
-
-    //     // Adicionalmente, dibujar rectángulo que encierra el área jugable
-    //     const playableX = this.location[0] + this.playableRange.minC * this.cellWidth;
-    //     const playableY = this.location[1] + this.playableRange.minR * this.cellWidth;
-
-    //     const playableWidth = (this.playableRange.maxC - this.playableRange.minC + 1) * this.cellWidth;
-    //     const playableHeight = (this.playableRange.maxR - this.playableRange.minR + 1) * this.cellWidth;
-
-    //     // Configura el color y grosor del borde
-    //     this.p.stroke(255);      // Color blanco para el borde
-    //     this.p.strokeWeight(3);  // Grosor de 3 píxeles
-
-    //     this.p.noFill();         // Asegúrate de que el rectángulo no tenga relleno
-
-    //     // Dibuja el rectángulo que encierra el área jugable
-    //     this.p.rect(playableX, playableY, playableWidth, playableHeight);
-    // }
     drawBoard() {
-    for (let r = 0; r < this.dimensions[0]; r++) {
-        for (let c = 0; c < this.dimensions[1]; c++) {
-            const x = this.location[0] + c * this.cellWidth;
-            const y = this.location[1] + r * this.cellWidth;
-
-            // Cambia el color de relleno basado en si la celda es jugable
-            if (this.isInPlayableRange(r, c)) {
+        for (let r = 0; r < this.dimensions[0]; r++) {
+            for (let c = 0; c < this.dimensions[1]; c++) {
+                const x = this.location[0] + c * this.cellWidth;
+                const y = this.location[1] + r * this.cellWidth;
                 const colorIndex = (r + c) % 2;
-                this.p.fill(this.colors[colorIndex]);
-            } else {
-                if ((r + c) % 2 === 0) {
-                    this.p.fill(200, 200, 200);
+
+                if (this.isInPlayableRange(r, c)) {
+                    this.p.fill(this.colors[colorIndex]);
                 } else {
-                    this.p.fill(240, 240, 240);
+                    this.p.fill((r + c) % 2 === 0 ? 200 : 240);
                 }
+
+                this.p.noStroke();
+                this.p.rect(x, y, this.cellWidth, this.cellWidth);
             }
+
+            const y = this.location[1] + r * this.cellWidth + this.cellWidth / 2;
+            const rowNumber = this.dimensions[0] - r;
+            const leftX = this.location[0] - 10;
+            const rightX = this.location[0] + this.dimensions[1] * this.cellWidth + 10;
+
+            this.p.textSize(15);
+            this.p.fill(0);
             this.p.noStroke();
-            this.p.rect(x, y, this.cellWidth, this.cellWidth);
+            this.p.textAlign(this.p.RIGHT, this.p.CENTER);
+            this.p.text(rowNumber, leftX, y);
+            this.p.textAlign(this.p.LEFT, this.p.CENTER);
+            this.p.text(rowNumber, rightX, y);
         }
 
-        // // Dibuja el número de fila a la izquierda y derecha del tablero
-        const y = this.location[1] + r * this.cellWidth + this.cellWidth / 2;
-        const rowNumber = this.dimensions[0] - r;  // Invertir numeración (desde abajo hacia arriba)
-        const leftX = this.location[0] - 10;       // Posición a la izquierda del tablero
-        const rightX = this.location[0] + this.dimensions[1] * this.cellWidth + 10; // Derecha
+        const playableX = this.location[0] + this.playableRange.minC * this.cellWidth;
+        const playableY = this.location[1] + this.playableRange.minR * this.cellWidth;
+        const playableWidth = (this.playableRange.maxC - this.playableRange.minC + 1) * this.cellWidth;
+        const playableHeight = (this.playableRange.maxR - this.playableRange.minR + 1) * this.cellWidth;
 
-        this.p.textSize(15); // Asegura tamaño de texto visible
-        this.p.fill(0); // Color negro
-        this.p.noStroke();
-        this.p.textAlign(this.p.RIGHT, this.p.CENTER);
-        this.p.text(rowNumber, leftX, y);
-        this.p.textAlign(this.p.LEFT, this.p.CENTER);
-        this.p.text(rowNumber, rightX, y);
+        this.p.stroke(255);
+        this.p.strokeWeight(3);
+        this.p.noFill();
+        this.p.rect(playableX, playableY, playableWidth, playableHeight);
     }
-
-    // Dibuja el rectángulo del área jugable
-    const playableX = this.location[0] + this.playableRange.minC * this.cellWidth;
-    const playableY = this.location[1] + this.playableRange.minR * this.cellWidth;
-    const playableWidth = (this.playableRange.maxC - this.playableRange.minC + 1) * this.cellWidth;
-    const playableHeight = (this.playableRange.maxR - this.playableRange.minR + 1) * this.cellWidth;
-
-    this.p.stroke(255);
-    this.p.strokeWeight(3);
-    this.p.noFill();
-    this.p.rect(playableX, playableY, playableWidth, playableHeight);
-}
 
     drawPieces() {
         for (let r = 0; r < this.dimensions[0]; r++) {
@@ -119,10 +74,9 @@ class ChessBoard {
                         const imgSize = this.cellWidth * 0.8;
                         this.p.image(img, centerX - imgSize / 2, centerY - imgSize / 2, imgSize, imgSize);
                     } else {
-                        // fallback: dibuja una letra si no hay imagen cargada para ese código
                         this.p.fill(0);
                         this.p.textAlign(this.p.CENTER, this.p.CENTER);
-                        this.p.textSize(this.cellWidth * 0.6);
+                        this.p.textSize(this.cellWidth * 0.4);
                         this.p.text(pieceCode, centerX, centerY);
                     }
                 }
@@ -143,80 +97,66 @@ class ChessBoard {
             c <= this.playableRange.maxC
         );
     }
+
     isInsideBoard(x, y) {
         const boardX = this.location[0];
         const boardY = this.location[1];
         const boardWidth = this.dimensions[1] * this.cellWidth;
         const boardHeight = this.dimensions[0] * this.cellWidth;
-        return (x >= boardX && x < boardX + boardWidth &&
-                y >= boardY && y < boardY + boardHeight);
+        return (
+            x >= boardX && x < boardX + boardWidth &&
+            y >= boardY && y < boardY + boardHeight
+        );
     }
 
     togglePiece(row, col) {
-        // Permitimos modificar todas las filas (0 a 7)
-        this.pieces[row][col] = this.pieces[row][col] ? null : 'p';
-        this.updateDisplays();
+        const assignedCode = this.assignedCodeMap[row][col];
+        if (!assignedCode) return; // No hace nada si no hay código asignado
+
+        this.pieces[row][col] = this.pieces[row][col] ? null : assignedCode;
+        this.updateDisplays?.();
     }
 
-    // getBinaryString() {
-    //     let binaryString = '';
-    //     // Recorremos todas las filas y columnas en orden MSB (0,0) a LSB (7,7)
-    //     for (let r = 0; r < 8; r++) {
-    //         for (let c = 0; c < 8; c++) {
-    //             binaryString += this.pieces[r][c] ? '1' : '0';
-    //         }
-    //     }
-    //     return binaryString;
-    // }
-    getBinaryString() {
-        let fullBinaryString = '';
-        // Recorremos todas las filas y columnas en orden MSB (0,0) a LSB (7,7)
-        for (let r = 0; r < 8; r++) {
-            for (let c = 0; c < 8; c++) {
-                fullBinaryString += this.pieces[r][c] ? '1' : '0';
+    mousePressed(mouseX, mouseY) {
+        if (this.isInsideBoard(this.p.mouseX, this.p.mouseY)) {
+            const col = this.p.floor((this.p.mouseX - this.location[0]) / this.cellWidth);
+            const row = this.p.floor((this.p.mouseY - this.location[1]) / this.cellWidth);
+            if (this.isInPlayableRange(row, col)) {
+                this.togglePiece(row, col);
             }
         }
+    }
 
-        const dataType = this.getDataType(); // Get the data type
-        let requiredBits;
+    // Modficada para aceptar filas:
 
-        // Determine the number of bits required based on the data type
-        switch (dataType) {
-            case "boolean":
-                requiredBits = 1;
-                break;
-            case "byte":
-                requiredBits = 8;
-                break;
-            case "short":
-                requiredBits = 16;
-                break;
-            case "int o float":
-                requiredBits = 32;
-                break;
-            case "long o double":
-                requiredBits = 64; // Use all 64 bits for long or double
-                break;
-            case "Ningún bit activo":
-                return "0"; // Return "0" if no bits are active
-            default:
-                requiredBits = 64; // Default to 64 bits if data type is not recognized or larger
+    getBinaryString(boardRows) { // Board Rows es un array de filas
+    let binaryString = '';
+
+    // Si no se pasan filas, recorrer todo el tablero
+    if (!Array.isArray(boardRows) || boardRows.length === 0) {
+        for (let r = 0; r < this.dimensions[0]; r++) {
+        for (let c = 0; c < this.dimensions[1]; c++) {
+            binaryString += this.pieces[r][c] ? '1' : '0';
         }
+        }
+        return binaryString;
+    }
 
-        // Return the slice of the binary string from the right (LSB side)
-        return fullBinaryString.slice(-requiredBits);
+    // Si se pasan filas específicas (en base 1), ordenarlas de mayor a menor
+    const sortedRows = boardRows.slice().sort((a, b) => b - a);
+
+    for (let i = 0; i < sortedRows.length; i++) {
+        const row = this.dimensions[0]- sortedRows[i]; // Convertir índice humano (1–8) a base 0 e invertido respecto a la matriz this.pieces
+        for (let c = 0; c < this.dimensions[1]; c++) {
+        binaryString += this.pieces[row][c] ? '1' : '0';
+        }
+    }
+
+    return binaryString;
     }
 
     getDecimalValue() {
-        let binaryString = '';
-        // Recorremos todas las filas y columnas en orden MSB (0,0) a LSB (7,7)
-        for (let r = 0; r < 8; r++) {
-            for (let c = 0; c < 8; c++) {
-                binaryString += this.pieces[r][c] ? '1' : '0';
-            }
-        }
-        // Usamos BigInt para manejar valores de 64 bits
-        return BigInt('0b' + binaryString);
+        return BigInt('0b' + this.getBinaryString());
     }
 
     getHexValue() {
@@ -225,116 +165,36 @@ class ChessBoard {
     }
 
     getDataType() {
-        const decimalValue = this.getDecimalValue();
-        
-        // Convertimos a número para las comparaciones (BigInt no funciona bien con comparaciones directas)
-        const numericValue = Number(decimalValue);
-        
-        // Si no hay bits activos
-        if (decimalValue === 0n) return "Ningún bit activo";
-        
-        // Para valores booleanos (solo el bit 0 activo, que vale 1)
-        if (decimalValue === 1n) return "boolean";
-        
-        // Para valores de byte (8 bits)
-        if (decimalValue <= 127n && decimalValue >= -128n) return "byte";
-        
-        // Para valores de short (16 bits)
-        if (decimalValue <= 32767n && decimalValue >= -32768n) return "short";
-        
-        // Para valores de char (16 bits sin signo)
-        //if (decimalValue <= 65535n && decimalValue >= 0n) return "char";
-        
-        // Para valores de int (32 bits)
-        if (decimalValue <= 2147483647n && decimalValue >= -2147483648n) return "int o float";
-        
-        // Para valores de float (32 bits)
-        if (decimalValue <= 340282346638528859811704183484516925440n && 
-            decimalValue >= -340282346638528859811704183484516925440n) return "long o double";
-        
-        // Para valores de long (64 bits)
-        if (decimalValue <= 9223372036854775807n && decimalValue >= -9223372036854775808n) return "long";
-        
-        // Para valores de double (64 bits)
+        const val = this.getDecimalValue();
+        if (val === 0n) return "Ningún bit activo";
+        if (val === 1n) return "boolean";
+        if (val <= 127n && val >= -128n) return "byte";
+        if (val <= 32767n && val >= -32768n) return "short";
+        if (val <= 2147483647n && val >= -2147483648n) return "int o float";
+        if (val <= 340282346638528859811704183484516925440n &&
+            val >= -340282346638528859811704183484516925440n) return "long o double";
+        if (val <= 9223372036854775807n && val >= -9223372036854775808n) return "long";
         return "double";
     }
 
-    // -------- Inicio funciones para updateDisplay con separación de cifras ---------
-    /**
-     * Formatea una cadena binaria para insertar espacios cada 8 bits (1 byte).
-     * @param {string} binaryString - La cadena binaria sin formato.
-     * @returns {string} La cadena binaria formateada con espacios.
-     */
-    _formatBinary(binaryString) {
-        return binaryString.replace(/(.{8})/g, '$1 ').trim();
+    _formatBinary(bin) {
+        return bin.replace(/(.{8})/g, '$1 ').trim();
     }
 
-    /**
-     * Formatea una cadena hexadecimal para insertar espacios cada 2 dígitos.
-     * @param {string} hexString - La cadena hexadecimal (incluyendo el "0x").
-     * @returns {string} La cadena hexadecimal formateada con espacios.
-     */
-    _formatHex(hexString) {
-        const hexWithoutPrefix = hexString.startsWith('0x') ? hexString.substring(2) : hexString;
-        const formatted = hexWithoutPrefix.replace(/(.{2})/g, '$1 ').trim();
-        return '0x' + formatted;
+    _formatHex(hex) {
+        const clean = hex.startsWith('0x') ? hex.slice(2) : hex;
+        return '0x' + clean.replace(/(.{2})/g, '$1 ').trim();
     }
 
-    /**
-     * Formatea un número decimal para insertar espacios cada 3 dígitos.
-     * @param {BigInt} decimalValue - El valor decimal (puede ser BigInt).
-     * @returns {string} La cadena decimal formateada con espacios.
-     */
-    _formatDecimal(decimalValue) {
-        let formatted = decimalValue.toLocaleString('en-US'); // Usa comas como separador de miles
-        formatted = formatted.replace(/,/g, ' '); // Reemplaza comas por espacios
-        return formatted;
+    _formatDecimal(dec) {
+        return dec.toLocaleString('en-US').replace(/,/g, ' ');
     }
-
-    // --- MÉTODO updateDisplays() ahora usa los métodos auxiliares ---
-    updateDisplays() {
-        const binaryString = this.getBinaryString();
-        const decimalValue = this.getDecimalValue();
-        const hexValue = this.getHexValue();
-        const dataType = this.getDataType();
-
-        // Aplicamos el formato usando los métodos auxiliares de la clase
-        const formattedBinary = this._formatBinary(binaryString);
-        const formattedDecimal = this._formatDecimal(decimalValue);
-        const formattedHex = this._formatHex(hexValue);
-
-        if (this.binaryDisplay && this.decimalDisplay && this.hexDisplay && this.dataTypeDisplay) {
-            this.binaryDisplay.html(formattedBinary);
-            this.decimalDisplay.html(formattedDecimal);
-            this.hexDisplay.html(formattedHex);
-            this.dataTypeDisplay.html(dataType);
-        } else {
-            console.warn("One or more display elements for ChessBoard not found in DOM for updateDisplays.");
-        }
-    }
-
-    // -------- Fin funciones para updateDisplay con separación de cifras ---------
 
     resetBoardAndDisplays() {
-        // Set all pieces on the board to null (empty)
         for (let r = 0; r < this.dimensions[0]; r++) {
             for (let c = 0; c < this.dimensions[1]; c++) {
                 this.pieces[r][c] = null;
             }
-        }
-        // Call updateDisplays to reflect the empty board state in the HTML
-        this.updateDisplays();
-    }
-
-    mousePressed(mouseX, mouseY) {
-        if (this.isInsideBoard(this.p.mouseX, this.p.mouseY)) {
-            const col = this.p.floor((this.p.mouseX - this.location[0]) / this.cellWidth);
-            const row = this.p.floor((this.p.mouseY - this.location[1]) / this.cellWidth);
-            if(this.isInPlayableRange(row, col)){
-                this.togglePiece(row, col);
-                this.updateDisplays();
-            }
-            
         }
     }
 }

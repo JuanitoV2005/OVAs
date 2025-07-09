@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tipos de datos primitivos</title>
+  <title>OVA 0</title>
   <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
+   
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/niveles.css" />
 </head>
@@ -14,86 +15,9 @@
   </header>
 
   <main id="main-content">
-    <h1>Tipos de Datos Primitivos</h1>
-
-    <div id="introducción">
-    <h2>Introducción</h2>
-    <p>Ya sabes que todo en el mundo digital se reduce a ceros y unos, a esos bits que se combinan para formar nibbles y bytes. 
-    Pero, ¿cómo usa Java estos bits para almacenar cosas como números enteros, números con decimales, o incluso letras? 
-    Aquí es donde entran los tipos de datos primitivos.</p>
-
-    <p>Los tipos de datos primitivos son los bloques de construcción más básicos para almacenar información en Java. 
-    Son como los diferentes tipos de cajas que puedes usar para guardar tus objetos, y cada caja tiene un tamaño y una capacidad específica.</p>
     
-    <p><b>¿Por qué son "primitivos"?</b></p>
-    <p>Son "primitivos" porque son los tipos de datos fundamentales que Java entiende directamente, sin necesidad de objetos complejos (más sobre capítulos siguientes). 
-    Son la forma más eficiente de almacenar valores simples en la memoria de un computador.</p>
-    
-    <p>Java tiene 8 tipos de datos primitivos: byte, short, int, long, float, double, char y boolean.</p>
-    </div>
-
-    <br>
-    <div id="byte">
-    <h2>1. Byte</h2>
-    <p>Hasta ahora, hemos visto que con un byte, 8 bits, podemos representar números que van desde el 0 (todos los bits en cero: 00000000) 
-    hasta el 255 (todos los bits en uno: 11111111), como muestra el rango de la imagen:</p>
-    <img class="data-range" src="assets/rango-byte-positivo.png" alt="Recta con rango de 0 a 255 en binario con un byte."/>
-
-    <p>Sin embargo, cuando trabajamos con el tipo de dato byte en Java, la historia cambia un poco. 
-    No solo queremos guardar números positivos, sino que también necesitamos la capacidad de representar números negativos. 
-    Java y la mayoría de los sistemas modernos eligen una solución más elegante y eficiente para lograrlo: el Complemento a Dos.</p>
-
-    <h3>Complemento a 2</h3>
-    <p>Con esta estrategia, la forma en que "leemos" y "escribimos" esos 8 bits se modifica. 
-    La clave está en que prestamos el bit más significativo para un uso exclusivo: indicar si el número es negativo o no. 
-    Si ese bit es un <code>0</code>, sabemos que el número es <b>positivo</b>; si es un <code>1</code>, es <b>negativo</b>.</p>
-
-    <p>Los 7 bits restantes son los que usamos para la "cantidad" del número. 
-    Con esto, podemos representar 128 números negativos, el cero y 127 números positivos. Visualmente, este nuevo rango rango se vería así:</p>
-    <img class="data-range" src="assets/rango-byte-negativo.png" alt="Recta con rango de -128 a 127 en binario con un byte, usando complemento a 2."/>
-    
-    <h2>Reto 1</h2>
-    <!-- <p>Dentro de la visualización poner el proceso de cálculo? Sumas y restas</p>
-    <p>Decripción: hacer un número aleatorio positivo, hacer un número aleatorio negativo.</p> -->
-        <!-- Tal vez hacer que lean un número de 16 bits en positivo (que alcance a tener el negativo) y luego leer el mismo número en complemento a 2 -->
-    <div id="byte-canvas"></div>
-    
-    </div>
-
-    <br>
-    <div id="short">
-    <h2>2. Short</h2>
-    <h3>Reto 2</h3>
-    <!-- Preguntar el rango de estos numeros en complemento a 2 -->
-    <!-- Tal vez hacer que lean un número de 16 bits en positivo (que alcance a tener el negativo) y luego leer el mismo número en complemento a 2 -->
-    
-    </div>
-
-    <br>
-
-
-    <div id="int">
-    <h2>3. Int</h2>
-  </div>
-
-    <div id="long">
-    <h2>4. Long</h2>
-    </div>
-
-    <div id="float">
-    <h2>4. Float</h2>
-    </div>
-
-    <div id="double">
-    <h2>4. Double</h2>
-    </div>
-
-  
   </main>
 
-  <!-- Scripts de las secciones -->
-  <script src="scripts/chessBoard.js"></script>
-  <script src="canvas/byte.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
