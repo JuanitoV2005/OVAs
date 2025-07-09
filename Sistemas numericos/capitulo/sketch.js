@@ -109,7 +109,62 @@ function sketchTema2(p) {
         question: "Para representar el número 0xA5C3 en 16 casillas consecutivas de tu tablero, ¿cuántos peones necesitas colocar? Pista: Convierte 0xA5C3 a binario y cuenta los '1's.",
         correctAnswer: "8"
       }
-    ]
+    ],
+    // Reto 7 (indice 7) - Enteros (int)
+    [
+      {
+        id: "q1",
+        question: "¿Cuántos bytes ocupa un entero (int) en la mayoría de los sistemas modernos?",
+        correctAnswer: "4"
+      },
+      {
+        id: "q2",
+        question: "¿Cuántos dígitos hexadecimales se necesitan para representar un número de 32 bits?",
+        correctAnswer: "8"
+      },
+      {
+        id: "q3",
+        question: "Usa exactamente 8 peones en el tablero. ¿Cuál es el número más grande que puedes formar?",
+        correctAnswer: "4278190080", // 0xFF000000
+      },
+      {
+        id: "q4",
+        question: "Si tienes un int con valor 3855 ¿Cuántos bites sobrantes no son ocupados en el espacio reservado?",
+        correctAnswer: "24"
+      },
+      {
+        id: "q5",
+        question: "Forma el número 2.147.483.658 en el tablero",
+        correctAnswer: "10000000000000000000000000001010",
+        notInput: true
+      }
+    ],
+
+    // Reto 8 (indice 8) - Punto flotante (double)
+    [
+      {
+        id: "q1",
+        question: "¿Cuántos bytes ocupa un número double?",
+        correctAnswer: "8"
+      },
+      {
+        id: "q2",
+        question: "¿Cuántos dígitos hexadecimales se necesitan para representar un número de 64 bits?",
+        correctAnswer: "16"
+      },
+      {
+        id: "q3",
+        question: "Crea el número 12297829382473034410. ¿Qué patrón binario observas?",
+        correctAnswer: "1010101010101010101010101010101010101010101010101010101010101010",
+        notInput: true
+      },
+      {
+        id: "q4",
+        question: "¿Qué valor hexadecimal representa el máximo valor de 64 bits? Incluye '0x'",
+        correctAnswer: "0xFFFFFFFFFFFFFFFF"
+      },
+    ],
+    null
   ];
 
   // Mapeo de niveles a los IDs de los divs de contenido a mostrar
@@ -121,7 +176,9 @@ function sketchTema2(p) {
     4: ['enunciado4', 'hex-label', 'binary-label', 'decimal-label'],
     5: ['enunciado5', 'hex-label', 'binary-label', 'decimal-label'],
     6: ['enunciado6', 'hex-label', 'decimal-label'],
-    7: ['conclusion', "data-type-label"]
+    7: ['enunciado7', 'hex-label', 'binary-label', 'decimal-label'],
+    8: ['enunciado8', 'hex-label', 'binary-label', 'decimal-label'],
+    9: ['conclusion']
   };
 
 
@@ -227,7 +284,28 @@ levels[5].push({
     pieceImages,
     { minR: 0, maxR: 7, minC: 0, maxC: 7 }
   );
-
+  // Crear tablero Int
+    const tablero7 = new ChessBoard(
+    p,
+    [gui.cellColor1, gui.cellColor2],
+    [0, 0],
+    gui.cellLength,
+    [8, 8],
+    tableroVacio.map(fila => [...fila]),
+    pieceImages,
+    { minR: 4, maxR: 7, minC: 0, maxC: 7 } // 4 filas x 8 columnas = 32 bits (int)
+  );
+  // Crear tablero Double
+  const tablero8 = new ChessBoard(
+    p,
+    [gui.cellColor1, gui.cellColor2],
+    [0, 0],
+    gui.cellLength,
+    [8, 8],
+    tableroVacio.map(fila => [...fila]),
+    pieceImages,
+    { minR: 0, maxR: 7, minC: 0, maxC: 7 } // 8 filas x 8 columnas = 64 bits (double)
+  );
 
 
   const levelCanvasObjects = {
@@ -238,7 +316,9 @@ levels[5].push({
     4: tablero4,
     5: tablero5,
     6: tablero6, // El que antes era 5 ahora es 6
-    7: null // Y agregamos un nuevo índice para el final
+    7: tablero7, 
+    8: tablero8, 
+    9: null // Y agregamos un nuevo índice para el final
   };
 
   class CanvasController {

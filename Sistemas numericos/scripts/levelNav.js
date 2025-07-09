@@ -5,7 +5,9 @@ class QuizNavigator {
     this.contentVisibilityMap = contentVisibilityMap;
     this.specificContentDivs = this.getAllUniqueContentDivIds(contentVisibilityMap);
     this.currentLevel = 0;
-    this.answers = {};
+    this.totalCorrectAnswers = 0;
+      this.totalQuestions = 0;
+      this.answers = {};
     this.validationResults = {};
     this.isVerified = false;
 
@@ -48,6 +50,7 @@ class QuizNavigator {
     }
 
     this.setupLevel(this.currentLevel);
+  
   }
 
   // Configura el nivel actual
@@ -231,32 +234,6 @@ class QuizNavigator {
 
     this.isVerified = true;
     
-
-        // Si estamos en el último nivel, mostrar modal de finalización
-        if (this.currentLevel >= this.levels.length - 1) {
-          const finalMessage = "🎉 ¡Has completado todos los niveles!";
-          if (this.successModal) {
-            this.successModal.html(`
-            <div class="modal-content">
-              <button class="close-modal" id="closeXBtn">&times;</button>
-              <h2>¡Felicidades!</h2>
-              <p>${finalMessage}</p>
-              <button id="closeFinalModalBtn">Reiniciar Quiz</button>
-            </div>
-          `);
-            this.p.select("#closeFinalModalBtn").mousePressed(() => {
-              this.successModal.style("display", "none");
-              this.currentLevel = 0;
-              this.setupLevel(this.currentLevel);
-            });
-            this.successModal.style("display", "flex");
-          } else {
-            console.log(finalMessage);
-          }
-        } 
-        this.p.select("#closeXBtn").mousePressed(() => {
-          this.successModal.style("display", "none");
-        });
   }
 
   // Cierra el modal
@@ -272,25 +249,47 @@ class QuizNavigator {
 
   // Avanza al siguiente nivel
   goToNextLevel() {
+    
+    // Evaluar respuestas del nivel actual antes de avanzar
+    const currentQuestions = this.levels[this.currentLevel];
+    if (Array.isArray(currentQuestions)) {
+      currentQuestions.forEach(q => {
+        if (!q.isStatement) {
+          this.totalQuestions++;
+          const userAnswer = (this.answers[q.id] || "").toLowerCase();
+          const correctAnswer = q.correctAnswer.toLowerCase();
+          if (userAnswer === correctAnswer) {
+            this.totalCorrectAnswers++;
+          }
+        }
+      });
+    }
     this.currentLevel++;
     window.scrollTo(0, 0);
 
     if (this.currentLevel < this.levels.length) {
       this.setupLevel(this.currentLevel);
-    } else {
-      const finalMessage = "🎉 ¡Has completado todos los niveles!";
-      if (this.successModal) {
-        this.successModal.html(`<div class="modal-content"><h2>¡Felicidades!</h2><p>${finalMessage}</p><button id="closeFinalModalBtn">Reiniciar Quiz</button></div>`);
-        this.p.select("#closeFinalModalBtn").mousePressed(() => {
-          this.successModal.style("display", "none");
-          this.currentLevel = 0;
-          this.setupLevel(this.currentLevel);
-        });
-        this.successModal.style("display", "flex");
-      } else {
-        console.log(finalMessage);
+    
+    if (this.currentLevel === this.levels.length - 1) {
+      const nota = (this.totalCorrectAnswers / this.totalQuestions) * 100;
+      const roundedNota = Math.round(nota * 100) / 100;
+      const conclusionDiv = document.getElementById("conclusion");
+      if (conclusionDiv) {
+        console.log("Llegó SCORM. 4");
+        pipwerks.SCORM.set("cmi.core.lesson_status", "passed");
+        pipwerks.SCORM.set("cmi.core.score.raw", roundedNota.toString());
+        pipwerks.SCORM.save(); // Guarda el estado
+        pipwerks.SCORM.quit(); // Finaliza la sesión correctamente
+        const notaHTML = `
+        <div class="mensaje-final-scorm">
+          <h2>🎉 ¡Felicidades! Has completado todos los niveles de este capítulo.</h2>
+          <p class="texto-pequeno">Tu nota es:</p>
+          <h2 class="nota-grande">${roundedNota} / 100</h2>
+        </div>`;
+        conclusionDiv.innerHTML += notaHTML;
       }
     }
+    } 
   }
 
   setAnswerForGraphicInteractiveQuestion(questionId, answer) {
