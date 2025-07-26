@@ -50,6 +50,46 @@
     </div>
 
     <div class="content hidden" id="enunciado2">
+  <h2>2. Short e Int</h2>
+  <p>Después de trabajar con un <b>byte</b>, es hora de conocer otros tipos de datos enteros con mayor capacidad: <code>short</code> e <code>int</code>.</p>
+
+  <p>Ambos tipos también almacenan solo números enteros, pero ocupan más espacio en memoria y permiten representar valores mucho mayores.</p>
+
+  <h3>¿Cuántos valores pueden almacenar?</h3>
+  <ul>
+    <li><code>short</code>: usa 16 bits (2 bytes) → puede representar <b>65,536 valores diferentes</b>.</li>
+    <li><code>int</code>: usa 32 bits (4 bytes) → puede representar <b>más de 4 mil millones de valores</b>.</li>
+  </ul>
+
+  <p>Al igual que con <code>byte</code>, estos tipos también usan el <b>Complemento a Dos</b> para representar números negativos.</p>
+
+  <h3>Rango con signo (signed)</h3>
+  <ul>
+    <li><code>short</code>: de -32,768 a 32,767</li>
+    <li><code>int</code>: de -2,147,483,648 a 2,147,483,647</li>
+  </ul>
+
+  <img class="data-range" src="assets/img/rango-short-negativo.png" alt="Recta con rango de -32768 a 32767 en binario con short."/>
+  <img class="data-range" src="assets/img/rango-int-negativo.png" alt="Recta con rango de int en binario con complemento a 2."/>
+
+  <p>Esto es fundamental cuando decides qué tipo de dato usar: <b>¿cuántos valores necesitas representar?</b> Usar un tipo más pequeño ahorra memoria, pero tiene límites. Usar uno grande permite más rango, pero consume más espacio.</p>
+
+  <h2>Reto 2</h2>
+  <p>Usa el tablero de bits para representar los siguientes valores. 
+  Activa el modo <b>short</b> (16 bits) o <b>int</b> (32 bits) según se indique en cada pregunta.</p>
+
+  <ul>
+    <li>¿Puedes formar el número <code>30000</code> con <code>short</code>?</li>
+    <li>¿Y el número <code>40000</code>? ¿Qué pasa si intentas hacerlo con <code>short</code>?</li>
+    <li>¿Qué representación binaria tiene el número <code>-1</code> en <code>int</code>?</li>
+    <li>¿Y en <code>short</code>?</li>
+  </ul>
+
+  <p><i>Consejo:</i> Observa qué sucede con los bits más significativos cuando los valores son negativos o cuando superan el rango permitido.</p>
+</div>
+
+
+    <div class="content hidden" id="enunciado-ejemplo">
         <h2>Reto 2</h2>
         <p>Con una sola casilla podíamos representar dos cosas diferentes (un peón o ninguna). En este nivel, el objetivo es explorar qué combinaciones son posibles si tenemos dos casillas.</p>
         <p><b>Pero ojo, aquí viene lo interesante:</b> no todas las posiciones valen lo mismo.</p>

@@ -11,22 +11,25 @@ html, body {
 }
 
 main {
-  padding: 20px;
+  padding: 40px; /* Incrementado de 20px a 40px para más espacio general */
+  max-width: 1200px; /* Opcional: Limitar el ancho máximo del contenido para mejorar la legibilidad en pantallas grandes */
+  margin: 0 auto; /* Centrar el contenido si se define un max-width */
 }
 
 
 /* Estilos de la visualizacion de bits: */
 body {
   font-family: Arial, sans-serif;
-  margin: 20px;
+  margin: 0;
   background-color: #f8f9fa;
   color: #333;
 }
 
 p {
   font-size: 18px;       /* Tamaño de la letra */
-  line-height: 1.6;      /* Altura de línea (1.6 veces el tamaño de la fuente) */
-  margin-bottom: 10px;
+  line-height: 1.7;      /* Altura de línea (1.7) veces el tamaño de la fuente) */
+  padding-top: 20px;
+  margin-bottom: 40px;
 }
 
 h1 {
@@ -39,7 +42,7 @@ h1 {
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  gap: 20px;
+  gap: 40px;
 }
 
 .canvas-container canvas {
@@ -57,10 +60,18 @@ h1 {
 
 @media (max-width: 600px) {
   main {
-  padding: 5px;
-  padding-bottom: 10px !important;
-}
+    padding: 20px;
+    padding-bottom: 20px !important;
+  }
 
+  h1 {
+    margin-bottom: 30px; /* Reducir el margen del título en móviles */
+  }
+
+  p {
+    margin-bottom: 15px; /* Reducir el margen de los párrafos en móviles */
+  }
+  
   .canvas-container {
     max-width: 100%;
   }
