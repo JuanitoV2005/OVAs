@@ -28,8 +28,11 @@ body {
 p {
   font-size: 18px;       /* Tamaño de la letra */
   line-height: 1.7;      /* Altura de línea (1.7) veces el tamaño de la fuente) */
-  padding-top: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+}
+
+img{
+  margin-bottom: 30px !important;
 }
 
 h1 {
@@ -71,7 +74,11 @@ h1 {
   p {
     margin-bottom: 15px; /* Reducir el margen de los párrafos en móviles */
   }
-  
+
+  img{
+    margin-bottom: 15px !important; /* Reducir el margen de los párrafos en móviles */
+  }
+
   .canvas-container {
     max-width: 100%;
   }
