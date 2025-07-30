@@ -17,16 +17,24 @@ function sketchTema2(p) {
     ],
     [
       { id: "q3", question: "Responde en la fila 1 cómo se representa el número -39 en binario",notInput: true, correctAnswer: -39, boardRows:[1] , answerFormat: "signedByte", conversionLabels: ["decimal", "binary"]}
+    ],
+    [
+      { id: "q1", question: `Interactúa con el tablero en las filas 5 a 8 y revisa cómo cambia el número decimal.`,notInput: true, correctAnswer: numQ2, boardRows:[8,7,6,5] , answerFormat: "signedFloat", conversionLabels: ["decimal"]},
+      // { id: "q3", question: "Responde en la fila 1 cómo se representa el número -39 en binario",notInput: true, correctAnswer: -39, boardRows:[1] , answerFormat: "signedByte", conversionLabels: ["decimal", "binary"]}
     ]
   ];
+
+
 
   // Mapeo de niveles a los IDs de los divs de contenido a mostrar
   const contentVisibilityMap = {
     0: ['intro'],
-    1: ['enteros'],
-    2: ['enunciado1'],
-    3: ['enunciado2']
+    1: ['enteros-rangos'],
+    2: ['complemento-a-dos'],
+    3: ['enunciado2'],
+    4: ['punto-flotante-bits']
     };
+
 
   let quizController; // Renamed from quizNavigator
 
@@ -74,12 +82,40 @@ function sketchTema2(p) {
 
     tablero1.assignedCodeMap = assignedMap;
 
+  // Crear tablero-float
+    const floatPieces = Array.from({ length: rows }, () => Array(cols).fill(null));
+    const floatAssignedMap = [
+    ['pr', 'pg', 'pg', 'pg', 'pg', 'pg', 'pg', 'pg'],
+    ['pg', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw'],
+    ['pw', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw'],
+    ['pw', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw'],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, 'pk']
+  ];
+
+    tableroFloat = new ChessBoard(
+      p,
+      [gui.cellColor1, gui.cellColor2],
+      [20, 20],
+      gui.cellLength,
+      [rows,cols],
+      pieces,
+      pieceImages,
+      { minR: 0, maxR: 7, minC: 0, maxC: 7 }
+    );
+
+    tableroFloat.assignedCodeMap = floatAssignedMap;
+
   const levelCanvasObjects = {
     0: null,
     1: null,
     2: tablero1,
-    3: null
+    3: null,
+    4: tableroFloat
   };
+
 
   class CanvasController {
     constructor(p, levelCanvasObjects, quizController) { // Pass quizController here

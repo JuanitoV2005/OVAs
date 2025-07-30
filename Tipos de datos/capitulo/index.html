@@ -36,7 +36,7 @@
     
     </div>
 
-    <div class="content hidden" id="enteros">
+    <div class="content hidden" id="enteros-rangos">
 
         <h1>Tipos de Datos Enteros en Java</h1>
 
@@ -49,7 +49,7 @@
 
         <section class="card-grid">
         <!-- BYTE -->
-        <div class="card">
+        <div class="card-teoria">
             <div class="card-bar red"></div>
             <div class="card-body">
             <div class="card-header">
@@ -77,7 +77,7 @@
         </div>
 
         <!-- SHORT -->
-        <div class="card">
+        <div class="card-teoria">
             <div class="card-bar orange"></div>
             <div class="card-body">
             <div class="card-header">
@@ -105,7 +105,7 @@
         </div>
 
         <!-- INT -->
-        <div class="card">
+        <div class="card-teoria">
             <div class="card-bar blue"></div>
             <div class="card-body">
             <div class="card-header">
@@ -133,7 +133,7 @@
         </div>
 
         <!-- LONG -->
-        <div class="card">
+        <div class="card-teoria">
             <div class="card-bar green"></div>
             <div class="card-body">
             <div class="card-header">
@@ -163,8 +163,9 @@
         <br><br>
     </div>
 
-    <div class="content hidden" id="enunciado1">
-        
+    <div class="content hidden" id="complemento-a-dos">
+        <h1>Tipos de Datos Enteros en Java</h1>
+
         <h2>1. Byte</h2>
     <p>Hasta ahora, hemos visto que con un byte, 8 bits, podemos representar números que van desde el 0 (todos los bits en cero: 00000000) 
     hasta el 255 (todos los bits en uno: 11111111), como muestra el rango de la imagen:</p>
@@ -185,6 +186,41 @@
     
     <h2>Reto 1</h2>
 
+    </div>
+
+    <div class="content hidden" id="punto-flotante-bits">
+        <h1>Tipo de Datos Punto Flotante en Java</h1>
+        <h2>Comprender los "Decimales" de la Computadora</h2>
+        <p class="float-paragraph">
+            Cuando trabajamos con números que tienen partes decimales en Java (como 3.14 o -0.005),
+            Java nos ofrece <strong>float</strong> y <strong>double</strong>, que son tipos de punto flotante.
+            Las computadoras almacenan estos números de manera que se optimiza tanto el rango de valores
+            que pueden representar (desde números muy pequeños hasta muy grandes) como la precisión.
+        </p>
+
+        <p>
+            Esta representación sigue un estándar internacional conocido como <strong>IEEE 754</strong>, 
+            que divide el espacio de bits en tres secciones clave:
+        </p>
+
+        <ol id="bit-description">
+        <li>
+        <strong>Bit de Signo (1 bit):</strong> Así como los enteros, un 0 indica que el número es positivo,
+        y un 1 indica que es negativo.
+        </li>
+        <li>
+        <strong>Exponente (8 bits para float, 11 bits para double):</strong> Esta parte define el 'tamaño'
+        general del número. Similar a la notación científica, nos dice dónde está el 'punto decimal flotante'.
+        Para poder manejar los exponentes negativos como números positivos, siempre se suma un 'sesgo' (offset)
+        al valor real.
+        </li>
+        <li>
+        <strong>Mantisa o Fracción (23 bits para float, 52 bits para double):</strong> Representa los dígitos
+        'significativos' del número, similar a los dígitos que ves en una calculadora. Cuantos más bits tenga la mantisa,
+        mayor será la precisión del número. Se asume un '1' implícito al inicio de la mantisa para ahorrar un bit
+        de almacenamiento.
+        </li>
+        </ol>
     </div>
 
     <div class="content hidden" id="enunciado2">
