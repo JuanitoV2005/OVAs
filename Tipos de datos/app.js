@@ -19,7 +19,8 @@ const scriptsComunes = {
   quizController: 'scripts/quizController.js',
   quizData: 'scripts/quizData.js',
   quizUI: 'scripts/quizUI.js',
-  chessBoard: 'scripts/chessBoard.js'
+  chessBoard: 'scripts/chessBoard.js',
+  bitVisualizer: 'scripts/bitVisualizer.js'
 };
 
 const mainContent = document.getElementById('main-content');
