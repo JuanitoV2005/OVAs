@@ -66,6 +66,21 @@ h1 {
   width: 80%;
 }
 
+#bit-description {
+  background-color: #eef6fb;
+  border-left: 4px solid #0099cc;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 6px;
+}
+
+#bit-description li {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  color: #222;
+}
+
+
 @media (max-width: 600px) {
   main {
     padding: 20px;
