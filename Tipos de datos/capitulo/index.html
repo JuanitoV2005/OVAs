@@ -36,7 +36,135 @@
     
     </div>
 
+    <div class="content hidden" id="enteros">
+
+        <h1>Tipos de Datos Enteros en Java</h1>
+
+        <p>
+        Para un uso práctico eficiente de los tipos de datos enteros en Java, 
+        es indispensable tener presente el rango y el tamaño de cada uno. 
+        Conocer las capacidades de byte, short, int y long te permitirá seleccionar el tipo más apropiado para tus variables, 
+        optimizando así el consumo de memoria y evitando posibles desbordamientos de datos que podrían causar errores en tu programa.
+        </p>
+
+        <section class="card-grid">
+        <!-- BYTE -->
+        <div class="card">
+            <div class="card-bar red"></div>
+            <div class="card-body">
+            <div class="card-header">
+                <h2>byte</h2>
+                <span class="badge">8 bits</span>
+            </div>
+            <p>El tipo más pequeño, ideal para ahorrar memoria en arrays grandes</p>
+            <div class="card-info">
+                <p><strong>Tamaño:</strong> 1 byte</p>
+                <progress value="12.5" max="100"></progress>
+                <small>8 bits de 64</small>
+            </div>
+            <div class="card-range">
+                <strong>Rango de valores:</strong>
+                <div class="range-box">
+                <div>Mínimo: -128</div>
+                <div>Máximo: 127</div>
+                </div>
+            </div>
+            <div class="example">
+                <strong>Ejemplo:</strong>
+                <code>byte edad = 25;</code>
+            </div>
+            </div>
+        </div>
+
+        <!-- SHORT -->
+        <div class="card">
+            <div class="card-bar orange"></div>
+            <div class="card-body">
+            <div class="card-header">
+                <h2>short</h2>
+                <span class="badge">16 bits</span>
+            </div>
+            <p>Útil cuando necesitas más rango que byte pero menos que int</p>
+            <div class="card-info">
+                <p><strong>Tamaño:</strong> 2 bytes</p>
+                <progress value="25" max="100"></progress>
+                <small>16 bits de 64</small>
+            </div>
+            <div class="card-range">
+                <strong>Rango de valores:</strong>
+                <div class="range-box">
+                <div>Mínimo: -32.768</div>
+                <div>Máximo: 32.767</div>
+                </div>
+            </div>
+            <div class="example">
+                <strong>Ejemplo:</strong>
+                <code>short año = 2024;</code>
+            </div>
+            </div>
+        </div>
+
+        <!-- INT -->
+        <div class="card">
+            <div class="card-bar blue"></div>
+            <div class="card-body">
+            <div class="card-header">
+                <h2>int</h2>
+                <span class="badge">32 bits</span>
+            </div>
+            <p>El tipo entero más común, usado por defecto para números enteros</p>
+            <div class="card-info">
+                <p><strong>Tamaño:</strong> 4 bytes</p>
+                <progress value="50" max="100"></progress>
+                <small>32 bits de 64</small>
+            </div>
+            <div class="card-range">
+                <strong>Rango de valores:</strong>
+                <div class="range-box">
+                <div>Mínimo: -2.147.483.648</div>
+                <div>Máximo: 2.147.483.647</div>
+                </div>
+            </div>
+            <div class="example">
+                <strong>Ejemplo:</strong>
+                <code>int poblacion = 1000000;</code>
+            </div>
+            </div>
+        </div>
+
+        <!-- LONG -->
+        <div class="card">
+            <div class="card-bar green"></div>
+            <div class="card-body">
+            <div class="card-header">
+                <h2>long</h2>
+                <span class="badge">64 bits</span>
+            </div>
+            <p>Para números muy grandes, requiere sufijo 'L' (mayúscula para evitar ambiguedades).</p>
+            <div class="card-info">
+                <p><strong>Tamaño:</strong> 8 bytes</p>
+                <progress value="100" max="100"></progress>
+                <small>64 bits de 64</small>
+            </div>
+            <div class="card-range">
+                <strong>Rango de valores:</strong>
+                <div class="range-box">
+                <div>Mínimo: -9.223.372.036.854.775.808</div>
+                <div>Máximo: 9.223.372.036.854.775.807</div>
+                </div>
+            </div>
+            <div class="example">
+                <strong>Ejemplo:</strong>
+                <code>long distancia = 9460730472580800L;</code>
+            </div>
+            </div>
+        </div>
+        </section>
+        <br><br>
+    </div>
+
     <div class="content hidden" id="enunciado1">
+        
         <h2>1. Byte</h2>
     <p>Hasta ahora, hemos visto que con un byte, 8 bits, podemos representar números que van desde el 0 (todos los bits en cero: 00000000) 
     hasta el 255 (todos los bits en uno: 11111111), como muestra el rango de la imagen:</p>
@@ -60,6 +188,7 @@
     </div>
 
     <div class="content hidden" id="enunciado2">
+
   <h2>2. Short e Int</h2>
   <p>Después de trabajar con un <b>byte</b>, es hora de conocer otros tipos de datos enteros con mayor capacidad: <code>short</code> e <code>int</code>.</p>
 

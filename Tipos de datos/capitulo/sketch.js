@@ -8,6 +8,7 @@ function sketchTema2(p) {
   const levels = [
     // Introduction (index 0)
     null, // --> this level has no questions
+    null, // --> this level has no questions
     // Reto 1 (index 1)
     [
       { id: "q1", question: "¿Cuántos números negativos puede representar un byte?", correctAnswer: "128"},
@@ -22,8 +23,9 @@ function sketchTema2(p) {
   // Mapeo de niveles a los IDs de los divs de contenido a mostrar
   const contentVisibilityMap = {
     0: ['intro'],
-    1: ['enunciado1'],
-    2: ['enunciado2']
+    1: ['enteros'],
+    2: ['enunciado1'],
+    3: ['enunciado2']
     };
 
   let quizController; // Renamed from quizNavigator
@@ -74,8 +76,9 @@ function sketchTema2(p) {
 
   const levelCanvasObjects = {
     0: null,
-    1: tablero1,
-    2: tablero1
+    1: null,
+    2: tablero1,
+    3: null
   };
 
   class CanvasController {
