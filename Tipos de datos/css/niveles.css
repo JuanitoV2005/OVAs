@@ -10,13 +10,7 @@ body {
   margin-top: 1rem;
   color:#3a3b3c;
 }
-.container {
-  max-width: 1000px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
+
 .card {
   background: white;
   padding: 1.5rem;
@@ -61,7 +55,7 @@ input.incorrect {
 .buttons {
   text-align: center;
   display: flex; /* ¡Añade esto! */
-    justify-content: center; /* ¡Añade esto para centrarlos horizontalmente! */
+  justify-content: center; /* ¡Añade esto para centrarlos horizontalmente! */
   margin-top: 0;
 }
 #verifyBtn{
@@ -110,50 +104,13 @@ button {
   text-align: center;
 }
 
-.content{
-  max-width: 1000px;
-  margin: auto;
-  padding: 0 1.5rem;
-}
-
-.content ul {
-  padding-left: 1.5rem;       /* Sangría para el contenido de la lista */
-  margin-bottom: 1rem;        /* Espacio después de la lista */
-  list-style-type: disc;      /* Viñetas tipo círculo */
-}
-
-.content ul ul {
-  list-style-type: circle;    /* Viñetas de sublistas (más suaves) */
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.content li {
-  font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 8px;         /* Espacio entre ítems */
-}
-
-.content img{
-  width: 80%;
-  display: block;
-  margin:auto;
-}
 
 .hidden {
   display: none !important; /* El !important puede ser necesario para anular estilos en línea o específicos */
 }
 
-/* En tu media query para móvil, asegúrate que .content sea flex-direction: column; */
 @media (max-width: 600px) {
-  .container {
-    display:flex;
-    grid-template-columns: 1fr;
-    gap: 0;
-    display: flex; /* Asegúrate de que .content sea un contenedor flex */
-    flex-direction: column; /* Apila las tarjetas en móvil */
-  }
-  .card, .content {
+  .card{
     padding: 0.5rem 0;
   }
 
@@ -226,10 +183,6 @@ button {
     .button-icon-img {
         display: block; /* Muestra las imágenes de las flechas */
         /* Las propiedades de tamaño ya definidas arriba aplican aquí */
-    }
-
-    .content img{
-      width: 100%;
     }
 }
 
