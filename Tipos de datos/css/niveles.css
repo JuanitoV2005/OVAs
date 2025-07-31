@@ -152,37 +152,3 @@ button {
 .button-text {
     display: inline;
 }
-
-.button-icon-img {
-    display: none; /* Las imágenes están ocultas por defecto */
-    /* *** Ajusta estos valores para el tamaño de las flechas *** */
-    height: 24px;   /* Altura fija para la imagen, ajústala según tus flechas */
-    width: auto;    /* Ancho automático para mantener la proporción de la imagen */
-    vertical-align: middle; /* Ayuda a centrar verticalmente la imagen dentro del botón */
-}
-
-/* ---------------------------------------------------- */
-
-/* Media Query para pantallas pequeñas (600px o menos) */
-@media (max-width: 600px) {
-    #previousBtn,
-    #nextBtn {
-        /* Ajustes para el botón cuando muestra la imagen */
-        padding: 8px 12px; /* Un padding que funcione bien con el tamaño de la flecha */
-        min-width: unset;  /* Asegura que el botón pueda encogerse */
-        width: auto;       /* El ancho se ajusta al contenido (la flecha) */
-        display: flex;     /* Usamos flexbox para centrar la imagen */
-        justify-content: center; /* Centra horizontalmente la flecha */
-        align-items: center;     /* Centra verticalmente la flecha */
-    }
-
-    .button-text {
-        display: none; /* Oculta el texto en pantallas pequeñas */
-    }
-
-    .button-icon-img {
-        display: block; /* Muestra las imágenes de las flechas */
-        /* Las propiedades de tamaño ya definidas arriba aplican aquí */
-    }
-}
-
