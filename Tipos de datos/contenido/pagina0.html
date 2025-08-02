@@ -1,0 +1,116 @@
+<!-- Capítulo de complemento a 2 -->
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Primitivos en Java</title>
+  <link rel="stylesheet" href="principal.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="p5-canvas.css">
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
+</head>
+<body>
+  <div class="page">
+    <h1>Tipos de Datos Enteros en Java</h1>
+    <script src="rectaNumerica.js"></script>
+    <div class="anchoCompleto" id="recta-complemento-a-2"></div>
+
+
+
+    <h2>Dibuja libremente</h2>
+    <div id="canvas2"></div>
+
+    <h2>Responde estas preguntas básicas de matemáticas:</h2>
+    <form id="quiz">
+      <label>
+        1. ¿Cuánto es 2 + 2?
+        <input type="text" name="q1">
+      </label>
+
+      <label>
+        2. ¿Cuánto es 5 × 3?
+        <input type="text" name="q2">
+      </label>
+
+      <label>
+        3. ¿Cuánto es 9 − 4?
+        <input type="text" name="q3">
+      </label>
+
+      <button type="button" onclick="validarFormulario()">Validar respuestas</button>
+      <p id="resultadoFormulario"></p>
+    </form>
+
+    <nav>
+      <a href="index.html">← Anterior</a>
+      <a href="pagina3.html">Siguiente →</a>
+    </nav>
+  </div>
+
+  <script src="sketch2.js"></script>
+
+  <script>
+    function validarFormulario() {
+      const form = document.getElementById("quiz");
+      const respuestas = {
+        q1: "4",
+        q2: "15",
+        q3: "5"
+      };
+
+      let puntaje = 0;
+      let respuestasUsuario = {};
+
+      for (let [key, valorCorrecto] of Object.entries(respuestas)) {
+        const input = form.elements[key];
+        const respuestaUsuario = input.value.trim();
+        respuestasUsuario[key] = respuestaUsuario;
+
+        input.classList.remove("correcto", "incorrecto"); // LIMPIAR primero
+
+        if (respuestaUsuario === valorCorrecto) {
+          input.classList.add("correcto");
+          puntaje += 1;
+        } else {
+          input.classList.add("incorrecto");
+        }
+      }
+
+      localStorage.setItem("respuestas2", JSON.stringify(respuestasUsuario));
+      localStorage.setItem("formulario2", puntaje);
+
+      document.getElementById("resultadoFormulario").innerText =
+        `Respuestas correctas: ${puntaje} / 3`;
+    }
+
+    window.addEventListener("load", () => {
+      const form = document.getElementById("quiz");
+      const guardadas = JSON.parse(localStorage.getItem("respuestas2") || "{}");
+      const respuestas = {
+        q1: "4",
+        q2: "15",
+        q3: "5"
+      };
+
+      for (let key in guardadas) {
+        const input = form.elements[key];
+        input.value = guardadas[key];
+
+        input.classList.remove("correcto", "incorrecto"); // LIMPIAR antes de aplicar
+
+        if (guardadas[key] === respuestas[key]) {
+          input.classList.add("correcto");
+        } else {
+          input.classList.add("incorrecto");
+        }
+      }
+
+      const puntaje = localStorage.getItem("formulario2");
+      if (puntaje !== null) {
+        document.getElementById("resultadoFormulario").innerText =
+          `Respuestas correctas: ${puntaje} / 3`;
+      }
+    });
+  </script>
+</body>
+</html>
