@@ -1,0 +1,155 @@
+.ejemplo-modulo {
+  border-radius: 8px;
+  font-family: "Fira Code", monospace;
+  width:100%;
+  padding: 1rem;
+  margin:0;
+  margin-bottom: 1.2rem;
+  /* box-shadow: 0 2px 6px rgba(0,0,0,0.05); */
+  /* background: #ffffff; */
+
+}
+
+/* .ejemplo-modulo h2 {
+  margin-top: 0;
+  color: #4c1d95;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  text-align: center;
+} */
+
+.ejemplo-modulo .expresion {
+  font-size: 1.3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.ejemplo-modulo .positivo {
+  color: #474b4e;
+  font-weight: bold;
+}
+
+.ejemplo-modulo .negativo {
+  color: #474b4e;
+  font-weight: bold;
+}
+
+.ejemplo-modulo .suma {
+  color: #474b4e;
+  font-weight: bold;
+}
+
+.ejemplo-modulo .modulo {
+  color: #64748b;
+  font-style: italic;
+}
+
+.ejemplo-modulo .resultado {
+  color: #f59e0b;
+  font-weight: bold;
+}
+
+.ejemplo-modulo .signo,
+.ejemplo-modulo .igual,
+.ejemplo-modulo .flecha {
+  margin: 0 0.3em;
+  color: #6b7280;
+}
+
+.ejemplo-modulo .explicacion {
+  font-size: 0.95rem;
+  color: #334155;
+  text-align: center;
+}
+
+.explicacion-modulo {
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;;
+}
+/*ESTILOS PARA SUMA BINARIA*/
+/* Estilos generales del contenedor del ejemplo */
+
+/* .ejemplo-modulo h2 {
+    margin-top: 0;
+    color: #1a237e; 
+    font-size: 1.6rem; 
+    margin-bottom: 1.5rem;
+} */
+
+/* Contenedor específico para las operaciones binarias */
+#complemento-dos-suma {
+    /* Removed background-color, borders, shadows */
+    padding: 0; /* Remove padding from here too */
+    margin-bottom: 1.5rem;
+    display: inline-block; /* Essential to allow text-align: center on parent to center this block */
+    text-align: left; /* Keep this to align the bits to the left within this block */
+}
+
+.linea-binaria {
+    display: flex; /* Para alinear los bits horizontalmente */
+    justify-content: flex-end; /* Alinea los bits a la derecha en la línea */
+    font-size: 1.3rem; /* Tamaño de fuente para los bits */
+    font-weight: bold;
+    margin-bottom: 0.3rem; /* Espacio entre líneas */
+    line-height: 1.2; /* Para controlar el espacio vertical */
+}
+.linea-binaria span.bit {
+    width: 1.2em; /* Ancho fijo para cada bit para asegurar alineación vertical */
+    text-align: center;
+}
+
+.linea-binaria.valor-decimal {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #555;
+    margin-left: 1rem; /* Espacio entre binario y decimal */
+}
+
+.linea-separador {
+    border-bottom: 2px solid #aebac6; /* Línea para separar la operación */
+    margin: 0.5rem 0 0.8rem 0; /* Espacio alrededor del separador */
+    width: 100%; /* Asegura que la línea se extienda */
+}
+
+.simbolo-operacion {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-right: 0.5rem; /* Espacio antes del número binario */
+    color: #1a237e; /* Color de acción */
+    flex-shrink: 0; /* Evita que se encoja */
+    width: 1.2em; /* Ancho similar a un bit para alineación si es necesario */
+    text-align: center;
+}
+
+.bit-cero { color: #607D8B; } /* Gris para los bits cero */
+.bit-uno { color: #474b4e; } /* Azul oscuro para los bits uno */
+.bit-acarreo { color: #FFC107; font-size: 0.8em; } /* Naranja para los acarreos */
+
+/* Clases para los resultados */
+.resultado-binario .bit {
+    color: #4CAF50; /* Verde para los bits resultantes del cero */
+}
+.resultado-binario .bit.descartado {
+    color: #607D8B; /* Rojo fuerte para el bit descartado */
+}
+
+.resultado-explicacion {
+    font-size: 1rem;
+    color: #455A64;
+    margin-top: 1rem;
+    line-height: 1.5;
+}
+.resaltar {
+    font-weight: bold;
+    color: #1a237e; /* Azul oscuro para texto importante */
+}
+.descartado-texto {
+    color: #474b4e; /* Rojo para el texto del bit de acarreo descartado */
+    font-weight: bold;
+}
+.enfasis-cero {
+    color: #1a237e; /* Verde para enfatizar el cero */
+    font-weight: bold;
+}
