@@ -88,14 +88,73 @@
         </section>
 
 
+        <p><strong>¿Y qué tiene que ver esto con los negativos?</strong></p>
+        <p>
+            ¡Aquí viene lo interesante! En matemáticas, el <strong>negativo de un número positivo es simplemente el valor que, 
+            al sumarse, da como resultado cero</strong>. Piensa en <code>5 + (−5) = 0</code>. El sistema de complemento a 2 aplica 
+            exactamente esta misma lógica al mundo binario. <strong>Cuando sumas un número binario a su complemento a 2, el resultado siempre será cero</strong>.
+        </p> 
+        <p>
+            Esto funciona de manera consistente, ya sea que lo calcules con números decimales o que sumes directamente las cadenas de bits: 
+        </p>
+        <section class="ejemplo-modulo">
+            <div id="complemento-dos-suma">
+                <div class="linea-binaria">
+                    <span class="simbolo-operacion"></span> <span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-uno">1</span><span
+                        class="bit bit-cero">0</span>
+                    <span class="valor-decimal">(+2)</span>
+                </div>
+
+                <div class="linea-binaria">
+                    <span class="simbolo-operacion">+</span> <span class="bit bit-uno">1</span><span
+                        class="bit bit-uno">1</span><span class="bit bit-uno">1</span><span
+                        class="bit bit-uno">1</span><span class="bit bit-uno">1</span><span
+                        class="bit bit-uno">1</span><span class="bit bit-uno">1</span><span
+                        class="bit bit-cero">0</span>
+                    <span class="valor-decimal">(-2)</span>
+                </div>
+
+                <div class="linea-separador"></div>
+
+                <div class="linea-binaria" style="margin-bottom: 0.1rem; justify-content: flex-end;">
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span> <span
+                        class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+
+                </div>
+
+
+                <div class="linea-binaria resultado-binario">
+
+                    <span class="simbolo-operacion"></span>
+                    <span class="bit descartado">1</span>
+                    <span class="bit bit-cero">0</span><span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-cero">0</span>
+                    <span class="valor-decimal">( 0)</span>
+                </div>
+            </div>
+
+            <p class="resultado-explicacion">
+                En el resultado, se produce un bit de acarreo en la novena posición desde la derecha. Este <code>1</code> se descarta porque estamos trabajando con números de 8 bits.
+            </p>
+        </section>
 
 
 
 
 
 
-
-
+        
 
         <h2>Dibuja libremente</h2>
         <div id="canvas2"></div>
