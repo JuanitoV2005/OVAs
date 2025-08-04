@@ -6,14 +6,16 @@
     <meta charset="UTF-8">
     <title>Primitivos en Java</title>
     <link rel="stylesheet" href="principal.css">
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="p5-canvas.css">
+    <link rel="stylesheet" href="niveles.css">
     <link rel="stylesheet" href="complemento-a-2.css">
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
+    <script src="rectaNumerica.js"></script>
 </head>
 
 <body>
-    <div class="page">
+    <main>
         <h1>Complemento a 2:<br>Representación de Números Negativos</h1>
         <h2>Introducción</h2>
         <p>
@@ -32,7 +34,7 @@
 
 
 
-        <script src="rectaNumerica.js"></script>
+
         <div class="anchoCompleto" id="recta-complemento-a-2"></div>
 
 
@@ -90,12 +92,20 @@
 
         <p><strong>¿Y qué tiene que ver esto con los negativos?</strong></p>
         <p>
-            ¡Aquí viene lo interesante! En matemáticas, el <strong>negativo de un número positivo es simplemente el valor que, 
-            al sumarse, da como resultado cero</strong>. Piensa en <code>5 + (−5) = 0</code>. El sistema de complemento a 2 aplica 
-            exactamente esta misma lógica al mundo binario. <strong>Cuando sumas un número binario a su complemento a 2, el resultado siempre será cero</strong>.
-        </p> 
+            ¡Aquí viene lo interesante! En matemáticas, el <strong>negativo de un número positivo es simplemente el
+                valor
+                que,
+                al sumarse, da como resultado cero</strong>. Piensa en <code>5 + (−5) = 0</code>. El sistema de
+            complemento
+            a 2 aplica
+            exactamente esta misma lógica al mundo binario. <strong>Cuando sumas un número binario a su complemento a 2,
+                el
+                resultado siempre será cero</strong>.
+        </p>
         <p>
-            Esto funciona de manera consistente, ya sea que lo calcules con números decimales o que sumes directamente las cadenas de bits: 
+            Esto funciona de manera consistente, ya sea que lo calcules con números decimales o que sumes directamente
+            las
+            cadenas de bits:
         </p>
         <section class="ejemplo-modulo">
             <div id="complemento-dos-suma">
@@ -145,112 +155,56 @@
             </div>
 
             <p class="resultado-explicacion">
-                En el resultado, se produce un bit de acarreo en la novena posición desde la derecha. Este <code>1</code> se descarta porque estamos trabajando con números de 8 bits.
+                En el resultado, se produce un bit de acarreo en la novena posición desde la derecha. Este
+                <code>1</code> se
+                descarta porque estamos trabajando con números de 8 bits.
             </p>
         </section>
 
+        <h2>¿Qué rango de valores permite el complemento a 2?</h2>
+        <p>Cuando usamos complemento a 2, <strong>la mitad de todas las combinaciones posibles se reserva para
+                representar números negativos</strong>.</p>
+        <p>
+            Eso significa que, aunque con <code>n</code> bits puedes formar <code>2^n</code> combinaciones, el rango de
+            valores que puedes representar
+            con signo <strong>no</strong> va de <code>0 a 2^n – 1</code>, sino de
+            <code>–2^(n-1)  hasta  2^(n-1) – 1</code>.
+        </p>
+
+        <p>Por ejemplo, con 8 bits:</p>
+        <ul>
+            <li>Hay 256 combinaciones posibles (de 00000000 a 11111111)</li>
+            <li>Pero solo puede representar desde –128 hasta +127</li>
+            <li>El cero solo se representa una vez (00000000)</li>
+            <li>El valor más negativo (10000000) no tiene opuesto positivo porque no alcanza el rango</li>
+        </ul>
+
+        <p>
+            Esta división del espacio de bits es justo lo que determina los límites de los tipos de datos enteros en
+            Java,
+            como byte, short o int. En el próximo capítulo veremos cuántos bits usa cada uno y qué rangos permiten.
+        </p>
 
 
 
 
 
-        
+        <div class="footer-fixed">
+            <div class="buttons">
+                <button id="previousBtn" class="hidden">Anterior</button>
+                <button id="verifyBtn" disabled>Verificar</button>
+                <button id="nextBtn" onclick="window.location.href='pagina1.html';">Siguiente</button>
+            </div>
 
-        <h2>Dibuja libremente</h2>
-        <div id="canvas2"></div>
+        </div>
+        <div class="level-counter" id="levelIndicator">1 / 5</div>
+        </div>
+        </div>
 
-        <h2>Responde estas preguntas básicas de matemáticas:</h2>
-        <form id="quiz">
-            <label>
-                1. ¿Cuánto es 2 + 2?
-                <input type="text" name="q1">
-            </label>
 
-            <label>
-                2. ¿Cuánto es 5 × 3?
-                <input type="text" name="q2">
-            </label>
 
-            <label>
-                3. ¿Cuánto es 9 − 4?
-                <input type="text" name="q3">
-            </label>
+    </main>
 
-            <button type="button" onclick="validarFormulario()">Validar respuestas</button>
-            <p id="resultadoFormulario"></p>
-        </form>
-
-        <nav>
-            <a href="index.html">← Anterior</a>
-            <a href="pagina3.html">Siguiente →</a>
-        </nav>
-    </div>
-
-    <script src="sketch2.js"></script>
-
-    <script>
-        function validarFormulario() {
-            const form = document.getElementById("quiz");
-            const respuestas = {
-                q1: "4",
-                q2: "15",
-                q3: "5"
-            };
-
-            let puntaje = 0;
-            let respuestasUsuario = {};
-
-            for (let [key, valorCorrecto] of Object.entries(respuestas)) {
-                const input = form.elements[key];
-                const respuestaUsuario = input.value.trim();
-                respuestasUsuario[key] = respuestaUsuario;
-
-                input.classList.remove("correcto", "incorrecto"); // LIMPIAR primero
-
-                if (respuestaUsuario === valorCorrecto) {
-                    input.classList.add("correcto");
-                    puntaje += 1;
-                } else {
-                    input.classList.add("incorrecto");
-                }
-            }
-
-            localStorage.setItem("respuestas2", JSON.stringify(respuestasUsuario));
-            localStorage.setItem("formulario2", puntaje);
-
-            document.getElementById("resultadoFormulario").innerText =
-                `Respuestas correctas: ${puntaje} / 3`;
-        }
-
-        window.addEventListener("load", () => {
-            const form = document.getElementById("quiz");
-            const guardadas = JSON.parse(localStorage.getItem("respuestas2") || "{}");
-            const respuestas = {
-                q1: "4",
-                q2: "15",
-                q3: "5"
-            };
-
-            for (let key in guardadas) {
-                const input = form.elements[key];
-                input.value = guardadas[key];
-
-                input.classList.remove("correcto", "incorrecto"); // LIMPIAR antes de aplicar
-
-                if (guardadas[key] === respuestas[key]) {
-                    input.classList.add("correcto");
-                } else {
-                    input.classList.add("incorrecto");
-                }
-            }
-
-            const puntaje = localStorage.getItem("formulario2");
-            if (puntaje !== null) {
-                document.getElementById("resultadoFormulario").innerText =
-                    `Respuestas correctas: ${puntaje} / 3`;
-            }
-        });
-    </script>
 </body>
 
 </html>
