@@ -1,0 +1,210 @@
+<!-- Capítulo de complemento a 2 -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Primitivos en Java</title>
+    <link rel="stylesheet" href="principal.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="p5-canvas.css">
+    <link rel="stylesheet" href="niveles.css">
+    <link rel="stylesheet" href="complemento-a-2.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
+    <script src="rectaNumerica.js"></script>
+</head>
+
+<body>
+    <main>
+        <h1>Complemento a 2:<br>Representación de Números Negativos</h1>
+        <h2>Introducción</h2>
+        <p>
+            Ya sabemos cómo convertir un número como el 5 a su equivalente binario (00000101),
+            pero ¿qué hacemos con los números negativos? La computación necesita una forma inteligente de manejar tanto
+            positivos
+            como negativos usando el mismo espacio de bits. Aquí es donde entra en juego el complemento a 2, la técnica
+            que Java
+            y la mayoría de los sistemas modernos utilizan para representar enteros negativos.
+        </p>
+
+        <p>
+            Te invitamos a interactuar con el conversor de 1 byte a continuación, probando varios números.
+            ¿Se te ocurre alguna idea de cómo funciona el complemento a 2 basándote en lo que ves?
+        </p>
+
+
+
+
+        <div class="anchoCompleto" id="recta-complemento-a-2"></div>
+
+
+        <h2>¿Por qué funciona?</h2>
+        <p>
+            La palabra "complemento" sugiere que algo falta para llegar a un todo.
+            En el caso del complemento a 2, ese “todo” es una vuelta completa en nuestro sistema binario de 8 bits.
+        </p>
+
+        <p><strong>Imagina un reloj de 256 horas</strong></p>
+        <p>
+            En un sistema de 8 bits, solo podemos representar valores del <code>0</code> al <code>255</code>.
+            Si sumamos <code>1</code> a <code>255</code>, el contador vuelve a cero, como si el sistema diera la vuelta.
+            Este tipo de sistema se llama aritmética modular, porque los valores se "recortan" al llegar a un cierto
+            límite (en este caso, módulo 256).
+        </p>
+
+        <section class="ejemplo-modulo">
+            <div class="expresion">
+                <span class="positivo">253</span>
+                <span class="signo">+</span>
+                <span class="negativo">3</span>
+                <span class="igual">=</span>
+                <span class="suma">256</span>
+                <span class="modulo">(mod 256)</span>
+                <span class="flecha">→</span>
+                <span class="resultado">0</span>
+            </div>
+            <div class="expresion">
+                <span class="positivo">253</span>
+                <span class="signo">+</span>
+                <span class="negativo">3</span>
+                <span class="igual">=</span>
+                <span class="suma">256</span>
+                <span class="flecha">→</span>
+                <span class="resultado">0</span>
+                <span class="modulo">(mod 256)</span>
+            </div>
+            <div class="expresion">
+                <span class="positivo">2</span>
+                <span class="signo">+</span>
+                <span class="negativo">254</span>
+                <span class="igual">=</span>
+                <span class="suma">256</span>
+                <span class="flecha">→</span>
+                <span class="resultado">0</span>
+                <span class="modulo">(mod 256)</span>
+            </div>
+            <p class="explicacion-modulo">
+                En un sistema de 8 bits, al sumar 253 y 3 obtenemos 256. <br>Como se desborda, el resultado es
+                <strong>0</strong> bajo módulo 256.
+            </p>
+        </section>
+
+
+        <p><strong>¿Y qué tiene que ver esto con los negativos?</strong></p>
+        <p>
+            ¡Aquí viene lo interesante! En matemáticas, el <strong>negativo de un número positivo es simplemente el
+                valor
+                que,
+                al sumarse, da como resultado cero</strong>. Piensa en <code>5 + (−5) = 0</code>. El sistema de
+            complemento
+            a 2 aplica
+            exactamente esta misma lógica al mundo binario. <strong>Cuando sumas un número binario a su complemento a 2,
+                el
+                resultado siempre será cero</strong>.
+        </p>
+        <p>
+            Esto funciona de manera consistente, ya sea que lo calcules con números decimales o que sumes directamente
+            las
+            cadenas de bits:
+        </p>
+        <section class="ejemplo-modulo">
+            <div id="complemento-dos-suma">
+                <div class="linea-binaria">
+                    <span class="simbolo-operacion"></span> <span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-uno">1</span><span
+                        class="bit bit-cero">0</span>
+                    <span class="valor-decimal">(+2)</span>
+                </div>
+
+                <div class="linea-binaria">
+                    <span class="simbolo-operacion">+</span> <span class="bit bit-uno">1</span><span
+                        class="bit bit-uno">1</span><span class="bit bit-uno">1</span><span
+                        class="bit bit-uno">1</span><span class="bit bit-uno">1</span><span
+                        class="bit bit-uno">1</span><span class="bit bit-uno">1</span><span
+                        class="bit bit-cero">0</span>
+                    <span class="valor-decimal">(-2)</span>
+                </div>
+
+                <div class="linea-separador"></div>
+
+                <div class="linea-binaria" style="margin-bottom: 0.1rem; justify-content: flex-end;">
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span> <span
+                        class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+                    <span class="bit-acarreo" style="width: 1.2em; text-align: center;"></span>
+
+                </div>
+
+
+                <div class="linea-binaria resultado-binario">
+
+                    <span class="simbolo-operacion"></span>
+                    <span class="bit descartado">1</span>
+                    <span class="bit bit-cero">0</span><span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-cero">0</span><span
+                        class="bit bit-cero">0</span><span class="bit bit-cero">0</span>
+                    <span class="valor-decimal">( 0)</span>
+                </div>
+            </div>
+
+            <p class="resultado-explicacion">
+                En el resultado, se produce un bit de acarreo en la novena posición desde la derecha. Este
+                <code>1</code> se
+                descarta porque estamos trabajando con números de 8 bits.
+            </p>
+        </section>
+
+        <h2>¿Qué rango de valores permite el complemento a 2?</h2>
+        <p>Cuando usamos complemento a 2, <strong>la mitad de todas las combinaciones posibles se reserva para
+                representar números negativos</strong>.</p>
+        <p>
+            Eso significa que, aunque con <code>n</code> bits puedes formar <code>2^n</code> combinaciones, el rango de
+            valores que puedes representar
+            con signo <strong>no</strong> va de <code>0 a 2^n – 1</code>, sino de
+            <code>–2^(n-1)  hasta  2^(n-1) – 1</code>.
+        </p>
+
+        <p>Por ejemplo, con 8 bits:</p>
+        <ul>
+            <li>Hay 256 combinaciones posibles (de 00000000 a 11111111)</li>
+            <li>Pero solo puede representar desde –128 hasta +127</li>
+            <li>El cero solo se representa una vez (00000000)</li>
+            <li>El valor más negativo (10000000) no tiene opuesto positivo porque no alcanza el rango</li>
+        </ul>
+
+        <p>
+            <strong>Esta división del espacio de bits es justo lo que determina los límites de los tipos de datos enteros en
+            Java</strong>,
+            como byte, short o int. En el próximo capítulo veremos cuántos bits usa cada uno y qué rangos permiten.
+        </p>
+
+
+
+
+
+        <div class="footer-fixed">
+            <div class="buttons">
+                <button id="previousBtn" class="hidden">Anterior</button>
+                <button id="verifyBtn" disabled>Verificar</button>
+                <button id="nextBtn" onclick="window.location.href='pagina1.html';">Siguiente</button>
+            </div>
+
+            </div>
+                <div class="level-counter" id="levelIndicator">1 / 5</div>
+            </div>
+        </div>
+
+
+
+    </main>
+
+</body>
+
+</html>
