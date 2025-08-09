@@ -1,5 +1,5 @@
 class ChessBoard {
-    constructor(p, colors, location, cellWidth, dimensions, pieces, pieceImages, playableRange) {
+    constructor(p, colors, location, cellWidth, dimensions, pieces, pieceImages) {
         this.p = p;
         this.colors = colors;
         this.location = location;
@@ -7,7 +7,6 @@ class ChessBoard {
         this.dimensions = dimensions;
         this.pieces = pieces;
         this.pieceImages = pieceImages;
-        this.playableRange = { ...playableRange };
 
         this.assignedCodeMap = Array.from({ length: dimensions[0] }, () =>
             Array(dimensions[1]).fill(null)
@@ -25,12 +24,7 @@ class ChessBoard {
                 const x = this.location[0] + c * this.cellWidth;
                 const y = this.location[1] + r * this.cellWidth;
                 const colorIndex = (r + c) % 2;
-
-                if (this.isInPlayableRange(r, c)) {
-                    this.p.fill(this.colors[colorIndex]);
-                } else {
-                    this.p.fill((r + c) % 2 === 0 ? 200 : 240);
-                }
+                this.p.fill(this.colors[colorIndex]);
 
                 this.p.noStroke();
                 this.p.rect(x, y, this.cellWidth, this.cellWidth);
@@ -50,15 +44,8 @@ class ChessBoard {
             this.p.text(rowNumber, rightX, y);
         }
 
-        const playableX = this.location[0] + this.playableRange.minC * this.cellWidth;
-        const playableY = this.location[1] + this.playableRange.minR * this.cellWidth;
-        const playableWidth = (this.playableRange.maxC - this.playableRange.minC + 1) * this.cellWidth;
-        const playableHeight = (this.playableRange.maxR - this.playableRange.minR + 1) * this.cellWidth;
-
         this.p.stroke(255);
         this.p.strokeWeight(3);
-        this.p.noFill();
-        this.p.rect(playableX, playableY, playableWidth, playableHeight);
     }
 
     drawPieces() {
@@ -89,15 +76,6 @@ class ChessBoard {
         this.drawPieces();
     }
 
-    isInPlayableRange(r, c) {
-        return (
-            r >= this.playableRange.minR &&
-            r <= this.playableRange.maxR &&
-            c >= this.playableRange.minC &&
-            c <= this.playableRange.maxC
-        );
-    }
-
     isInsideBoard(x, y) {
         const boardX = this.location[0];
         const boardY = this.location[1];
@@ -121,9 +99,7 @@ class ChessBoard {
         if (this.isInsideBoard(this.p.mouseX, this.p.mouseY)) {
             const col = this.p.floor((this.p.mouseX - this.location[0]) / this.cellWidth);
             const row = this.p.floor((this.p.mouseY - this.location[1]) / this.cellWidth);
-            if (this.isInPlayableRange(row, col)) {
-                this.togglePiece(row, col);
-            }
+            this.togglePiece(row, col);
         }
     }
 
