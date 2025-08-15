@@ -1,13 +1,12 @@
 .ejemplo-modulo {
-    border-radius: 8px;
     font-family: "Fira Code", monospace;
     width: 100%;
     padding: 1rem;
     margin: 0;
     margin-bottom: 1.2rem;
     text-align: center;
-    /* box-shadow: 0 2px 6px rgba(0,0,0,0.05); */
-    /* background: #ffffff; */
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
 
 }
 
@@ -55,7 +54,7 @@
     text-align: center;
 }
 
-.explicacion-modulo{
+.explicacion-modulo {
     font-size: 1rem;
     max-width: 500px;
     margin: 0 auto;
@@ -70,7 +69,6 @@
     font-size: 1.3rem;
     text-align: center;
     margin-bottom: 1rem;
-    /* width: fit-content; */
     font-size: 1.3rem;
     display: inline-block;
     padding: 0;
@@ -83,16 +81,17 @@
     margin: 0 auto;
     text-align: center;
 }
-    
+
 
 .linea-binaria {
-    display: flex; 
-    justify-content: flex-end; 
-    font-size: 1.3rem; 
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.3rem;
     font-weight: bold;
-    margin-bottom: 0.3rem; 
-    line-height: 1.2; 
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
 }
+
 .linea-binaria span.bit {
     width: 1.2em;
     /* Ancho fijo para cada bit para asegurar alineación vertical */
@@ -178,7 +177,13 @@
 
 
 @media (max-width: 600px) {
-    .ejemplo-modulo{
+    .ejemplo-modulo {
         margin-bottom: 15px;
     }
+
+    .ejemplo-modulo .expresion,
+    .linea-binaria {
+        font-size: 1.2rem;
+    }
+
 }
