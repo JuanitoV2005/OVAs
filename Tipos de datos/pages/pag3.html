@@ -1,18 +1,15 @@
-<!-- Capítulo de Tipos de datos enteros -->
+<!-- Rangos de enteros en Java -->
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <title>Primitivos en Java</title>
-    <link rel="stylesheet" href="principal.css">
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="p5-canvas.css">
-    <link rel="stylesheet" href="niveles.css">
-    <link rel="stylesheet" href="cartas-resumen.css">
+    <link rel="stylesheet" href="../assets/css/global/principal.css">
+    <link rel="stylesheet" href="../assets/css/global/niveles.css">
+    <link rel="stylesheet" href="../assets/css/pag3/cartas-resumen.css">
+
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
-    <script src="rectaNumerica.js"></script>
-     <script src="conversionBinario.js"></script>
 </head>
 
 <body>
@@ -33,7 +30,7 @@
         <h2>Resumen</h2>
         <p>
             Observa con atención los rangos mostrados en la tabla. ¿Notas algún patrón?
-            Ahora intenta aplicar la fórmula que vimos para el complemento a 2: 
+            Ahora intenta aplicar la fórmula que vimos para el complemento a 2:
             <strong><code>–2^(n-1) a 2^(n-1) – 1</code></strong> según el número de bits de cada tipo.
             ¿Coinciden los resultados? Comprueba que la fórmula realmente explica por qué un <code>byte</code> llega
             hasta 127,
@@ -150,16 +147,16 @@
 
         <div class="footer-fixed">
             <div class="buttons">
-                <button id="previousBtn" onclick="window.location.href='pagina0.html';">Anterior</button>
+                <button id="previousBtn" class="hidden">Anterior</button>
                 <button id="verifyBtn" disabled>Verificar</button>
-                <button id="nextBtn" disabled>Siguiente</button>
+                <button id="nextBtn" onclick="window.location.href='pag3.html';">Siguiente</button>
             </div>
 
-        </div>
-        <div class="level-counter" id="levelIndicator">2 / 5</div>
-        </div>
-        </div>
 
+            <div class="level-counter" id="levelIndicator">3 / ?</div>
+        </div>
 
     </main>
 </body>
+
+</html>
