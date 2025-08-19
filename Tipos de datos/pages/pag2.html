@@ -213,9 +213,9 @@
         <script>
             // Falta hacer que las respuestas ingresadas se guarden también cuando se interactua con el canvas.
             // --- Guardar respuestas escritas en inputs en localStorage ---
-            // window.addEventListener("DOMContentLoaded", () => {
-            //     inicializarQuizInputs("quiz1", "complemento_q1_");
-            // });
+            window.addEventListener("DOMContentLoaded", () => {
+                inicializarQuizInputs("quiz2", "complemento_q2_");
+            });
 
             // Llama a la función para cada quiz en window.onload
             window.addEventListener("load", () => {
@@ -225,31 +225,35 @@
 
 
         </script>
-        <form class="quiz-form" id="quiz2">
-            <label>
-                1. En la primera línea del canvas, escribe el número <strong id="quiz2_q1_num"></strong> en binario.
-                <input type="text" name="q1" placeholder="Ejemplo: 00001010">
-            </label>
+        <div class="suma-binaria-quiz">
+            <div class="suma-canvas" id="canvas-quiz2"></div>
+            <form class="quiz-form" id="quiz2">
+                <label>
+                    1. En la primera línea del canvas, escribe el número <strong id="quiz2_q1_num"></strong> en binario.
+                    <input type="text" name="q1" placeholder="Ejemplo: 00001010" readonly>
+                </label>
 
-            <label>
-                2. En la segunda línea del canvas, escribe el número <strong id="quiz2_q2_num"></strong> en binario.
-                <input type="text" name="q2" placeholder="Ejemplo: 10010001">
-            </label>
+                <label>
+                    2. En la segunda línea del canvas, escribe el número <strong id="quiz2_q2_num"></strong> en binario.
+                    <input type="text" name="q2" placeholder="Ejemplo: 10010001" readonly>
+                </label>
 
-            <label>
-                3. Verifica el resultado: si ambas representaciones son correctas, la suma debe ser <strong id="quiz2_q3_num"></strong> en decimal.
-                <input type="text" name="q3" placeholder="Ejemplo: 10011011">
-            </label>
+                <label>
+                    3. Verifica el resultado: si ambas representaciones son correctas, la suma debe ser <strong
+                        id="quiz2_q3_num"></strong> en decimal.
+                    <input type="text" name="q3" placeholder="Ejemplo: 10011011" readonly>
+                </label>
 
-            <p id="resultadosQ2"></p>
+                <p id="resultadosQ2"></p>
 
-            <button type="button" id="botonValidarQ2" class="verifyBtn"
-                onclick="validarFormulario(respuestasQ2,'quiz2','resultadosQ2','botonValidarQ2','complemento_q2_')">
-                Validar respuestas
-            </button>
+                <button type="button" id="botonValidarQ2" class="verifyBtn"
+                    onclick="validarFormulario(respuestasQ2,'quiz2','resultadosQ2','botonValidarQ2','complemento_q2_')">
+                    Validar respuestas
+                </button>
 
 
-        </form>
+            </form>
+        </div>
 
 
         <br>
