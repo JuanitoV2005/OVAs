@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="../assets/css/pag2/complemento-a-2.css">
 
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
+    <script src="../assets/js/global/conversionBinario.js"></script>
     <script src="../assets/js/pag2/rectaNumerica.js"></script>
     <script src="../assets/js/pag2/crearQuiz1Aleatorio.js"></script>
+    <script src="../assets/js/pag2/crearQuiz2Aleatorio.js"></script>
     <script src="../assets/js/pag2/funcionesQuiz.js"></script>
 
 </head>
@@ -36,8 +38,8 @@
         </p>
 
         <div class="anchoCompleto" id="recta-complemento-a-2"></div>
-        <br>
 
+        <br><br>
         <h2>¿De dónde sale el complemento a 2?</h2>
         <p>
             Imagina un reloj con 256 horas: empieza en 0, sigue 1, 2, 3… y cuando llega a 255,
@@ -135,22 +137,19 @@
         </form>
 
 
+        <br><br>
         <h2>¿Por qué es conveniente este método?</h2>
         <p>
-            ¡Aquí viene lo interesante! En matemáticas, el <strong>negativo de un número positivo es simplemente el
-                valor
-                que,
-                al sumarse, da como resultado cero</strong>. Piensa en <code>5 + (−5) = 0</code>. El sistema de
-            complemento
-            a 2 aplica
-            exactamente esta misma lógica al mundo binario. <strong>Cuando sumas un número binario a su complemento a 2,
-                el
-                resultado siempre será cero</strong>.
+            La gran ventaja del <strong>complemento a 2</strong> es que no necesitamos inventar nuevas reglas para los
+            números negativos:
+            las computadoras pueden seguir usando la misma suma binaria de siempre.
+            Si tomamos un número y lo sumamos con su complemento, el resultado es exactamente <code>0</code> (mod 256).
         </p>
+
         <p>
-            Esto funciona de manera consistente, ya sea que lo calcules con números decimales o que sumes directamente
-            las
-            cadenas de bits:
+            Por ejemplo, en 8 bits, <code>+2</code> y <code>−2</code> se representan de manera que su suma produce un
+            desbordamiento.
+            El bit extra se descarta y lo que queda es <code>0</code>, tal como esperamos.
         </p>
         <section class="ejemplo-modulo">
             <div id="complemento-dos-suma">
@@ -206,6 +205,54 @@
             </p>
         </section>
 
+        <h3>Quiz</h3>
+        <p>
+            Practiquemos cómo representar negativos en <strong>complemento a 2</strong> realizando una resta.
+            Interactúa con el canvas a continuación para registrar tus respuestas.
+        </p>
+        <script>
+            // Falta hacer que las respuestas ingresadas se guarden también cuando se interactua con el canvas.
+            // --- Guardar respuestas escritas en inputs en localStorage ---
+            // window.addEventListener("DOMContentLoaded", () => {
+            //     inicializarQuizInputs("quiz1", "complemento_q1_");
+            // });
+
+            // Llama a la función para cada quiz en window.onload
+            window.addEventListener("load", () => {
+                generarQuiz2();
+                restaurarQuiz("quiz2", respuestasQ2, "resultadosQ2", "botonValidarQ2", "complemento_q2_");
+            });
+
+
+        </script>
+        <form class="quiz-form" id="quiz2">
+            <label>
+                1. En la primera línea del canvas, escribe el número <strong id="quiz2_q1_num"></strong> en binario.
+                <input type="text" name="q1" placeholder="Ejemplo: 00001010">
+            </label>
+
+            <label>
+                2. En la segunda línea del canvas, escribe el número <strong id="quiz2_q2_num"></strong> en binario.
+                <input type="text" name="q2" placeholder="Ejemplo: 10010001">
+            </label>
+
+            <label>
+                3. Verifica el resultado: si ambas representaciones son correctas, la suma debe ser <strong id="quiz2_q3_num"></strong> en decimal.
+                <input type="text" name="q3" placeholder="Ejemplo: 10011011">
+            </label>
+
+            <p id="resultadosQ2"></p>
+
+            <button type="button" id="botonValidarQ2" class="verifyBtn"
+                onclick="validarFormulario(respuestasQ2,'quiz2','resultadosQ2','botonValidarQ2','complemento_q2_')">
+                Validar respuestas
+            </button>
+
+
+        </form>
+
+
+        <br>
         <h2>¿Qué rango de valores permite el complemento a 2?</h2>
         <p>Cuando usamos complemento a 2, <strong>la mitad de todas las combinaciones posibles se reserva para
                 representar números negativos</strong>.</p>

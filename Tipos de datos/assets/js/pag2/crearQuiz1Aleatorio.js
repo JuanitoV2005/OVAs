@@ -1,13 +1,9 @@
-// --- CONFIGURACIÓN DE RANGOS ---
-            const rangoQ1 = { min: 1, max: 200 }; // Para pregunta 1 (en 8 bits)
-            const rangoQ3 = { min: 1, max: 15 };  // Para pregunta 3 (en 4 bits)
-
-            // Función para generar un número aleatorio dentro de un rango
-            function randomInRange(min, max) {
-                return Math.floor(Math.random() * (max - min + 1)) + min;
-            }
 // --- FUNCIÓN PARA GENERAR O RESTAURAR LAS PREGUNTAS Y RESPUESTAS CORRECTAS DEL QUIZ ---
 function generarQuiz1() {
+    // --- CONFIGURACIÓN DE RANGOS ---
+    const rangoQ1 = { min: 1, max: 200 }; // Para pregunta 1 (en 8 bits)
+    const rangoQ3 = { min: 1, max: 15 };  // Para pregunta 3 (en 4 bits)
+
     let quizData = localStorage.getItem("complemento_q1_numeros");
 
     if (quizData) {
