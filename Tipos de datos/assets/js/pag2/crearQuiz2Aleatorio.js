@@ -111,6 +111,10 @@ let canvasSumaQuiz2 = (p) => {
         const validado = localStorage.getItem("complemento_q2_validado") === "true";
         if (validado) return;
 
+        // Verificar que el mouse está dentro del canvas
+        let clickedInside = p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height;
+        if (!clickedInside) return;
+
         // Detectar click en bits1 o bits2
         for (let row = 0; row < 2; row++) {
             for (let i = 0; i < 8; i++) {
@@ -170,9 +174,9 @@ let canvasSumaQuiz2 = (p) => {
             if (respuestas.q3) {
                 sumBits = respuestas.q3.split('').map(Number);
                 // Recalcular la suma decimal para que el canvas la muestre correctamente
-                sum = binToDec(sumBits);    
+                sum = binToDec(sumBits);
             }
-            
+
         }
     }
 }
