@@ -1,4 +1,4 @@
-<!-- Rangos de enteros en Java -->
+<!-- Tipos de datos enteros en Java -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="../assets/css/global/principal.css">
     <link rel="stylesheet" href="../assets/css/global/niveles.css">
     <link rel="stylesheet" href="../assets/css/pag3/cartas-resumen.css">
+    <link rel="stylesheet" href="../assets/css/pag3/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
+    <script src="../assets/js/global/conversionBinario.js"></script>
+    <script src="../assets/js/global/chessboard.js"></script>
+    <script src="../assets/js/pag3/funcionesQuiz.js"></script>
 </head>
 
 <body>
@@ -141,20 +145,277 @@
             </div>
         </section>
 
+
         <br>
+        <h2>Actividad</h2>
+
+
+        <script>
+            // Llama a la función para cada quiz en DOMContentLoaded
+            window.addEventListener("DOMContentLoaded", () => {
+                inicializarQuizInputs("quiz1", "enteros_q1_");
+                inicializarQuizInputs("quiz2", "enteros_q2_");
+            });
+
+            // Llama a la función para cada quiz en window.onload
+            window.addEventListener("load", () => {
+                restaurarQuiz("quiz1", respuestasQ1, "resultadoFormulario", "botonValidarQ1", "enteros_q1_");
+                restaurarQuiz("quiz2", respuestasQ2, "resultadoFormularioQ2", "botonValidarQ2", "enteros_q2_");
+            });
+
+        </script>
+        <div class="chessboard-quiz">
+            <div class="chessboard-canvas" id="chessboardQuiz1" style="max-width: 400px;""></div>
+
+                <form class=" quiz-form" id="quiz1">
+                <label>
+                    1. ¿Cuánto es 2 + 2?
+                    <input type="text" name="q1">
+                </label>
+
+                <label>
+                    2. ¿Cuánto es 5 × 3?
+                    <input type="text" name="q2">
+                </label>
+
+                <!-- 🔹 NUEVA PREGUNTA DE OPCIÓN MÚLTIPLE -->
+                <fieldset>
+                    <legend>3. ¿Cuál de estos es un tipo entero en Java?</legend>
+                    <label><input type="radio" name="q1-multi" value="short"> short</label><br>
+                    <label><input type="radio" name="q1-multi" value="int"> int</label><br>
+                    <label><input type="radio" name="q1-multi" value="byte"> byte</label>
+                </fieldset>
+
+                <label class="cadenaEnteraBinaria">
+                    4. Ingresa el número 5 en binario (16 bits, complemento a 2):
+                    <input type="text" name="q3" placeholder="0000000000000000" readonly>
+                    <div class="decimal-output" id="decimal-q3"></div>
+                </label>
+
+                <label class="cadenaEnteraBinaria">
+                    5. Ingresa el número -3 en binario (8 bits, complemento a 2):
+                    <input type="text" name="q4" placeholder="00000000" readonly>
+                    <div class="decimal-output" id="decimal-q4"></div>
+                </label>
+
+                <button type="button" id="botonValidarQ1" class="verifyBtn"
+                    onclick="validarFormularioChessboard(respuestasQ1,'quiz1','resultadoFormulario','botonValidarQ1','enteros_q1_')">Validar
+                    respuestas</button>
+
+                <p id="resultadoFormulario"></p>
+                </form>
+
+            </div>
+
+            <a href="pag2.html">Ir a la página 2</a>
+            <script>
+                const respuestasQ1 = {
+                    q1: { valor: "4" },
+                    q2: { valor: "15" },
+                    "q1-multi": { valor: "int" },  // 🔹 nueva respuesta correcta
+                    q3: { valor: "5", filas: [8, 7] },
+                    q4: { valor: "-3", filas: [6] }
+                };
+
+
+                // Función del canvas
+                function sketchQuiz1(p) {
+                    // -------- Creacion del canvas ---------
+                    let gui = {
+                        "background": "#ffffff",
+                        "cellColor1": "#b58863",
+                        "cellColor2": "#f0d9b5",
+                        "cellLength": 50,
+                    }
+
+                    const tableroVacio = Array(8).fill().map(() => Array(8).fill(null))
+
+                    // Colores disponibles de piezas y sus códigos
+                    const pawnCodes = ['pw', 'pg', 'pr', 'pb', 'pk'];
+                    const pieceImages = {};
+
+                    // Crear tablero
+                    const rows = 8, cols = 8;
+                    const pieces = Array.from({ length: rows }, () => Array(cols).fill(null));
+                    const assignedMap = [
+                        ['pg', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw'],
+                        ['pw', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw'],
+                        ['pr', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk'],
+                        [null, null, null, null, null, null, null, null],
+                        [null, null, null, null, null, null, null, null],
+                        [null, null, null, null, null, null, null, null],
+                        [null, null, null, null, null, null, null, 'pk']
+                    ];
+
+                    // Al cargar, restaurar pieces desde localStorage si existe y no está validado
+                    const piecesGuardadas = localStorage.getItem("enteros_q1_pieces");
+                    const validado = localStorage.getItem("enteros_q1_validado") === "true";
+                    if (piecesGuardadas && !validado) {
+                        try {
+                            const restored = JSON.parse(piecesGuardadas);
+                            if (Array.isArray(restored) && restored.length === rows) {
+                                pieces = restored;
+                            }
+                        } catch (e) {
+                            // Si falla, ignora y usa el tablero vacío
+                        }
+                    }
+
+
+                    tablero1 = new ChessBoard(
+                        p,
+                        [gui.cellColor1, gui.cellColor2],
+                        [20, 20],
+                        gui.cellLength,
+                        [rows, cols],
+                        pieces,
+                        pieceImages // sin imágenes por ahora
+                    );
+
+                    tablero1.assignedCodeMap = assignedMap;
+
+                    // --------- Lógica de interacción ---------
+                    p.setup = function () {
+                        const canvas = p.createCanvas(gui.cellLength * 8 + 50, gui.cellLength * 8 + 40);
+                    }
+                    p.draw = function () {
+                        // Restaurar pieces desde localStorage si existe y no está validado
+                        const piecesGuardadas = localStorage.getItem("enteros_q1_pieces");
+                        const validado = localStorage.getItem("enteros_q1_validado") === "true";
+                        if (piecesGuardadas && !validado) {
+                            try {
+                                const restored = JSON.parse(piecesGuardadas);
+                                if (Array.isArray(restored) && restored.length === rows) {
+                                    tablero1.pieces = restored;
+                                }
+                            } catch (e) {
+                                // Si falla, ignora
+                            }
+                        }
+
+                        tablero1.draw();
+                    };
+
+
+                    p.mousePressed = function () {
+                        const validado = localStorage.getItem("enteros_q1_validado") === "true";
+                        if (validado) {
+                            return;
+                        }
+
+                        clicked = tablero1.mousePressed();
+                        if (!clicked) {
+                            return;
+                        }
+
+                        // Guardar el estado actual de pieces en localStorage
+                        localStorage.setItem("enteros_q1_pieces", JSON.stringify(tablero1.pieces));
+
+                        // Diccionario para guardar respuestas
+                        let respuestasGuardadas = JSON.parse(localStorage.getItem("enteros_q1_respuestas") || "{}");
+
+                        let decimalesGuardados = JSON.parse(localStorage.getItem("enteros_q1_decimales") || "{}");
+
+                        // Recorrer todas las preguntas y actualizar el input y el decimal si tiene filas
+                        for (let key in respuestasQ1) {
+                            const obj = respuestasQ1[key];
+                            if (Array.isArray(obj.filas) && obj.filas.length > 0) {
+                                const input = document.querySelector(`input[name="${key}"]`);
+                                if (input) {
+                                    const binStr = tablero1.getBinaryString(obj.filas);
+                                    input.value = binStr;
+                                    respuestasGuardadas[key] = binStr;
+
+                                    // Actualiza el decimal debajo del input si existe
+                                    const decimalDiv = document.getElementById("decimal-" + key);
+                                    if (decimalDiv) {
+                                        let decimalText;
+                                        try {
+                                            decimalText = "Decimal: " + binarioAEntero(binStr);
+                                        } catch {
+                                            decimalText = "Decimal: (inválido)";
+                                        }
+                                        decimalDiv.textContent = decimalText;
+                                        decimalesGuardados[key] = decimalText;
+                                    }
+                                }
+                            }
+                        }
+
+                        // Guardar todas las respuestas en localStorage bajo el prefijo
+                        localStorage.setItem("enteros_q1_respuestas", JSON.stringify(respuestasGuardadas));
+                        localStorage.setItem("enteros_q1_decimales", JSON.stringify(decimalesGuardados));
+                    };
+
+                };
+
+                // Iniciar el sketch de p5
+                new p5(sketchQuiz1, 'chessboardQuiz1');
+            </script>
 
 
 
-        <div class="footer-fixed">
-            <div class="buttons">
-                <button id="previousBtn" class="hidden">Anterior</button>
-                <button id="verifyBtn" disabled>Verificar</button>
-                <button id="nextBtn" onclick="window.location.href='pag3.html';">Siguiente</button>
+
+            <h1>Segundo quiz</h1>
+            <p>Otro ejemplo.</p>
+            <div class="canvas-quiz">
+                <div id="chessboardQuiz2"></div>
+                <script>
+                    const respuestasQ2 = {
+                        "q2-q1": { valor: "4" },
+                        "q2-q2": { valor: "15" },
+                        "q2-q3": { valor: "5", filas: [8, 7] },
+                        "q2-q4": { valor: "-3", filas: [6] }
+                    };
+                </script>
+                <form id="quiz2">
+                    <label>
+                        1. ¿Cuánto es 2 + 2?
+                        <input type="text" name="q2-q1">
+                    </label>
+
+                    <label>
+                        2. ¿Cuánto es 5 × 3?
+                        <input type="text" name="q2-q2">
+                    </label>
+
+                    <label class="cadenaEnteraBinaria">
+                        3. Ingresa el número 5 en binario (16 bits, complemento a 2):
+                        <input type="text" name="q2-q3" placeholder="0000000000000000" readonly>
+                    </label>
+
+                    <label class="cadenaEnteraBinaria">
+                        4. Ingresa el número -3 en binario (8 bits, complemento a 2):
+                        <input type="text" name="q2-q4" placeholder="00000000" readonly>
+                    </label>
+
+                    <button type="button" id="botonValidarQ2" class="verifyBtn"
+                        onclick="validarFormularioChessboard(respuestasQ2,'quiz2','resultadoFormularioQ2','botonValidarQ2','enteros_q2_')">Validar
+                        respuestas</button>
+                    <p id="resultadoFormularioQ2"></p>
+                </form>
             </div>
 
 
-            <div class="level-counter" id="levelIndicator">3 / ?</div>
-        </div>
+
+
+
+
+
+
+            <br>
+
+
+
+            <div class="footer-fixed">
+                <div class="buttons">
+                    <button id="previousBtn" onclick="window.location.href='pag2.html';">Anterior</button>
+                    <button id="nextBtn" onclick="window.location.href='pag3.html';">Siguiente</button>
+                </div>
+
+
+                <div class="level-counter" id="levelIndicator">3 / ?</div>
+            </div>
 
     </main>
 </body>
