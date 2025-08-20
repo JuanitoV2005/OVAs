@@ -37,7 +37,8 @@ body {
   margin-bottom: 1rem;
 }
 
-input {
+input[type="text"],
+input[type="number"] {
   width: 100%;
   padding: 0.5rem;
   border: 2px solid #ccc;
@@ -47,40 +48,27 @@ input {
   margin-bottom: 0.5rem;
 }
 
-input.correcto {
-  border-color: green;
+/* Solo afecta a inputs de texto o número */
+input[type="text"].correcto,
+input[type="number"].correcto,
+.correcto {
+  border: 2px solid #27ae60;
+  border-radius: 4px;
   background-color: #e6ffed;
 }
 
-input.incorrecto {
-  border-color: red;
-  background-color: #ffe6e6;
-}
-
-/* Para los input de opcion multiple: */
-.correcto {
-  background-color: #c8f7c5;
-  /* verde claro */
-  border: 1px solid #27ae60;
-  border-radius: 5px;
-  padding: 2px;
-}
-
+input[type="text"].incorrecto,
+input[type="number"].incorrecto,
 .incorrecto {
-  background-color: #f7c5c5;
-  /* rojo claro */
-  border: 1px solid #c0392b;
-  border-radius: 5px;
-  padding: 2px;
+  border: 2px solid red;
+  background-color: #ffe6e6;
 }
 
 .buttons {
   text-align: center;
   display: flex;
-  /* ¡Añade esto! */
   justify-content: center;
-  /* ¡Añade esto para centrarlos horizontalmente! */
-  margin-top: 0;
+  margin-top: 0.5rem;
 }
 
 .verifyBtn {
@@ -187,4 +175,34 @@ button {
 /* Estilos por defecto para pantallas grandes (el texto sigue visible, las imágenes ocultas) */
 .button-text {
   display: inline;
+}
+
+/* Quitar borde y márgenes por defecto que tienen las preguntas de opcion multiple */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+/* Formularios más ordenados */
+form {
+  width: 90%;
+  max-width: 600px;
+  /* margin: 1rem auto; */
+}
+
+/* aplicado al label que está en las opciones de checkbox */
+.checkbox {
+  display: inline-flex;
+  text-align: left;
+  margin: 0;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+}
+
+.checkbox input[type="radio"],
+.checkbox input[type="checkbox"] {
+  margin-right: 0.5rem;
+  vertical-align: middle;
 }

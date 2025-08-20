@@ -126,12 +126,14 @@
                 <input type="text" name="q3" placeholder="Ejemplo: 4">
             </label>
 
-            <p id="resultadosQ1"></p>
+            <p class="hidden" id="resultadosQ1"></p>
 
-            <button type="button" id="botonValidarQ1" class="verifyBtn"
-                onclick="validarFormulario(respuestasQ1,'quiz1','resultadosQ1','botonValidarQ1','complemento_q1_')">
-                Validar respuestas
-            </button>
+            <div class="buttons">
+                <button type="button" id="botonValidarQ1" class="verifyBtn"
+                    onclick="validarFormulario(respuestasQ1,'quiz1','resultadosQ1','botonValidarQ1','complemento_q1_')">
+                    Validar respuestas
+                </button>
+            </div>
 
 
         </form>
@@ -226,7 +228,7 @@
 
         </script>
         <div class="suma-binaria-quiz">
-            <div class="suma-canvas" id="canvas-quiz2"></div>
+            <div id="canvas-quiz2"></div>
             <form class="quiz-form" id="quiz2">
                 <label>
                     1. En la primera línea del canvas, escribe el número <strong id="quiz2_q1_num"></strong> en binario.
@@ -244,12 +246,15 @@
                     <input type="text" name="q3" placeholder="Ejemplo: 10011011" readonly>
                 </label>
 
-                <p id="resultadosQ2"></p>
+                <p class="hidden" id="resultadosQ2"></p>
 
-                <button type="button" id="botonValidarQ2" class="verifyBtn"
-                    onclick="validarFormulario(respuestasQ2,'quiz2','resultadosQ2','botonValidarQ2','complemento_q2_')">
-                    Validar respuestas
-                </button>
+                <div class="buttons">
+                    <button type="button" id="botonValidarQ2" class="verifyBtn"
+                        onclick="validarFormulario(respuestasQ2,'quiz2','resultadosQ2','botonValidarQ2','complemento_q2_')">
+                        Validar respuestas
+                    </button>
+                </div>
+
 
 
             </form>
