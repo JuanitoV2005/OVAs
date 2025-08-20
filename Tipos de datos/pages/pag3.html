@@ -146,20 +146,83 @@
 
 
         <br>
-        <h2>Actividad</h2>
+
+        <h2>Quiz Teórico</h2>
+        <div class="quiz-formulario">
+            <script>
+                // Llama a la función para cada quiz en DOMContentLoaded
+                window.addEventListener("DOMContentLoaded", () => {
+                    inicializarQuizInputs("quiz2", "enteros_q2_");
+                });
+
+                // Llama a la función para cada quiz en window.onload
+                window.addEventListener("load", () => {
+                    restaurarQuiz("quiz-teoria", respuestasTeoria, "resultadoFormularioTeoria", "botonValidarTeoria", "enteros_teoria_");
+                });
+
+            </script>
+            <script>
+                const respuestasTeoria = {
+                    "q1-q1": { valor: "Verdadero" },
+                    "q1-q2": { valor: "4" },
+                    "q1-q3": { valor: "long" },
+                    "q1-q4": { valor: "-100" }
+                };
+            </script>
+            <form id="quiz-teoria">
+                <fieldset>
+                    <legend>1. Los cuatro tipos enteros en Java (byte, short, int, long) siempre son con signo
+                        (incluyen
+                        valores negativos).</legend>
+                    <label class="checkbox"><input type="radio" name="q1-q1" value="Verdadero"> Verdadero</label><br>
+                    <label class="checkbox"><input type="radio" name="q1-q1" value="Falso"> Falso</label><br>
+                </fieldset>
+
+                <label>
+                    2. Cuantos bytes ocupa un int en Java?
+                    <input type="text" name="q1-q2">
+                </label>
+
+                <fieldset>
+                    <legend>3. Vas a almacenar la cantidad de segundos que han pasado desde el 1 de enero de 1970
+                        (tiempo UNIX).
+                        Este número actualmente supera los 1,600,000,000. ¿Qué tipo de dato entero necesitas?
+                    </legend>
+                    <label class="checkbox"><input type="radio" name="q1-q3" value="short"> short</label><br>
+                    <label class="checkbox"><input type="radio" name="q1-q3" value="int"> int</label><br>
+                    <label class="checkbox"><input type="radio" name="q1-q3" value="long"> long</label><br>
+                </fieldset>
+
+                <fieldset>
+                    <legend>4. ¿Cuál de los siguientes valores sí puede almacenarse en una variable de tipo byte?
+                    </legend>
+                    <label class="checkbox"><input type="radio" name="q1-q4" value="200">200</label><br>
+                    <label class="checkbox"><input type="radio" name="q1-q4" value="-100"> -100</label><br>
+                    <label class="checkbox"><input type="radio" name="q1-q4" value="500"> 500</label><br>
+                </fieldset>
+
+
+                <div class="buttons">
+                    <button type="button" id="botonValidarTeoria" class="verifyBtn"
+                        onclick="validarFormularioChessboard(respuestasTeoria,'quiz-teoria','resultadoFormularioTeoria','botonValidarTeoria','enteros_teoria_')">Validar
+                        respuestas</button>
+                </div>
+
+                <p class="hidden" id="resultadoFormularioTeoria"></p>
+            </form>
+        </div>
+        <h2>Actividad 2</h2>
 
 
         <script>
             // Llama a la función para cada quiz en DOMContentLoaded
             window.addEventListener("DOMContentLoaded", () => {
                 inicializarQuizInputs("quiz1", "enteros_q1_");
-                inicializarQuizInputs("quiz2", "enteros_q2_");
             });
 
             // Llama a la función para cada quiz en window.onload
             window.addEventListener("load", () => {
                 restaurarQuiz("quiz1", respuestasQ1, "resultadoFormulario", "botonValidarQ1", "enteros_q1_");
-                restaurarQuiz("quiz2", respuestasQ2, "resultadoFormularioQ2", "botonValidarQ2", "enteros_q2_");
             });
 
         </script>
@@ -359,45 +422,7 @@
 
 
 
-            <h1>Segundo quiz</h1>
-            <p>Otro ejemplo.</p>
-            <div class="canvas-quiz">
-                <div id="chessboardQuiz2"></div>
-                <script>
-                    const respuestasQ2 = {
-                        "q2-q1": { valor: "4" },
-                        "q2-q2": { valor: "15" },
-                        "q2-q3": { valor: "5", filas: [8, 7] },
-                        "q2-q4": { valor: "-3", filas: [6] }
-                    };
-                </script>
-                <form id="quiz2">
-                    <label>
-                        1. ¿Cuánto es 2 + 2?
-                        <input type="text" name="q2-q1">
-                    </label>
 
-                    <label>
-                        2. ¿Cuánto es 5 × 3?
-                        <input type="text" name="q2-q2">
-                    </label>
-
-                    <label class="cadenaEnteraBinaria">
-                        3. Ingresa el número 5 en binario (16 bits, complemento a 2):
-                        <input type="text" name="q2-q3" placeholder="0000000000000000" readonly>
-                    </label>
-
-                    <label class="cadenaEnteraBinaria">
-                        4. Ingresa el número -3 en binario (8 bits, complemento a 2):
-                        <input type="text" name="q2-q4" placeholder="00000000" readonly>
-                    </label>
-
-                    <button type="button" id="botonValidarQ2" class="verifyBtn"
-                        onclick="validarFormularioChessboard(respuestasQ2,'quiz2','resultadoFormularioQ2','botonValidarQ2','enteros_q2_')">Validar
-                        respuestas</button>
-                    <p id="resultadoFormularioQ2"></p>
-                </form>
-            </div>
 
 
 
