@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../assets/css/global/principal.css">
     <link rel="stylesheet" href="../assets/css/global/niveles.css">
     <link rel="stylesheet" href="../assets/css/pag3/cartas-resumen.css">
-    <link rel="stylesheet" href="../assets/css/pag3/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
     <script src="../assets/js/global/conversionBinario.js"></script>
@@ -178,13 +177,14 @@
                     <input type="text" name="q2">
                 </label>
 
-                <!-- 🔹 NUEVA PREGUNTA DE OPCIÓN MÚLTIPLE -->
                 <fieldset>
                     <legend>3. ¿Cuál de estos es un tipo entero en Java?</legend>
-                    <label><input type="radio" name="q1-multi" value="short"> short</label><br>
-                    <label><input type="radio" name="q1-multi" value="int"> int</label><br>
-                    <label><input type="radio" name="q1-multi" value="byte"> byte</label>
+                    <label class="checkbox"><input type="radio" name="q1-multi" value="short"> short</label><br>
+                    <label class="checkbox"><input type="radio" name="q1-multi" value="int"> int</label><br>
+                    <label class="checkbox"><input type="radio" name="q1-multi" value="byte"> byte</label>
                 </fieldset>
+
+
 
                 <label class="cadenaEnteraBinaria">
                     4. Ingresa el número 5 en binario (16 bits, complemento a 2):
@@ -198,9 +198,12 @@
                     <div class="decimal-output" id="decimal-q4"></div>
                 </label>
 
-                <button type="button" id="botonValidarQ1" class="verifyBtn"
-                    onclick="validarFormularioChessboard(respuestasQ1,'quiz1','resultadoFormulario','botonValidarQ1','enteros_q1_')">Validar
-                    respuestas</button>
+                <div class="buttons">
+                    <button type="button" id="botonValidarQ1" class="verifyBtn"
+                        onclick="validarFormularioChessboard(respuestasQ1,'quiz1','resultadoFormulario','botonValidarQ1','enteros_q1_')">Validar
+                        respuestas</button>
+                </div>
+
 
                 <p id="resultadoFormulario"></p>
                 </form>
