@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="ova-tipos-de-datos" version="1.2"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+
+  <organizations default="ORG1">
+    <organization identifier="ORG1">
+      <title>OVA Tipos de Datos</title>
+      <item identifier="ITEM1" identifierref="RES1">
+        <title>OVA Tipos de Datos</title>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="RES1" type="webcontent" adlcp:scormtype="sco" href="pages/pag1.html">
+      <!-- Pegar aquí las etiquetas obtenidas con generar_manifest_files.ps1 y guardadas en
+      files.xml -->
+
+      <file href="assets\css\global\niveles.css" />
+      <file href="assets\css\global\principal.css" />
+      <file href="assets\css\pag2\complemento-a-2.css" />
+      <file href="assets\css\pag3\cartas-resumen.css" />
+      <file href="assets\css\pag3\style.css" />
+      <file href="assets\css\pag4\cartas-resumen.css" />
+      <file href="assets\css\pag4\ieee754-to-decimal.css" />
+      <file href="assets\css\pag4\notacion-cientifica.css" />
+      <file href="assets\img\chess\pawn-b.png" />
+      <file href="assets\img\chess\pawn-g.png" />
+      <file href="assets\img\chess\pawn-k.png" />
+      <file href="assets\img\chess\pawn-r.png" />
+      <file href="assets\img\chess\pawn-w.png" />
+      <file href="assets\js\global\chessboard.js" />
+      <file href="assets\js\global\conversionBinario.js" />
+      <file href="assets\js\pag2\crearQuiz1Aleatorio.js" />
+      <file href="assets\js\pag2\crearQuiz2Aleatorio.js" />
+      <file href="assets\js\pag2\funcionesQuiz.js" />
+      <file href="assets\js\pag2\rectaNumerica.js" />
+      <file href="assets\js\pag3\crearQuizPracticoAleatorio.js" />
+      <file href="assets\js\pag3\crearQuizTeorico.js" />
+      <file href="assets\js\pag3\funcionesQuiz.js" />
+      <file href="assets\js\pag4\ieee754-to-decimal.js" />
+      <file href="pages\pag1.html" />
+      <file href="pages\pag2.html" />
+      <file href="pages\pag3.html" />
+      <file href="pages\pag4.html" />
+      <file href="pages\pag5-calificacion.html" />
+
+    </resource>
+  </resources>
+</manifest>

@@ -1,0 +1,109 @@
+<!-- Página de calificación moodle -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Primitivos en Java</title>
+    <link rel="stylesheet" href="../assets/css/global/principal.css">
+    <link rel="stylesheet" href="../assets/css/global/niveles.css">
+
+    <script src="../scormdriver.js"></script>
+</head>
+
+<body>
+    <main>
+        <h1>Página de calificación</h1>
+        <p id="resultado"></p>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                pipwerks.SCORM.version = "1.2";
+                const success = pipwerks.SCORM.init();
+
+                if (!success) {
+                    console.error("No se pudo inicializar la conexión SCORM.");
+                    return;
+                }
+
+                const score = calcularNota();
+                document.getElementById("resultado").textContent = "Tu nota es: " + score;
+
+                // Enviar nota
+                pipwerks.SCORM.set("cmi.core.score.raw", score);
+                pipwerks.SCORM.set("cmi.core.score.min", 0);
+                pipwerks.SCORM.set("cmi.core.score.max", 100);
+                pipwerks.SCORM.set("cmi.core.lesson_status", "completed");
+
+                pipwerks.SCORM.save();
+                pipwerks.SCORM.quit();
+            });
+
+
+
+
+            function calcularNota() {
+                // Número de preguntas por actividad
+                const num_complemento_q1 = 3;
+                const num_complemento_q2 = 3;
+                const num_enteros_teoria = 4;
+                const num_enteros_q1 = 5;
+                const num_ieee754 = 6;
+
+                total_puntos = num_complemento_q1 + num_complemento_q2 + num_enteros_teoria + num_enteros_q1 + num_ieee754;
+
+                // Obtener puntajes de localStorage
+                const complemento_q1 = parseInt(localStorage.getItem("complemento_q1_puntaje")) || 0;
+                const complemento_q2 = parseInt(localStorage.getItem("complemento_q2_puntaje")) || 0;
+                const enteros_teoria = parseInt(localStorage.getItem("enteros_teoria_puntaje")) || 0;
+                const enteros_q1 = parseInt(localStorage.getItem("enteros_q1_puntaje")) || 0;
+
+                // Para los pasos de IEEE754 en página números reales en java
+                let ieee754_total = 0;
+                for (let i = 1; i <= 6; i++) {
+                    if (localStorage.getItem(`ieee754-step-stepStatus-${i}`) === "true") {
+                        ieee754_total += 1;
+                    }
+                }
+
+                // Sumar todos los puntos obtenidos
+                const puntos_obtenidos = complemento_q1 + complemento_q2 + enteros_teoria + enteros_q1 + ieee754_total;
+
+                // Calcular nota sobre 100
+                const nota = Math.round((puntos_obtenidos / total_puntos) * 100);
+
+                return nota;
+            }
+        </script>
+
+        <!-- Limpiar de localstorage los datos relacionados al OVA -->
+        <script> 
+            window.addEventListener("beforeunload", () => {
+                // Prefijos de las claves a borrar
+                const prefijos = [
+                    "complemento_q1_",
+                    "complemento_q2",
+                    "enteros_teoria_",
+                    "enteros_q1_",
+                    "enteros_q2_",
+                    "ieee754"
+                ];
+
+                // Recorrer todas las claves de localStorage
+                Object.keys(localStorage).forEach(clave => {
+                    if (prefijos.some(prefijo => clave.startsWith(prefijo))) {
+                        localStorage.removeItem(clave);
+                    }
+                });
+
+                // Opcional: cerrar sesión SCORM si está conectada
+                if (pipwerks.SCORM.connected) {
+                    pipwerks.SCORM.quit();
+                }
+            });
+        </script>
+
+    </main>
+</body>
+
+</html>
