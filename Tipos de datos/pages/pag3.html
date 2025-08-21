@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../assets/css/global/principal.css">
     <link rel="stylesheet" href="../assets/css/global/niveles.css">
     <link rel="stylesheet" href="../assets/css/pag3/cartas-resumen.css">
+    <link rel="stylesheet" href="../assets/css/pag3/quizStyles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
     <script src="../assets/js/global/conversionBinario.js"></script>
@@ -149,7 +150,6 @@
 
 
         <br><br>
-        <h2>Quiz Teórico</h2>
         <script>
             // Llama a la función para cada quiz en DOMContentLoaded
             window.addEventListener("DOMContentLoaded", () => {
@@ -162,8 +162,10 @@
             });
 
         </script>
-        <div class="quiz-formulario">
 
+
+        <div class="quiz-container">
+            <h2>Quiz Teórico</h2>
             <form id="quiz-teoria">
                 <fieldset>
                     <legend>1. Los cuatro tipos enteros en Java (byte, short, int, long) siempre son con signo
@@ -208,7 +210,16 @@
         </div>
 
         <br><br>
-        <h2>Quiz Representación Binaria de enteros en Java</h2>
+
+        <script>
+            // Llama a la función para cada quiz en DOMContentLoaded
+            window.addEventListener("DOMContentLoaded", () => {
+                generarQuiz1();
+                restaurarQuiz("quiz1", respuestasQ1, "resultadoFormulario", "botonValidarQ1", "enteros_q1_");
+            });
+
+        </script>
+
         <p>
             Todos los tipos enteros en Java se representan usando <strong>complemento a 2</strong>.
             En este sistema, el <em>bit más significativo</em> también es indicador del signo:
@@ -220,66 +231,63 @@
             funcionan.
         </p>
 
-        <script>
-            // Llama a la función para cada quiz en DOMContentLoaded
-            window.addEventListener("DOMContentLoaded", () => {
-                generarQuiz1();
-                restaurarQuiz("quiz1", respuestasQ1, "resultadoFormulario", "botonValidarQ1", "enteros_q1_");
-            });
+        <div class="quiz-container">
+            <h2>Quiz Representación Binaria de enteros en Java</h2>
+            <div class="canvas-wrapper">
+                <div class="chessboard-canvas" id="chessboardQuiz1" style="max-width: 400px;"></div>
+            </div>
+            <div class="suma-binaria-quiz">
 
-        </script>
+                <form id="quiz1">
 
-        <div class="chessboard-quiz">
-            <div class="chessboard-canvas" id="chessboardQuiz1" style="max-width: 400px;"></div>
-            <form id="quiz1">
+                    <label class=" cadenaEnteraBinaria">
+                        1. En un byte, el valor más negativo se escribe <code>10000000</code> (-128).
+                        Escribe en las filas <strong>7</strong> y <strong>8</strong> la cadena que representa
+                        el valor más negativo de un <strong>short</strong>
+                        <input type="text" name="q1" placeholder="0000000000000000" readonly>
+                        <div class="decimal-output" id="decimal-q1"></div>
+                    </label>
 
-                <label class=" cadenaEnteraBinaria">
-                    1. En un byte, el valor más negativo se escribe <code>10000000</code> (-128).
-                    Escribe en las filas <strong>7</strong> y <strong>8</strong> la cadena que representa
-                    el valor más negativo de un <strong>short</strong>
-                    <input type="text" name="q1" placeholder="0000000000000000" readonly>
-                    <div class="decimal-output" id="decimal-q1"></div>
-                </label>
+                    <label class="cadenaEnteraBinaria">
+                        2. Escribe <code id="quiz1_q2_num"></code> en el byte de la fila <strong>6</strong>. ¿Qué número
+                        obtienes?
+                        <input type="text" name="q2" placeholder="00000000" readonly>
+                        <div class="decimal-output" id="decimal-q2"></div>
+                    </label>
 
-                <label class="cadenaEnteraBinaria">
-                    2. Escribe <code id="quiz1_q2_num"></code> en el byte de la fila <strong>6</strong>. ¿Qué número
-                    obtienes?
-                    <input type="text" name="q2" placeholder="00000000" readonly>
-                    <div class="decimal-output" id="decimal-q2"></div>
-                </label>
+                    <label class="cadenaEnteraBinaria">
+                        3. Toma el mismo decimal del punto anterior y represéntalo en un short
+                        (filas <strong>4</strong> y <strong>5</strong>).
+                        Extiende los bits del punto 2 rellenando con <code>1</code>s a la izquierda.
+                        <input type="text" name="q3" placeholder="0000000000000000" readonly>
+                        <div class="decimal-output" id="decimal-q3"></div>
+                    </label>
 
-                <label class="cadenaEnteraBinaria">
-                    3. Toma el mismo decimal del punto anterior y represéntalo en un short
-                    (filas <strong>4</strong> y <strong>5</strong>).
-                    Extiende los bits del punto 2 rellenando con <code>1</code>s a la izquierda.
-                    <input type="text" name="q3" placeholder="0000000000000000" readonly>
-                    <div class="decimal-output" id="decimal-q3"></div>
-                </label>
+                    <label class="cadenaEnteraBinaria">
+                        4. Escribe la cadena <code id="quiz1_q4_num"></code>
+                        en la fila <strong>3</strong>.¿Qué valor decimal resulta?
+                        <input type="text" name="q4" placeholder="00000000" readonly>
+                        <div class="decimal-output" id="decimal-q4"></div>
+                    </label>
 
-                <label class="cadenaEnteraBinaria">
-                    4. Escribe la cadena <code id="quiz1_q4_num"></code>
-                    en la fila <strong>3</strong>.¿Qué valor decimal resulta?
-                    <input type="text" name="q4" placeholder="00000000" readonly>
-                    <div class="decimal-output" id="decimal-q4"></div>
-                </label>
+                    <label class="cadenaEnteraBinaria">
+                        5. Ahora, escribe en las filas <strong>1</strong> y <strong>2</strong>
+                        la cadena que representa el mismo decimal que en el punto anterior.
+                        ¿Cómo debes extender esa cadena para que encaje en un short?
+                        <input type="text" name="q5" placeholder="0000000000000000" readonly>
+                        <div class="decimal-output" id="decimal-q5"></div>
+                    </label>
 
-                <label class="cadenaEnteraBinaria">
-                    5. Ahora, escribe en las filas <strong>1</strong> y <strong>2</strong>
-                    la cadena que representa el mismo decimal que en el punto anterior.
-                    ¿Cómo debes extender esa cadena para que encaje en un short?
-                    <input type="text" name="q5" placeholder="0000000000000000" readonly>
-                    <div class="decimal-output" id="decimal-q5"></div>
-                </label>
-
-                <div class="buttons">
-                    <button type="button" id="botonValidarQ1" class="verifyBtn"
-                        onclick="validarFormularioChessboard(respuestasQ1,'quiz1','resultadoFormulario','botonValidarQ1','enteros_q1_')">Validar
-                        respuestas</button>
-                </div>
+                    <div class="buttons">
+                        <button type="button" id="botonValidarQ1" class="verifyBtn"
+                            onclick="validarFormularioChessboard(respuestasQ1,'quiz1','resultadoFormulario','botonValidarQ1','enteros_q1_')">Validar
+                            respuestas</button>
+                    </div>
 
 
-                <p class="hidden" id="resultadoFormulario"></p>
-            </form>
+                    <p class="hidden" id="resultadoFormulario"></p>
+                </form>
+            </div>
 
         </div>
 

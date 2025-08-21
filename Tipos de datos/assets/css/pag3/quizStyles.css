@@ -1,0 +1,100 @@
+    /* Estilos específicos para la apariencia de los quices y canvas */
+    .quiz-container {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .quiz-container h2 {
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .quiz-container p {
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        margin-bottom: 0.5rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .quiz-form {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .quiz-form label {
+        display: block;
+    }
+
+    .quiz-form input[type="text"] {
+        width: 100%;
+        padding: 0.75rem;
+    }
+
+    .canvas-wrapper {
+        border-radius: 8px;
+        /* padding: 1rem; */
+        /* margin: 1.5rem 0; */
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    #canvas-quiz2 {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #canvas-quiz2 canvas {
+        max-width: 100%;
+        height: auto !important;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .suma-binaria-quiz {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        align-items: center;
+    }
+
+    .suma-binaria-quiz .canvas-wrapper {
+        order: 1;
+        margin-bottom: 0.5rem;
+    }
+
+    .suma-binaria-quiz .quiz-form {
+        order: 2;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    @media (min-width: 768px) {
+        #canvas-quiz2 canvas {
+            max-width: 80%;
+        }
+
+        .suma-binaria-quiz {
+            flex-direction: column;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        #canvas-quiz2 canvas {
+            max-width: 600px;
+        }
+    }
