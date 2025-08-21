@@ -1,0 +1,375 @@
+<!-- Tipos de datos punto flotante en Java -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Primitivos en Java</title>
+    <link rel="stylesheet" href="../assets/css/global/principal.css">
+    <link rel="stylesheet" href="../assets/css/global/niveles.css">
+    <link rel="stylesheet" href="../assets/css/pag4/ieee754-to-decimal.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
+    <script src="../assets/js/pag4/ieee754-to-decimal.js"></script>
+</head>
+
+<body>
+    <main>
+        <div class="converter-container">
+            <h1>IEEE 754</h1>
+
+
+            <h1>Conversión de IEEE 754 a Decimal</h1>
+
+            <p>Convierte el número en formato IEEE 754 (32 bits) <strong>01000001010001100000000000000000</strong> a
+                decimal paso a paso. Solo podrás avanzar al siguiente paso si completas correctamente el actual.</p>
+
+            <!-- Representación IEEE 754 -->
+            <div class="binary-input-display">
+                <div class="ieee-parts">
+                    <span class="ieee-part sign">0</span>
+                    <span class="ieee-separator"></span>
+                    <span class="ieee-part exponent">10000010</span>
+                    <span class="ieee-separator"></span>
+                    <span class="ieee-part mantissa">10001100000000000000000</span>
+                </div>
+                <div style="margin-top: 1rem; font-size: 0.9rem; color: #6b7280;">
+                    Signo (1 bit) | Exponente (8 bits) | Mantisa (23 bits)
+                </div>
+            </div>
+
+            <!-- Indicador de progreso -->
+            <div class="conversion-progress">
+                <div class="progress-step current" id="progress-1">1</div>
+                <div class="progress-connector" id="connector-1"></div>
+                <div class="progress-step pending" id="progress-2">2</div>
+                <div class="progress-connector" id="connector-2"></div>
+                <div class="progress-step pending" id="progress-3">3</div>
+                <div class="progress-connector" id="connector-3"></div>
+                <div class="progress-step pending" id="progress-4">4</div>
+                <div class="progress-connector" id="connector-4"></div>
+                <div class="progress-step pending" id="progress-5">5</div>
+                <div class="progress-connector" id="connector-5"></div>
+                <div class="progress-step pending" id="progress-6">6</div>
+            </div>
+
+            <!-- Paso 1: Interpretar el bit de signo -->
+            <div class="conversion-step" id="step-1">
+                <div class="step-bar" id="bar-1"></div>
+                <div class="step-header">
+                    <div class="step-title">
+                        <div class="step-number" id="number-1">1</div>
+                        <h3>Interpretar el bit de signo</h3>
+                    </div>
+                    <div class="step-status pending" id="status-1">Pendiente</div>
+                </div>
+                <div class="step-content">
+                    <div class="binary-input-display white">
+                        <div class="ieee-parts">
+                            <span class="ieee-part sign">0</span>
+                            <span class="ieee-separator"></span>
+                            <span class="ieee-part gray">10000010</span>
+                            <span class="ieee-separator"></span>
+                            <span class="ieee-part gray">10001100000000000000000</span>
+                        </div>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: #6b7280;">
+                            Signo (1 bit) | Exponente (8 bits) | Mantisa (23 bits)
+                        </div>
+                    </div>
+                    <p class="step-description">
+                        El primer bit (más significativo) en IEEE 754 representa el signo:
+                        <br>• <strong>0</strong> = número positivo
+                        <br>• <strong>1</strong> = número negativo
+                        <br><br>Observa el bit de signo: <strong style="color: #92400e;">0</strong>
+                        <br>¿Qué significa esto para nuestro número?
+                    </p>
+
+                    <div class="option-group">
+                        <div class="option-button" data-value="positive">
+                            <div class="option-radio"></div>
+                            <span>El número es positivo</span>
+                        </div>
+                        <div class="option-button" data-value="negative">
+                            <div class="option-radio"></div>
+                            <span>El número es negativo</span>
+                        </div>
+                    </div>
+
+                    <button class="verify-button" id="verify-1" disabled>
+                        <span>Verificar Respuesta</span>
+                    </button>
+
+                    <div class="feedback-message" id="feedback-1" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Paso 2: Convertir exponente -->
+            <div class="conversion-step locked" id="step-2">
+                <div class="step-bar" id="bar-2"></div>
+                <div class="step-header">
+                    <div class="step-title">
+                        <div class="step-number" id="number-2">2</div>
+                        <h3>Convertir exponente a decimal</h3>
+                    </div>
+                    <div class="step-status locked" id="status-2">Bloqueado</div>
+                </div>
+                <div class="step-content">
+                    <div class="binary-input-display white">
+                        <div class="ieee-parts">
+                            <span class="ieee-part gray">0</span>
+                            <span class="ieee-separator"></span>
+                            <span class="ieee-part exponent">10000010</span>
+                            <span class="ieee-separator"></span>
+                            <span class="ieee-part gray">10001100000000000000000</span>
+                        </div>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: #6b7280;">
+                            Signo (1 bit) | Exponente (8 bits) | Mantisa (23 bits)
+                        </div>
+                    </div>
+
+                    <p class="step-description">
+                        El exponente en IEEE 754 son los siguientes 8 bits: <strong
+                            style="color: #1e40af;">10000010</strong>
+                        <br><br>Para encontrar su equivalente en decimal, utiliza el método para convertir cadenas
+                        binarias positivas:
+                        <br>10000010₂ = 1×2⁷ + 0×2⁶ + 0×2⁵ + 0×2⁴ + 0×2³ + 0×2² + 1×2¹ + 0×2⁰
+                        <br>= 128 + 0 + 0 + 0 + 0 + 0 + 2 + 0 = ?
+                    </p>
+
+                    <div class="input-group">
+                        <label class="input-label">Exponente en decimal:</label>
+                        <input type="number" class="step-input" id="exponent-decimal" placeholder="Ejemplo: 115"
+                            disabled>
+                    </div>
+
+                    <button class="verify-button" id="verify-2" disabled>
+                        <span>Verificar Conversión</span>
+                    </button>
+
+                    <div class="feedback-message" id="feedback-2" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Paso 3: Calcular exponente real -->
+            <div class="conversion-step locked" id="step-3">
+                <div class="step-bar" id="bar-3"></div>
+                <div class="step-header">
+                    <div class="step-title">
+                        <div class="step-number" id="number-3">3</div>
+                        <h3>Calcular exponente real (quitar sesgo)</h3>
+                    </div>
+                    <div class="step-status locked" id="status-3">Bloqueado</div>
+                </div>
+                <div class="step-content">
+                    <p class="step-description">
+                        IEEE 754 de 32 bits usa un <strong>sesgo de 127</strong>. Para obtener el exponente real:
+                        <br><strong>Exponente real = Exponente almacenado - 127</strong>
+                        <br><br>Con el exponente que calculaste (130):
+                        <br>Exponente real = 130 - 127 = ?
+                    </p>
+
+                    <div class="input-group">
+                        <label class="input-label">Exponente real:</label>
+                        <input type="number" class="step-input" id="real-exponent" placeholder="Ejemplo: 12" disabled>
+                    </div>
+
+                    <button class="verify-button" id="verify-3" disabled>
+                        <span>Verificar Cálculo</span>
+                    </button>
+
+                    <div class="feedback-message" id="feedback-3" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Paso 4: Normalizar mantisa -->
+            <div class="conversion-step locked" id="step-4">
+                <div class="step-bar" id="bar-4"></div>
+                <div class="step-header">
+                    <div class="step-title">
+                        <div class="step-number" id="number-4">4</div>
+                        <h3>Normalizar la mantisa</h3>
+                    </div>
+                    <div class="step-status locked" id="status-4">Bloqueado</div>
+                </div>
+                <div class="step-content">
+                    <div class="binary-input-display white">
+                        <div class="ieee-parts">
+                            <span class="ieee-part gray">0</span>
+                            <span class="ieee-separator"></span>
+                            <span class="ieee-part gray">10000010</span>
+                            <span class="ieee-separator"></span>
+                            <span class="ieee-part mantissa">10001100000000000000000</span>
+                        </div>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: #6b7280;">
+                            Signo (1 bit) | Exponente (8 bits) | Mantisa (23 bits)
+                        </div>
+                    </div>
+                    <p class="step-description">
+                        La mantisa son los últimos 23 bits: <strong
+                            style="color: #065f46;">10001100000000000000000</strong>
+                        <br><br>En IEEE 754, la mantisa representa la parte fraccionaria de un número normalizado.
+                        <br>Se asume un "1" implícito antes del punto decimal: <strong>1.</strong>
+                        <br><br>Forma el número normalizado: <strong>1.</strong> + mantisa
+                    </p>
+
+                    <div class="input-group">
+                        <label class="input-label">Número normalizado (1.xxxxx en binario):</label>
+                        <input type="text" class="step-input" id="normalized-binary"
+                            placeholder="Ejemplo: 1.10000000001000010000001" disabled>
+                    </div>
+
+                    <button class="verify-button" id="verify-4" disabled>
+                        <span>Verificar Normalización</span>
+                    </button>
+
+                    <div class="feedback-message" id="feedback-4" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Paso 5: Calcular la mantisa normalizada en decimal-->
+            <div class="conversion-step locked" id="step-5">
+                <div class="step-bar" id="bar-5"></div>
+                <div class="step-header">
+                    <div class="step-title">
+                        <div class="step-number" id="number-5">5</div>
+                        <h3>Calcular el valor decimal final</h3>
+                    </div>
+                    <div class="step-status locked" id="status-5">Bloqueado</div>
+                </div>
+                <div class="step-content">
+                    <h4>1. Convertir mantisa en decimal</h4>
+                    <p class="step-description">
+                        <br>El último paso antes de obtener el valor real a partir de los 32 bits es transformar la
+                        mantisa normalizada que calculaste (1.10001100000000000000000) a su equivalente decimal.
+                        <br><br>Para hacerlo, trabajamos de manera distinta el peso asignado a los bits. Al leer la
+                        cadena de izquierda a derecha después del punto, el exponente de 2 comienza en -1 y disminuye de
+                        uno en uno hacia la derecha. Así, cada posición representa una potencia negativa de dos más
+                        pequeña:
+                        <br>
+                    <ul>
+                        <li>El 1 antes del punto es <strong>2⁰ = 1</strong></li>
+                        <li>Primer bit fraccionario (1) vale <strong>2⁻¹ = 0.5</strong></li>
+                        <li>Segundo bit fraccionario (0) vale <strong>2⁻² = 0.25</strong> pero no suma</li>
+                        <li>Tercer bit fraccionario (0) vale <strong>2⁻³ = 0.125</strong> pero no suma</li>
+                        <li>Cuarto bit fraccionario (0) vale <strong>2⁻⁴ = 0.0625</strong> pero no suma</li>
+                        <li>Quinto bit fraccionario (1) vale <strong>2⁻⁵ = 0.03125</strong></li>
+                        <li>Sexto bit fraccionario (1) vale <strong>2⁻⁶ = 0.015625</strong></li>
+                    </ul>
+                    Después de identificar esto, sumamos los valores de todas las potencias donde el bit sea 1. <br>¿Qué
+                    número de mantisa obtienes?
+                    </p>
+
+                    <div class="input-group">
+                        <label class="input-label">Mantisa en decimal:</label>
+                        <input type="number" step="0.001" class="step-input" id="normalized-decimal"
+                            placeholder="Ejemplo: 1.0765" disabled>
+                    </div>
+
+                    <button class="verify-button" id="verify-5" disabled>
+                        <span>Verificar Resultado</span>
+                    </button>
+
+                    <div class="feedback-message" id="feedback-5" style="display: none;"></div>
+                </div>
+            </div>
+            <!-- Paso 6: Calcular el valor final -->
+            <div class="conversion-step locked" id="step-6">
+                <div class="step-bar" id="bar-6"></div>
+                <div class="step-header">
+                    <div class="step-title">
+                        <div class="step-number" id="number-6">6</div>
+                        <h3>Calcular el valor decimal final</h3>
+                    </div>
+                    <div class="step-status locked" id="status-6">Bloqueado</div>
+                </div>
+                <div class="step-content">
+                    <p class="step-description">
+                        Usa la fórmula IEEE 754:
+                        <br><strong>Valor = (-1)^signo × mantisa_normalizada × 2^exponente_real</strong>
+                        <br><br>Con tus valores:
+                        <br>• Signo = 0
+                        <br>• Mantisa normalizada = 1.546875
+                        <br>• Exponente real = 3
+                        <br><br>
+
+                        Reemplaza en la fórmula para encontrar el valor decodificado de la cadena trabajada a lo largo
+                        de todo el ejercicio ( 0 10000010 10001100000000000000000 )
+
+                    </p>
+
+
+
+                    <div class="input-group">
+                        <label class="input-label">Valor decimal final:</label>
+                        <input type="number" step="0.001" class="step-input" id="final-decimal"
+                            placeholder="Ejemplo: -1.678" disabled>
+                    </div>
+
+                    <button class="verify-button" id="verify-6" disabled>
+                        <span>Verificar Resultado</span>
+                    </button>
+
+                    <div class="feedback-message" id="feedback-6" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Resultado final -->
+            <div class="conversion-step locked" id="final-result" style="display: none;">
+                <div class="step-bar correct"></div>
+                <div class="step-header">
+                    <div class="step-title">
+                        <div class="step-number correct">✓</div>
+                        <h3>Resultado Final</h3>
+                    </div>
+                    <div class="step-status correct">Completado</div>
+                </div>
+                <div class="step-content">
+                    <div
+                        style="background: #f0fdf4; border: 1px solid #10b981; border-radius: 8px; padding: 1.5rem; text-align: center;">
+                        <h2 style="margin: 0 0 1rem 0; color: #059669;">🎉 ¡Conversión Completada!</h2>
+                        <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+                            <div class="binary-input-display final">
+                                <div class="ieee-parts">
+                                    <span class="ieee-part sign">0</span>
+                                    <span class="ieee-separator"></span>
+                                    <span class="ieee-part exponent">10000010</span>
+                                    <span class="ieee-separator"></span>
+                                    <span class="ieee-part mantissa">10001100000000000000000</span>
+                                </div>
+                            </div>
+
+                            <br>= <strong style="font-size: 1.5rem; color: #059669;">12.375</strong> (decimal)
+                        </div>
+
+                        <div
+                            style="background: white; padding: 1rem; border-radius: 6px; margin-top: 1rem; text-align: left;">
+                            <strong>Resumen del proceso:</strong>
+                            <br>
+                            <br>• Signo: 0 → Positivo
+                            <br>• Exponente: 10000010₂ = 130₁₀ → Real: 130 - 127 = 3
+                            <br>• Mantisa: 1.100011₂ = 1.546875₁₀
+                            <br>• Resultado: (+1) × 1.546875 × 2³ = 12.375
+                        </div>
+                    </div>
+
+                    <div class="feedback-message correct" style="margin-top: 1rem;">
+                        <span>¡Excelente! Has convertido correctamente de IEEE 754 a decimal.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones de navegación -->
+        <div class="footer-fixed">
+            <div class="buttons">
+                <button id="previousBtn" onclick="window.location.href='pag3.html';">Anterior</button>
+                <button id="nextBtn" onclick="window.location.href='pag4.html';">Siguiente</button>
+            </div>
+
+
+            <div class="level-counter" id="levelIndicator">4 / ?</div>
+        </div>
+    </main>
+</body>
+
+</html>
