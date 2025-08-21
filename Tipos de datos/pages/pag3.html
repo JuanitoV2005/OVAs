@@ -150,19 +150,20 @@
 
         <br><br>
         <h2>Quiz Teórico</h2>
+        <script>
+            // Llama a la función para cada quiz en DOMContentLoaded
+            window.addEventListener("DOMContentLoaded", () => {
+                inicializarQuizInputs("quiz-teoria", "enteros_teoria_");
+            });
+
+            // Llama a la función para cada quiz en window.onload
+            window.addEventListener("load", () => {
+                restaurarQuiz("quiz-teoria", respuestasTeoria, "resultadoFormularioTeoria", "botonValidarTeoria", "enteros_teoria_");
+            });
+
+        </script>
         <div class="quiz-formulario">
-            <script>
-                // Llama a la función para cada quiz en DOMContentLoaded
-                window.addEventListener("DOMContentLoaded", () => {
-                    inicializarQuizInputs("quiz-teoria", "enteros_teoria_");
-                });
 
-                // Llama a la función para cada quiz en window.onload
-                window.addEventListener("load", () => {
-                    restaurarQuiz("quiz-teoria", respuestasTeoria, "resultadoFormularioTeoria", "botonValidarTeoria", "enteros_teoria_");
-                });
-
-            </script>
             <form id="quiz-teoria">
                 <fieldset>
                     <legend>1. Los cuatro tipos enteros en Java (byte, short, int, long) siempre son con signo
@@ -229,8 +230,8 @@
         </script>
 
         <div class="chessboard-quiz">
-            <div class="chessboard-canvas" id="chessboardQuiz1" style="max-width: 400px;""></div>
-            <form id=" quiz1">
+            <div class="chessboard-canvas" id="chessboardQuiz1" style="max-width: 400px;"></div>
+            <form id="quiz1">
 
                 <label class=" cadenaEnteraBinaria">
                     1. En un byte, el valor más negativo se escribe <code>10000000</code> (-128).
@@ -278,30 +279,30 @@
 
 
                 <p class="hidden" id="resultadoFormulario"></p>
-                </form>
+            </form>
 
+        </div>
+
+        <br><br>
+        <h2>El siguiente paso: punto flotante</h2>
+        <p>
+            Ya viste cómo los enteros en Java se representan con <strong>complemento a 2</strong>.
+            Pero no todo son valores enteros: a menudo necesitamos trabajar con <em>números reales</em>.
+            En la siguiente lección conocerás los <strong>tipos de datos de punto flotante</strong>
+            (<code>float</code> y <code>double</code>) y cómo permiten representar valores fraccionarios con
+            precisión (y límitaciones).
+        </p>
+
+
+        <div class="footer-fixed">
+            <div class="buttons">
+                <button id="previousBtn" onclick="window.location.href='pag2.html';">Anterior</button>
+                <button id="nextBtn" onclick="window.location.href='pag4.html';">Siguiente</button>
             </div>
 
-            <br><br>
-            <h2>El siguiente paso: punto flotante</h2>
-            <p>
-                Ya viste cómo los enteros en Java se representan con <strong>complemento a 2</strong>.
-                Pero no todo son valores enteros: a menudo necesitamos trabajar con <em>números reales</em>.
-                En la siguiente lección conocerás los <strong>tipos de datos de punto flotante</strong>
-                (<code>float</code> y <code>double</code>) y cómo permiten representar valores fraccionarios con
-                precisión (y límitaciones).
-            </p>
 
-
-            <div class="footer-fixed">
-                <div class="buttons">
-                    <button id="previousBtn" onclick="window.location.href='pag2.html';">Anterior</button>
-                    <button id="nextBtn" onclick="window.location.href='pag4.html';">Siguiente</button>
-                </div>
-
-
-                <div class="level-counter" id="levelIndicator">3 / ?</div>
-            </div>
+            <div class="level-counter" id="levelIndicator">3 / 4</div>
+        </div>
 
 
     </main>
