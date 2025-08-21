@@ -18,142 +18,143 @@
 <body>
     <main>
         <h1>Tipos de Datos Reales en Java</h1>
-            <h2>Introducción</h2>
-            <p>
-                En Java, cuando necesitas trabajar con números que tienen parte fraccionaria, usas los tipos
-                <code>float</code> y <code>double</code>.
-                Estos no se guardan como enteros, sino siguiendo un estándar especial.
-            </p>
+        <h2>Introducción</h2>
+        <p>
+            En Java, cuando necesitas trabajar con números que tienen parte fraccionaria, usas los tipos
+            <code>float</code> y <code>double</code>.
+            Estos no se guardan como enteros, sino siguiendo un estándar especial.
+        </p>
 
-            <main>
-                <section class="card-grid">
-                    <!-- FLOAT -->
-                    <div class="card-teoria">
-                        <div class="card-bar purple"></div>
-                        <div class="card-body">
-                            <div class="card-header">
-                                <h2>float</h2>
-                                <span class="badge">32 bits</span>
-                            </div>
-                            <p>Números en coma flotante de precisión simple. Requiere el sufijo <code>f</code> o
-                                <code>F</code> al asignar literales.</p>
-                            <div class="card-info">
-                                <p><strong>Tamaño:</strong> 4 bytes</p>
-                                <progress value="50" max="100"></progress>
-                                <small>32 bits de 64</small>
-                            </div>
-                            <div class="card-range">
-                                <strong>Rango aproximado:</strong>
-                                <div class="range-box">
-                                    <div>Mínimo: 1.4e-45</div>
-                                    <div>Máximo: 3.4028235e+38</div>
-                                </div>
-                            </div>
-                            <div class="card-range">
-                                <strong>Precisión:</strong>
-                                <div class="range-box">
-                                    ~7 dígitos decimales
-                                </div>
-                            </div>
-                            <!-- <div class="example">
+        <section class="card-grid">
+            <!-- FLOAT -->
+            <div class="card-teoria">
+                <div class="card-bar purple"></div>
+                <div class="card-body">
+                    <div class="card-header">
+                        <h2>float</h2>
+                        <span class="badge">32 bits</span>
+                    </div>
+                    <p>Números en coma flotante de precisión simple. Requiere el sufijo <code>f</code> o
+                        <code>F</code> al asignar literales.
+                    </p>
+                    <div class="card-info">
+                        <p><strong>Tamaño:</strong> 4 bytes</p>
+                        <progress value="50" max="100"></progress>
+                        <small>32 bits de 64</small>
+                    </div>
+                    <div class="card-range">
+                        <strong>Rango aproximado:</strong>
+                        <div class="range-box">
+                            <div>Mínimo: 1.4e-45</div>
+                            <div>Máximo: 3.4028235e+38</div>
+                        </div>
+                    </div>
+                    <div class="card-range">
+                        <strong>Precisión:</strong>
+                        <div class="range-box">
+                            ~7 dígitos decimales
+                        </div>
+                    </div>
+                    <!-- <div class="example">
                                 <strong>Ejemplo:</strong>
                                 <code>float pi = 3.1415927f;</code>
                             </div> -->
+                </div>
+            </div>
+
+            <!-- DOUBLE -->
+            <div class="card-teoria">
+                <div class="card-bar indigo"></div>
+                <div class="card-body">
+                    <div class="card-header">
+                        <h2>double</h2>
+                        <span class="badge">64 bits</span>
+                    </div>
+                    <p>Números en coma flotante de doble precisión. Es el tipo por defecto para literales
+                        decimales en Java.</p>
+                    <div class="card-info">
+                        <p><strong>Tamaño:</strong> 8 bytes</p>
+                        <progress value="100" max="100"></progress>
+                        <small>64 bits de 64</small>
+                    </div>
+                    <div class="card-range">
+                        <strong>Rango aproximado:</strong>
+                        <div class="range-box">
+                            <div>Mínimo: 4.9e-324</div>
+                            <div>Máximo: 1.7976931348623157e+308</div>
                         </div>
                     </div>
-
-                    <!-- DOUBLE -->
-                    <div class="card-teoria">
-                        <div class="card-bar indigo"></div>
-                        <div class="card-body">
-                            <div class="card-header">
-                                <h2>double</h2>
-                                <span class="badge">64 bits</span>
-                            </div>
-                            <p>Números en coma flotante de doble precisión. Es el tipo por defecto para literales
-                                decimales en Java.</p>
-                            <div class="card-info">
-                                <p><strong>Tamaño:</strong> 8 bytes</p>
-                                <progress value="100" max="100"></progress>
-                                <small>64 bits de 64</small>
-                            </div>
-                            <div class="card-range">
-                                <strong>Rango aproximado:</strong>
-                                <div class="range-box">
-                                    <div>Mínimo: 4.9e-324</div>
-                                    <div>Máximo: 1.7976931348623157e+308</div>
-                                </div>
-                            </div>
-                            <div class="card-range">
-                                <strong>Precisión:</strong>
-                                <div class="range-box">
-                                    ~15 dígitos decimales
-                                </div>
-                            </div>
-                            <!-- <div class="example">
+                    <div class="card-range">
+                        <strong>Precisión:</strong>
+                        <div class="range-box">
+                            ~15 dígitos decimales
+                        </div>
+                    </div>
+                    <!-- <div class="example">
                                 <strong>Ejemplo:</strong>
                                 <code>double e = 2.718281828459045;</code>
                             </div> -->
-                        </div>
-                    </div>
-                </section>
-
-
-
-            </main>
-
-
-
-
-
-
-
-
-
-
-
-            <p>
-                Se trata del estándar <strong>IEEE 754</strong>: la forma en que se representan los números reales en
-                binario.
-                Se construye a partir de tres componentes —<em>signo</em>, <em>exponente</em> y <em>mantisa</em>— que
-                podemos entender fácilmente si lo comparamos con la notación científica que ya conoces:
-            </p>
-
-            <div id="notacion-cientifica">
-                <div class="formula-title">Fórmula:</div>
-                <div class="formula-line">
-                    (<span class="ieee-part sign">–</span>) ×
-                    <span class="ieee-part mantissa">4.2</span> ×
-                    10<sup><span class="ieee-part exponent">7</span></sup>
                 </div>
-                <div class="formula-line">
-                    = –42,000,000
-                </div>
-
-                <br><br>
-
-                <ul style="list-style: none; padding-left: 0; line-height: 1.8;">
-                    <li>
-                        <span class="ieee-part sign">–</span> :
-                        Indica el <strong>signo</strong> del número (positivo o negativo).
-                    </li>
-                    <li>
-                        <span class="ieee-part exponent">7</span> :
-                        Es el <strong>exponente</strong>, que nos dice cuántas veces multiplicamos por la base (10).
-                    </li>
-                    <li>
-                        <span class="ieee-part mantissa">4.2</span> :
-                        Es la <strong>mantisa</strong> o los <em>dígitos significativos</em> del número.
-                    </li>
-                </ul>
             </div>
+        </section>
+
+        <br><br>
+        <p>
+            Se trata del estándar <strong>IEEE 754</strong>: la forma en que se representan los números reales en
+            binario.
+            Se construye a partir de tres componentes —<em>signo</em>, <em>exponente</em> y <em>mantisa</em>— que
+            podemos entender fácilmente si lo comparamos con la notación científica que ya conoces:
+        </p>
+
+        <div id="notacion-cientifica">
+            <div class="formula-title">Fórmula:</div>
+            <div class="formula-line">
+                (<span class="ieee-part sign">–</span>) ×
+                <span class="ieee-part mantissa">4.2</span> ×
+                10<sup><span class="ieee-part exponent">7</span></sup>
+            </div>
+            <div class="formula-line">
+                = –42,000,000
+            </div>
+
+            <br><br>
+
+            <ul style="list-style: none; padding-left: 0; line-height: 1.8;">
+                <li>
+                    <span class="ieee-part sign">–</span> :
+                    Indica el <strong>signo</strong> del número (positivo o negativo).
+                </li>
+                <li>
+                    <span class="ieee-part exponent">7</span> :
+                    Es el <strong>exponente</strong>, que nos dice cuántas veces multiplicamos por la base (10).
+                </li>
+                <li>
+                    <span class="ieee-part mantissa">4.2</span> :
+                    Es la <strong>mantisa</strong> o los <em>dígitos significativos</em> del número.
+                </li>
+            </ul>
+        </div>
+
+        <p>
+            La idea de este capítulo es aprender el paso a paso para convertir un número en formato <strong>IEEE
+                754</strong>
+            a su valor decimal. En este caso, trabajaremos con <code>float</code>. Sin embargo, 
+            los pasos que seguiremos son los mismos respecto a <code>double</code></strong>,
+            solo cambian las longitudes:
+        </p>
+        <ul>
+            <li><code>float</code> → 1 bit de signo, 8 bits de exponente, 23 bits de mantisa.</li>
+            <li><code>double</code> → 1 bit de signo, 11 bits de exponente, 52 bits de mantisa.</li>
+        </ul>
 
         <div class="converter-container">
 
             <h2>Conversión de IEEE 754 a Decimal</h1>
 
-                <p>Convierte el número en formato IEEE 754 (32 bits) <strong>01000001010001100000000000000000</strong> a
-                    decimal paso a paso. Solo podrás avanzar al siguiente paso si completas correctamente el actual.</p>
+                <p>Convierte el número en formato IEEE 754 (32 bits)
+                    <strong>01000001010001100000000000000000</strong> a
+                    decimal paso a paso. Solo podrás avanzar al siguiente paso si completas correctamente el actual.
+                </p>
 
                 <!-- Representación IEEE 754 -->
                 <div class="binary-input-display">
@@ -261,7 +262,8 @@
                         <p class="step-description">
                             El exponente en IEEE 754 son los siguientes 8 bits: <strong
                                 style="color: #1e40af;">10000010</strong>
-                            <br><br>Para encontrar su equivalente en decimal, utiliza el método para convertir cadenas
+                            <br><br>Para encontrar su equivalente en decimal, utiliza el método para convertir
+                            cadenas
                             binarias positivas:
                             <br>10000010₂ = 1×2⁷ + 0×2⁶ + 0×2⁵ + 0×2⁴ + 0×2³ + 0×2² + 1×2¹ + 0×2⁰
                             <br>= 128 + 0 + 0 + 0 + 0 + 0 + 2 + 0 = ?
@@ -293,7 +295,8 @@
                     </div>
                     <div class="step-content">
                         <p class="step-description">
-                            IEEE 754 de 32 bits usa un <strong>sesgo de 127</strong>. Para obtener el exponente real:
+                            IEEE 754 de 32 bits usa un <strong>sesgo de 127</strong>. Para obtener el exponente
+                            real:
                             <br><strong>Exponente real = Exponente almacenado - 127</strong>
                             <br><br>Con el exponente que calculaste (130):
                             <br>Exponente real = 130 - 127 = ?
@@ -339,7 +342,8 @@
                         <p class="step-description">
                             La mantisa son los últimos 23 bits: <strong
                                 style="color: #065f46;">10001100000000000000000</strong>
-                            <br><br>En IEEE 754, la mantisa representa la parte fraccionaria de un número normalizado.
+                            <br><br>En IEEE 754, la mantisa representa la parte fraccionaria de un número
+                            normalizado.
                             <br>Se asume un "1" implícito antes del punto decimal: <strong>1.</strong>
                             <br><br>Forma el número normalizado: <strong>1.</strong> + mantisa
                         </p>
@@ -371,12 +375,15 @@
                     <div class="step-content">
                         <h4>1. Convertir mantisa en decimal</h4>
                         <p class="step-description">
-                            <br>El último paso antes de obtener el valor real a partir de los 32 bits es transformar la
+                            <br>El último paso antes de obtener el valor real a partir de los 32 bits es transformar
+                            la
                             mantisa normalizada que calculaste (1.10001100000000000000000) a su equivalente decimal.
-                            <br><br>Para hacerlo, trabajamos de manera distinta el peso asignado a los bits. Al leer la
+                            <br><br>Para hacerlo, trabajamos de manera distinta el peso asignado a los bits. Al leer
+                            la
                             cadena de izquierda a derecha después del punto, el exponente de 2 comienza en -1 y
                             disminuye de
-                            uno en uno hacia la derecha. Así, cada posición representa una potencia negativa de dos más
+                            uno en uno hacia la derecha. Así, cada posición representa una potencia negativa de dos
+                            más
                             pequeña:
                             <br>
                         <ul>
