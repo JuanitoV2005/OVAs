@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../assets/css/global/principal.css">
     <link rel="stylesheet" href="../assets/css/global/niveles.css">
     <link rel="stylesheet" href="../assets/css/pag2/complemento-a-2.css">
+    <link rel="stylesheet" href="../assets/css/pag2/quizStyles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
     <script src="../assets/js/global/conversionBinario.js"></script>
@@ -15,6 +16,7 @@
     <script src="../assets/js/pag2/crearQuiz1Aleatorio.js"></script>
     <script src="../assets/js/pag2/crearQuiz2Aleatorio.js"></script>
     <script src="../assets/js/pag2/funcionesQuiz.js"></script>
+
 
 </head>
 
@@ -94,7 +96,9 @@
             <strong>complemento a 2</strong>— es <code>3</code>, porque
             <code>253 + 3 = 256 ≡ 0 (mod 256)</code>.
         </p>
-        <h2>Quiz Aritmética Modular</h2>
+
+
+        <!-- Quiz Aritmética Modular -->
         <script>
             // --- Guardar respuestas escritas en inputs en localStorage ---
             window.addEventListener("DOMContentLoaded", () => {
@@ -109,34 +113,36 @@
 
         </script>
 
+        <div class="quiz-container">
+            <h2>Quiz Aritmética Modular</h2>
+            <form class="quiz-form" class="quiz-form" id="quiz1">
+                <label>
+                    1. ¿Cuál es el complemento de <strong id="q1_num"></strong> en 8 bits?
+                    <input type="text" name="q1" placeholder="Ejemplo: 3">
+                </label>
 
-        <form class="quiz-form" id="quiz1">
-            <label>
-                1. ¿Cuál es el complemento de <strong id="q1_num"></strong> en 8 bits?
-                <input type="text" name="q1" placeholder="Ejemplo: 3">
-            </label>
+                <label>
+                    2. Si el reloj es de 4 bits, ¿de cuántas horas será?
+                    <input type="text" name="q2" placeholder="Ejemplo: 256">
+                </label>
 
-            <label>
-                2. Si el reloj es de 4 bits, ¿de cuántas horas será?
-                <input type="text" name="q2" placeholder="Ejemplo: 256">
-            </label>
+                <label>
+                    3. En ese reloj de 4 bits, ¿cuál es el complemento de <strong id="q3_num"></strong>?
+                    <input type="text" name="q3" placeholder="Ejemplo: 4">
+                </label>
 
-            <label>
-                3. En ese reloj de 4 bits, ¿cuál es el complemento de <strong id="q3_num"></strong>?
-                <input type="text" name="q3" placeholder="Ejemplo: 4">
-            </label>
+                <p class="hidden" id="resultadosQ1"></p>
 
-            <p class="hidden" id="resultadosQ1"></p>
-
-            <div class="buttons">
-                <button type="button" id="botonValidarQ1" class="verifyBtn"
-                    onclick="validarFormulario(respuestasQ1,'quiz1','resultadosQ1','botonValidarQ1','complemento_q1_')">
-                    Validar respuestas
-                </button>
-            </div>
+                <div class="buttons">
+                    <button type="button" id="botonValidarQ1" class="verifyBtn"
+                        onclick="validarFormulario(respuestasQ1,'quiz1','resultadosQ1','botonValidarQ1','complemento_q1_')">
+                        Validar respuestas
+                    </button>
+                </div>
 
 
-        </form>
+            </form>
+        </div>
 
 
         <br><br>
@@ -148,11 +154,7 @@
             Si tomamos un número y lo sumamos con su complemento, el resultado es exactamente <code>0</code> (mod 256).
         </p>
 
-        <p>
-            Por ejemplo, en 8 bits, <code>+2</code> y <code>−2</code> se representan de manera que su suma produce un
-            desbordamiento.
-            El bit extra se descarta y lo que queda es <code>0</code>, tal como esperamos.
-        </p>
+
         <section class="ejemplo-modulo">
             <div id="complemento-dos-suma">
                 <div class="linea-binaria">
@@ -207,13 +209,15 @@
             </p>
         </section>
 
-        <h2>Quiz Representación Binaria de Negativos</h2>
         <p>
-            Practiquemos cómo representar negativos en <strong>complemento a 2</strong> realizando una resta.
-            Interactúa con el canvas a continuación para registrar tus respuestas.
+            Por ejemplo, en 8 bits, <code>+2</code> y <code>−2</code> se representan de manera que su suma produce un
+            desbordamiento.
+            El bit extra se descarta y lo que queda es <code>0</code>, tal como esperamos.
         </p>
+
+
+        <!-- Quiz Representación Binaria de Negativos -->
         <script>
-            // Falta hacer que las respuestas ingresadas se guarden también cuando se interactua con el canvas.
             // --- Guardar respuestas escritas en inputs en localStorage ---
             window.addEventListener("DOMContentLoaded", () => {
                 inicializarQuizInputs("quiz2", "complemento_q2_");
@@ -227,37 +231,49 @@
 
 
         </script>
-        <div class="suma-binaria-quiz">
-            <div id="canvas-quiz2"></div>
-            <form class="quiz-form" id="quiz2">
-                <label>
-                    1. En la primera línea del canvas, escribe el número <strong id="quiz2_q1_num"></strong> en binario.
-                    <input type="text" name="q1" placeholder="Ejemplo: 00001010" readonly>
-                </label>
 
-                <label>
-                    2. En la segunda línea del canvas, escribe el número <strong id="quiz2_q2_num"></strong> en binario.
-                    <input type="text" name="q2" placeholder="Ejemplo: 10010001" readonly>
-                </label>
-
-                <label>
-                    3. Verifica el resultado: si ambas representaciones son correctas, la suma debe ser <strong
-                        id="quiz2_q3_num"></strong> en decimal.
-                    <input type="text" name="q3" placeholder="Ejemplo: 10011011" readonly>
-                </label>
-
-                <p class="hidden" id="resultadosQ2"></p>
-
-                <div class="buttons">
-                    <button type="button" id="botonValidarQ2" class="verifyBtn"
-                        onclick="validarFormulario(respuestasQ2,'quiz2','resultadosQ2','botonValidarQ2','complemento_q2_')">
-                        Validar respuestas
-                    </button>
+        <div class="quiz-container">
+            <h2>Quiz Representación Binaria de Negativos</h2>
+            <p>
+                Practiquemos cómo representar negativos en <strong>complemento a 2</strong> realizando una resta.
+                Interactúa con el canvas a continuación para registrar tus respuestas.
+            </p>
+            <div class="suma-binaria-quiz">
+                <div class="canvas-wrapper">
+                    <div id="canvas-quiz2"></div>
                 </div>
+                <form class="quiz-form" id="quiz2">
+                    <label>
+                        1. En la primera línea del canvas, escribe el número <strong id="quiz2_q1_num"></strong> en
+                        binario.
+                        <input type="text" name="q1" placeholder="Ejemplo: 00001010" readonly>
+                    </label>
+
+                    <label>
+                        2. En la segunda línea del canvas, escribe el número <strong id="quiz2_q2_num"></strong> en
+                        binario.
+                        <input type="text" name="q2" placeholder="Ejemplo: 10010001" readonly>
+                    </label>
+
+                    <label>
+                        3. Verifica el resultado: si ambas representaciones son correctas, la suma debe ser <strong
+                            id="quiz2_q3_num"></strong> en decimal.
+                        <input type="text" name="q3" placeholder="Ejemplo: 10011011" readonly>
+                    </label>
+
+                    <p class="hidden" id="resultadosQ2"></p>
+
+                    <div class="buttons">
+                        <button type="button" id="botonValidarQ2" class="verifyBtn"
+                            onclick="validarFormulario(respuestasQ2,'quiz2','resultadosQ2','botonValidarQ2','complemento_q2_')">
+                            Validar respuestas
+                        </button>
+                    </div>
 
 
 
-            </form>
+                </form>
+            </div>
         </div>
 
 
