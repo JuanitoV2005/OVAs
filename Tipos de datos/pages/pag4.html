@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../assets/css/global/niveles.css">
     <link rel="stylesheet" href="../assets/css/pag4/ieee754-to-decimal.css">
     <link rel="stylesheet" href="../assets/css/pag4/notacion-cientifica.css">
+    <link rel="stylesheet" href="../assets/css/pag4/cartas-resumen.css">
 
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
     <script src="../assets/js/pag4/ieee754-to-decimal.js"></script>
@@ -16,8 +17,7 @@
 
 <body>
     <main>
-        <div class="converter-container">
-            <h1>Tipos de Datos Reales en Java</h1>
+        <h1>Tipos de Datos Reales en Java</h1>
             <h2>Introducción</h2>
             <p>
                 En Java, cuando necesitas trabajar con números que tienen parte fraccionaria, usas los tipos
@@ -25,11 +25,98 @@
                 Estos no se guardan como enteros, sino siguiendo un estándar especial.
             </p>
 
+            <main>
+                <section class="card-grid">
+                    <!-- FLOAT -->
+                    <div class="card-teoria">
+                        <div class="card-bar purple"></div>
+                        <div class="card-body">
+                            <div class="card-header">
+                                <h2>float</h2>
+                                <span class="badge">32 bits</span>
+                            </div>
+                            <p>Números en coma flotante de precisión simple. Requiere el sufijo <code>f</code> o
+                                <code>F</code> al asignar literales.</p>
+                            <div class="card-info">
+                                <p><strong>Tamaño:</strong> 4 bytes</p>
+                                <progress value="50" max="100"></progress>
+                                <small>32 bits de 64</small>
+                            </div>
+                            <div class="card-range">
+                                <strong>Rango aproximado:</strong>
+                                <div class="range-box">
+                                    <div>Mínimo: 1.4e-45</div>
+                                    <div>Máximo: 3.4028235e+38</div>
+                                </div>
+                            </div>
+                            <div class="card-range">
+                                <strong>Precisión:</strong>
+                                <div class="range-box">
+                                    ~7 dígitos decimales
+                                </div>
+                            </div>
+                            <!-- <div class="example">
+                                <strong>Ejemplo:</strong>
+                                <code>float pi = 3.1415927f;</code>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- DOUBLE -->
+                    <div class="card-teoria">
+                        <div class="card-bar indigo"></div>
+                        <div class="card-body">
+                            <div class="card-header">
+                                <h2>double</h2>
+                                <span class="badge">64 bits</span>
+                            </div>
+                            <p>Números en coma flotante de doble precisión. Es el tipo por defecto para literales
+                                decimales en Java.</p>
+                            <div class="card-info">
+                                <p><strong>Tamaño:</strong> 8 bytes</p>
+                                <progress value="100" max="100"></progress>
+                                <small>64 bits de 64</small>
+                            </div>
+                            <div class="card-range">
+                                <strong>Rango aproximado:</strong>
+                                <div class="range-box">
+                                    <div>Mínimo: 4.9e-324</div>
+                                    <div>Máximo: 1.7976931348623157e+308</div>
+                                </div>
+                            </div>
+                            <div class="card-range">
+                                <strong>Precisión:</strong>
+                                <div class="range-box">
+                                    ~15 dígitos decimales
+                                </div>
+                            </div>
+                            <!-- <div class="example">
+                                <strong>Ejemplo:</strong>
+                                <code>double e = 2.718281828459045;</code>
+                            </div> -->
+                        </div>
+                    </div>
+                </section>
+
+
+
+            </main>
+
+
+
+
+
+
+
+
+
+
+
             <p>
-                Ese estándar se llama <strong>IEEE 754</strong>: la forma en que se representan los números reales en
+                Se trata del estándar <strong>IEEE 754</strong>: la forma en que se representan los números reales en
                 binario.
                 Se construye a partir de tres componentes —<em>signo</em>, <em>exponente</em> y <em>mantisa</em>— que
-                podemos entender fácilmente si lo comparamos con la notación científica que ya conoces.
+                podemos entender fácilmente si lo comparamos con la notación científica que ya conoces:
             </p>
 
             <div id="notacion-cientifica">
@@ -61,6 +148,7 @@
                 </ul>
             </div>
 
+        <div class="converter-container">
 
             <h2>Conversión de IEEE 754 a Decimal</h1>
 
