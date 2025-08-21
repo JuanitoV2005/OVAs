@@ -25,21 +25,22 @@
 
         <p>
             Para un uso práctico eficiente de los tipos de datos enteros en Java,
-            es indispensable tener presente el rango y el tamaño de cada uno.
-            Conocer las capacidades de byte, short, int y long te permitirá seleccionar el tipo más apropiado para tus
+            es indispensable tener presente el <strong>rango y tamaño</strong> de cada uno.
+            Conocer las capacidades de <code>byte</code>, <code>short</code>, <code>int</code> y <code>long</code> te
+            permitirá seleccionar el tipo más apropiado para tus
             variables,
-            optimizando así el consumo de memoria y evitando posibles desbordamientos de datos que podrían causar
+            optimizando así <strong>el consumo de memoria</strong> y <strong>evitando posibles desbordamientos</strong>
+            de datos que podrían causar
             errores en tu programa.
         </p>
 
         <h2>Resumen</h2>
         <p>
-            Observa con atención los rangos mostrados en la tabla. ¿Notas algún patrón?
-            Ahora intenta aplicar la fórmula que vimos para el complemento a 2:
-            <strong><code>–2^(n-1) a 2^(n-1) – 1</code></strong> según el número de bits de cada tipo.
-            ¿Coinciden los resultados? Comprueba que la fórmula realmente explica por qué un <code>byte</code> llega
-            hasta 127,
-            o por qué un <code>long</code> puede representar números tan negativos.
+            Observa con atención los rangos mostrados en la tabla.
+            Puedes aplicar la fórmula que vimos para el complemento a 2:
+            <strong><code>–2^(n-1) a 2^(n-1) – 1</code></strong> según el número de bits de cada tipo, y así comprobar
+            que la fórmula realmente explica por qué un <code>byte</code> llega hasta 127,
+            o por qué un <code>long</code> puede representar números tan grandes.
         </p>
 
         <section class="card-grid">
@@ -147,8 +148,7 @@
         </section>
 
 
-        <br>
-
+        <br><br>
         <h2>Quiz Teórico</h2>
         <div class="quiz-formulario">
             <script>
@@ -206,30 +206,38 @@
             </form>
         </div>
 
-        <h2>Representación Binaria de enteros en Java</h2>
+        <br><br>
+        <h2>Quiz Representación Binaria de enteros en Java</h2>
+        <p>
+            Todos los tipos enteros en Java se representan usando <strong>complemento a 2</strong>.
+            En este sistema, el <em>bit más significativo</em> también es indicador del signo:
+            siempre resulta <code>0</code> si el número es positivo, o <code>1</code> cuando es negativo.
+        </p>
+        <p>
+            Además de esta regla, existen otros patrones interesantes en la forma en que los bits representan
+            valores negativos y positivos. En la siguiente actividad podrás explorarlos y comprobar cómo
+            funcionan.
+        </p>
 
-        <h2>Quiz Cadenas Binarias Enteras</h2>
         <script>
             // Llama a la función para cada quiz en DOMContentLoaded
             window.addEventListener("DOMContentLoaded", () => {
                 generarQuiz1();
-                // inicializarQuizInputs("quiz1", "enteros_q1_");
                 restaurarQuiz("quiz1", respuestasQ1, "resultadoFormulario", "botonValidarQ1", "enteros_q1_");
             });
 
         </script>
-        <script>
-        </script>
+
         <div class="chessboard-quiz">
             <div class="chessboard-canvas" id="chessboardQuiz1" style="max-width: 400px;""></div>
-            <form id="quiz1">
+            <form id=" quiz1">
 
                 <label class=" cadenaEnteraBinaria">
-                1. En un byte, el valor más negativo se escribe <code>10000000</code> (-128).
-                Escribe en las filas <strong>7</strong> y <strong>8</strong> la cadena que representa
-                el valor más negativo de un <strong>short</strong>
-                <input type="text" name="q1" placeholder="0000000000000000" readonly>
-                <div class="decimal-output" id="decimal-q1"></div>
+                    1. En un byte, el valor más negativo se escribe <code>10000000</code> (-128).
+                    Escribe en las filas <strong>7</strong> y <strong>8</strong> la cadena que representa
+                    el valor más negativo de un <strong>short</strong>
+                    <input type="text" name="q1" placeholder="0000000000000000" readonly>
+                    <div class="decimal-output" id="decimal-q1"></div>
                 </label>
 
                 <label class="cadenaEnteraBinaria">
@@ -269,12 +277,20 @@
                 </div>
 
 
-                <p class = "hidden" id="resultadoFormulario"></p>
-            </form>
+                <p class="hidden" id="resultadoFormulario"></p>
+                </form>
 
             </div>
-            <br>
 
+            <br><br>
+            <h2>El siguiente paso: punto flotante</h2>
+            <p>
+                Ya viste cómo los enteros en Java se representan con <strong>complemento a 2</strong>.
+                Pero no todo son valores enteros: a menudo necesitamos trabajar con <em>números reales</em>.
+                En la siguiente lección conocerás los <strong>tipos de datos de punto flotante</strong>
+                (<code>float</code> y <code>double</code>) y cómo permiten representar valores fraccionarios con
+                precisión (y límitaciones).
+            </p>
 
 
             <div class="footer-fixed">
@@ -286,6 +302,7 @@
 
                 <div class="level-counter" id="levelIndicator">3 / ?</div>
             </div>
+
 
     </main>
 </body>
