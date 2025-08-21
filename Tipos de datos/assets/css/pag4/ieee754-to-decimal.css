@@ -2,8 +2,8 @@
 
 .converter-container {
   max-width: 1000px;
-  margin: 0 auto;
-  padding: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 /* Estilos para los pasos de conversión */
@@ -27,12 +27,12 @@
 }
 
 .conversion-step.correct {
-  border: 2px solid #10b981;
+  /* border: 2px solid #10b981; */
   box-shadow: 0 3px 15px rgba(16, 185, 129, 0.15);
 }
 
 .conversion-step.incorrect {
-  border: 2px solid #ef4444;
+  /* border: 2px solid #ef4444; */
   box-shadow: 0 3px 15px rgba(239, 68, 68, 0.15);
   animation: shake 0.5s ease-in-out;
 }
