@@ -26,20 +26,30 @@ function sketchTema3(p) {
       { id: "q8", question: "Si arr = {57, 28, 63} y luego ejecutamos arr[0] = 99; ¿Qué valor imprime System.out.println(arr[1])?", correctAnswer: "28" },
       { id: "q9", question: "¿Es posible cambiar el tamaño de un array después de crearlo en Java? (si/no)", correctAnswer: "no" }
     ],
-    // Reto 7 (indice 7) - Enteros (int)
+    [
+      { id: "q10", question: "¿Un arreglo en Java puede contener referencias nulas? (si/no)", correctAnswer: "si" },
+      { id: "q11", question: "¿Qué valor tendrá puntos[3] si nunca se le ha asignado un objeto?", correctAnswer: "null" }
+    ],
+
     null
   ];
+
+  p.preload = function () {
+    imgEnun4 = p.loadImage("assets/punteros.png");
+  };
 
   const contentVisibilityMap = {
       0: ['intro'],
       1: ['enunciado1', 'decimal-label'],
       2: ['enunciado2', 'explicacion-intermedia', 'decimal-label'],
       3: ['enunciado3', 'decimal-label'],
-      4: ['conclusion']
+      4: ['enunciado4', 'decimal-label'],
+      5: ['conclusion']
     };
 
   let arrayValues = [0, 0, 0, 0, 0];
   let selectedIndex = -1;
+  let imagenes = {};
 
   p.setup = function () {
     let canvas = p.createCanvas(600, 400);
@@ -77,6 +87,10 @@ function sketchTema3(p) {
       p.textSize(16);
       p.text("arr[0] = 9;  System.out.println(arr[0]);", p.width/2, 320);
       p.text("Output: 9", p.width/2, 350);
+    }
+    else if (nivelActual === 4) {
+      if (imgEnun4) p.image(imgEnun4, 50, 10, 500, 380);
+      return;
     }
   };
 

@@ -67,7 +67,32 @@
   </p>
 </div>
 
+<div class="content" id="enunciado4">
+  <h2>Arreglos y memoria en Java</h2>
+  <p>
+    En Java, los arreglos no almacenan directamente los objetos, sino
+    <strong>referencias</strong> hacia ellos.  
+    Al declarar un arreglo de objetos, por ejemplo:
+  </p>
+  <b><p><code>Punto[] puntos = new Punto[5];</code></p></b>
+  <p>
+    Se crea un arreglo de tamaño 5, pero inicialmente todas sus
+    posiciones contienen <code>null</code>.  
+    Al asignar:
+  </p>
+  <b><p><code>puntos[0] = new Punto(1, 2);</code></p></b>
+  <p>
+    La primera posición ahora guarda una referencia a un objeto de la clase
+    <code>Punto</code>, que vive en memoria (heap), con valores <b><code>x = 1</code></b>,
+    <b><code>y = 2</code></b>.
+  </p>
 
+  <p>
+    Esto significa que los arreglos en Java son estructuras de
+    <strong>referencias</strong>, no de copias completas de objetos.
+  </p>
+<p>Ejemplo de memoria con arreglos en Java</p>
+</div>
 
 
 <div class="content" id="conclusion" style="min-height: 600px;">
