@@ -152,7 +152,6 @@ function restaurarQuiz(formId, respuestasDict, resultadoId, botonId, storagePref
     } else {
         const form = document.getElementById(formId);
         const respuestasGuardadas = JSON.parse(localStorage.getItem(storagePrefix + "respuestas") || "{}");
-        const decimalesGuardados = JSON.parse(localStorage.getItem(storagePrefix + "decimales") || "{}");
 
         for (let key in respuestasGuardadas) {
             if (form.elements[key]) {
@@ -181,4 +180,45 @@ function restaurarQuiz(formId, respuestasDict, resultadoId, botonId, storagePref
         }
         document.getElementById(resultadoId).innerText = "";
     }
+
+    // --- Restaurar conversiones a decimal del tablero (si las hay) ---
+    const decimalesGuardados = JSON.parse(localStorage.getItem(storagePrefix + "decimales") || "{}");
+
+    for (let key in decimalesGuardados) {
+        const decimalDiv = document.getElementById("decimal-" + key);
+        if (decimalDiv) {
+            // Como el valor ya incluye "Decimal: ...", lo ponemos directo
+            decimalDiv.textContent = decimalesGuardados[key];
+        } else {
+            console.warn("No se encontró div con id decimal-" + key);
+        }
+    }
+
+}
+
+
+// Guardar en localStorage el contenido de los inputs del quiz, como respuestas ingresadas
+function guardarRespuestas(formId, diccionarioRespuestasCorrectas, prefix) {
+    const ids = Object.keys(diccionarioRespuestasCorrectas);
+    const formulario = document.getElementById(formId);
+    if (!formulario) {
+        console.error(`No se encontró el formulario con el ID: ${formId}`);
+        return;
+    }
+
+    const respuestas = {};
+    for (const id of ids) {
+        const input = formulario.querySelector(`input[name="${id}"]`);
+        if (input) {
+            respuestas[id] = input.value;
+        }
+    }
+
+    // Convertir el objeto a una cadena JSON
+    const jsonRespuestas = JSON.stringify(respuestas);
+
+    // Generar la clave única y guardar en localStorage
+    const clave = `${prefix}respuestas`;
+    localStorage.setItem(clave, jsonRespuestas);
+    console.log(`Respuestas guardadas en localStorage con la clave: ${clave}`);
 }
