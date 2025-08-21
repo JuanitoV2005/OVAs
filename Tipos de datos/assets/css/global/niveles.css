@@ -83,8 +83,15 @@ input[type="number"].incorrecto,
   border: none;
 }
 
+
 #previousBtn {
   background-color: #3b9cb4;
+  color: white;
+  border: none;
+}
+
+#finishBtn {
+  background-color: #d9534f;
   color: white;
   border: none;
 }
@@ -98,6 +105,7 @@ button {
 }
 
 .verifyBtn:disabled,
+#previousBtn:disabled,
 #nextBtn:disabled {
   background-color: #ccc;
   color: #555;
