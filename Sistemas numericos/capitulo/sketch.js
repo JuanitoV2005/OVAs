@@ -9,7 +9,7 @@ function sketchTema2(p) {
     [
       { id: "q1", question: "Si ubicas un peón. ¿Qué número se forma?", correctAnswer: "1" },
       { id: "q2", question: "Ahora, si retiras el peón. ¿Qué número obtienes?", correctAnswer: "0" },
-      { id: "q3", question: "Si necesitaras guardar la respuesta a una pregunta 'sí o no', ¿cómo usarías esta casilla para representar un 'sí'?", isStatement: true }
+      { id: "q3", question: "Si necesitaras guardar la respuesta a una pregunta 'sí o no', ¿cómo usarías esta casilla para representar un 'sí'?", correctAnswer: "1", notInput: true }
     ],
     // Reto 2 (indice 2)
     [
