@@ -1,0 +1,115 @@
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+main {
+  padding: 20px;
+}
+
+
+/* Estilos de la visualizacion de bits: */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+p {
+  font-size: 18px;       /* Tamaño de la letra */
+  line-height: 1.6;      /* Altura de línea (1.6 veces el tamaño de la fuente) */
+  margin-bottom: 10px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.canvas-container canvas {
+  width:100%;  
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+}
+
+.canvas-container {
+  height: auto !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  main {
+  padding: 5px;
+  padding-bottom: 10px !important;
+}
+
+  .canvas-container {
+    max-width: 100%;
+  }
+
+  canvas {
+    max-width: 100%;
+    height: auto !important;
+  }
+}
+
+[id^="q"] {
+  font-size: 18px;   /* mismo que <p> */
+  line-height: 1.4;
+}
+
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.opcion {
+  display: flex;
+  align-items: center;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+}
+
+.opcion:hover {
+  border-color: #3b9cb4;
+  background-color: #f0f8ff;
+}
+
+.opcion input[type="radio"] {
+  display: none; /* oculta el radio original */
+}
+
+.opcion span {
+  flex: 1;
+  font-size: 16px;
+}
+
+.opcion input[type="radio"]:checked + span {
+  background-color: #3b9cb4;
+  color: white;
+  border-radius: 6px;
+  padding: 6px 10px;
+}

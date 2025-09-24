@@ -1,0 +1,749 @@
+
+<h1>Controlando el Flujo: Decidir y Repetir</h1>
+
+
+<!-- ----------------- INTRODUCCION ----------------- -->
+
+<div class="content" id="intro" style="min-height: 450px; max-width: 650px; margin: 0 auto; text-align: justify;">
+  <br>
+    <p>En el corazón de cada programa de computadora, desde una sencilla aplicación hasta un complejo sistema operativo,
+    se encuentran las estructuras de control de flujo. Estas instrucciones son las que permiten a un programa tomar
+    decisiones, ejecutar tareas repetidamente y adaptar su comportamiento en tiempo de ejecución.</p>
+    <p>En este módulo, nos adentraremos en los dos pilares fundamentales del control de flujo: las estructuras de
+    selección (o condicionales), que dirigen al programa por diferentes caminos según una condición, y las estructuras
+    de repetición (o bucles), que permiten automatizar y repetir acciones hasta alcanzar un objetivo. Comprender estos
+    conceptos es esencial para escribir código que no solo sea funcional, sino también dinámico y eficiente.</p>
+</div>
+
+
+<!-- ----------------- MICROTEMA 1 ----------------- -->
+
+<div class="content" id="enunciado1">
+  <h2>Lógica booleana y operadores</h2>
+
+  <hr>
+
+  <p>
+    La lógica booleana es la base de la toma de decisiones en programación. En Java, se utilizan <strong>expresiones
+      booleanas</strong> para crear condiciones que evalúan a <code>true</code> o <code>false</code>. Estas
+    expresiones
+    son fundamentales en las estructuras de selección (<code>if-then-else</code>) y de iteración (bucles).
+  </p>
+
+  <hr>
+
+  <h3>Expresiones Booleanas</h3>
+
+  <p>
+    Una expresión booleana puede ser una variable de tipo <code>boolean</code> o una comparación entre dos valores.
+    Por
+    ejemplo, <code>x > 5</code> es una expresión que evalúa a <code>true</code> si el valor de la variable
+    <code>x</code> es mayor que 5, y a <code>false</code> en caso contrario.
+  </p>
+  
+  <hr>
+
+  <h3>Operadores de Relación</h3>
+
+  <p>
+    Los operadores de relación se utilizan para comparar dos valores.
+  </p>
+  <ul>
+    <li><code>==</code> (igual a)</li>
+    <li><code>!=</code> (no es igual a)</li>
+    <li><code>&lt;</code> (menor que)</li>
+    <li><code>&gt;</code> (mayor que)</li>
+    <li><code>&lt;=</code> (menor o igual que)</li>
+    <li><code>&gt;=</code> (mayor o igual que)</li>
+  </ul>
+  
+  <hr>
+
+  <h3>Operadores Lógicos</h3>
+  
+  <p>
+    Para construir condiciones más complejas, se utilizan los operadores lógicos. Estos operadores combinan
+    expresiones
+    booleanas para producir un único resultado booleano. Los principales son:
+  </p>
+  <ul>
+    <li><code>&&</code> (operador <strong>AND</strong>): La expresión combinada es <code>true</code> solo si
+      <strong>ambas</strong> expresiones son <code>true</code>.
+    </li>
+    <li><code>||</code> (operador <strong>OR</strong>): La expresión combinada es <code>true</code> si <strong>al
+        menos
+        una</strong> de las expresiones es <code>true</code>.</li>
+    <li><code>!</code> (operador <strong>NOT</strong>): Invierte el valor de la expresión booleana. Si es
+      <code>true</code> la convierte a <code>false</code>, y viceversa.
+    </li>
+  </ul>
+
+  <p>
+    También es interesante mencionar el concepto de <strong>corto circuito</strong> (short circuit), que es una
+    optimización en
+    la evaluación de expresiones lógicas. Por ejemplo, en una expresión con <code>&&</code>, si la primera parte es
+    <code>false</code>, la segunda no se evalúa porque el resultado ya se conoce (<code>false</code>). Lo mismo ocurre
+    con <code>||</code> si la primera parte es <code>true</code>.
+  </p>
+
+  <hr>
+
+  <h2>Preguntas</h2>
+
+</div>
+
+
+<!-- ----------------- LABERINTO 1 ----------------- -->
+
+<div class="content" id="enunciado2">
+  <h2>Laberinto: Lógica booleana y operadores</h2>
+</div>
+
+
+<!-- ----------------- MICROTEMA 2 ----------------- -->
+<div class="content" id="enunciado3">
+  <h2>If simple (decisión básica)</h2>
+  
+  <hr>
+
+  <h3>La sentencia <code>if</code></h3>
+  <p>
+    La sentencia <code>if</code> es la forma más sencilla de una estructura de selección. Se utiliza para ejecutar un
+    bloque de código solo si una condición específica es verdadera (<code>true</code>). Dicha estructura de selección es
+    fundamental
+    para controlar el flujo de un programa.
+  </p>
+
+  <h3>Estructura básica</h3>
+  <p>
+    La sintaxis de un <code>if</code> simple es la siguiente:
+  </p>
+  <div class="code-block">
+    <pre><code>if (condición) {
+        // Código a ejecutar si la condición es verdadera
+    }</code></pre>
+  </div>
+  <ul>
+    <li>La <strong><code>condición</code></strong> es una <strong>expresión booleana</strong> que, como vimos, evalúa a
+      <code>true</code> o <code>false</code>. Puede ser una variable booleana, una comparación o una combinación de
+      comparaciones usando operadores lógicos.
+    </li>
+    <li>El <strong>bloque de código</strong> dentro de las llaves <code>{}</code> se ejecuta solo si la condición es
+      <code>true</code>. Si la condición es <code>false</code>, el programa simplemente salta este bloque y continúa con
+      la siguiente línea de código.
+    </li>
+  </ul>
+
+  <h4>Ejemplo</h4>
+  <p>
+    Considera un programa que verifica si un número es positivo:
+  </p>
+  <div class="code-block">
+    <pre><code>int numero = 10;
+  
+  if (numero > 0) {
+      System.out.println("El número es positivo.");
+  }</code></pre>
+  </div>
+  <p>
+    En este caso, la condición <code>numero > 0</code> es <code>true</code> (ya que 10 es mayor que 0), por lo que el
+    mensaje "El número es positivo." se imprimirá en la consola.
+  </p>
+
+  <hr>
+
+  <h2>Preguntas</h2>
+
+</div>
+
+<!-- ----------------- LABERINTO 2 ----------------- -->
+
+<div class="content" id="enunciado4">
+  <h2>Laberinto: If simple (decisión básica)</h2>
+</div>
+
+<!-- ----------------- MICROTEMA 3 ----------------- -->
+
+<div class="content" id="enunciado5">
+  <h2>If–else y cadenas else if</h2>
+
+  <hr>
+
+  <h3>La sentencia <code>if-else</code></h3>
+  <p>
+    A diferencia del <code>if</code> simple, la sentencia <code>if-else</code> ofrece dos caminos de ejecución. Si la
+    condición es verdadera, se ejecuta un bloque de código; si es falsa, se ejecuta un bloque de código diferente.
+  </p>
+
+  <h3>Estructura básica</h3>
+  <p>
+    La sintaxis es la siguiente:
+  </p>
+  <div class="code-block">
+    <pre><code>if (condición) {
+      // Código si la condición es verdadera (true)
+  } else {
+      // Código si la condición es falsa (false)
+  }</code></pre>
+  </div>
+
+  <h4>Ejemplo</h4>
+  <p>
+    Para un programa que determina si un número es par o impar:
+  </p>
+  <div class="code-block">
+    <pre><code>int numero = 7;
+  
+  if (numero % 2 == 0) {
+      System.out.println("El número es par.");
+  } else {
+      System.out.println("El número es impar.");
+  }</code></pre>
+  </div>
+  <p>
+    En este caso, la condición <code>numero % 2 == 0</code> es falsa, por lo que el programa ejecuta el código dentro
+    del bloque <code>else</code>.
+  </p>
+
+  <hr>
+
+  <h3>Cadenas <code>else if</code></h3>
+  <p>
+    Para manejar múltiples condiciones excluyentes, se pueden encadenar sentencias <code>if-else</code> usando
+    <code>else if</code>. Esto permite al programa evaluar varias condiciones en secuencia, y ejecutar el primer bloque
+    de código que corresponda a una condición verdadera.
+  </p>
+
+  <h3>Estructura básica</h3>
+  <p>
+    La sintaxis es:
+  </p>
+  <div class="code-block">
+    <pre><code>if (condición1) {
+      // Código si la condición1 es verdadera
+  } else if (condición2) {
+      // Código si la condición1 es falsa y la condición2 es verdadera
+  } else if (condición3) {
+      // Código si la condición1 y 2 son falsas, y la condición3 es verdadera
+  } else {
+      // Código si ninguna de las condiciones anteriores es verdadera
+  }</code></pre>
+  </div>
+
+  <h4>Ejemplo</h4>
+  <p>
+    Un programa que asigna una calificación a una puntuación:
+  </p>
+  <div class="code-block">
+    <pre><code>int puntuacion = 85;
+  
+  if (puntuacion >= 90) {
+      System.out.println("Calificación: A");
+  } else if (puntuacion >= 80) {
+      System.out.println("Calificación: B");
+  } else if (puntuacion >= 70) {
+      System.out.println("Calificación: C");
+  } else {
+      System.out.println("Calificación: F");
+  }</code></pre>
+  </div>
+  <p>
+    El programa evalúa las condiciones en orden. Como <code>puntuacion >= 90</code> es falsa, pasa a la siguiente
+    condición. <code>puntuacion >= 80</code> es verdadera, por lo que imprime "Calificación: B" y el resto de la cadena
+    <code>else if</code> es ignorada.
+  </p>
+
+  <hr>
+
+  <h2>Preguntas</h2>
+
+</div>
+
+<!-- ----------------- LABERINTO 3 ----------------- -->
+
+<div class="content" id="enunciado6">
+  <h2>Laberinto: If–else y cadenas else if</h2>
+</div>
+
+<!-- ----------------- MICROTEMA 4 ----------------- -->
+
+<div class="content" id="enunciado7">
+  <h2>Switch (selección discreta)</h2>
+
+  <hr>
+
+  <h3>La sentencia <code>switch</code></h3>
+  <p>
+    La sentencia <code>switch</code> permite que un programa evalúe una expresión y, basándose en su valor, ejecute
+    diferentes bloques de código. Es una forma más limpia y eficiente de manejar múltiples selecciones que las cadenas
+    <code>else if</code>.
+  </p>
+
+  <h4>Estructura básica</h4>
+  <p>
+    La sintaxis de un <code>switch</code> es la siguiente:
+  </p>
+  <div class="code-block">
+    <pre><code>switch (expresión) {
+      case valor1:
+          // Código a ejecutar si la expresión coincide con valor1
+          break;
+      case valor2:
+          // Código a ejecutar si la expresión coincide con valor2
+          break;
+      ...
+      default:
+          // Código a ejecutar si la expresión no coincide con ningún caso
+  }</code></pre>
+  </div>
+  <ul>
+    <li>La <strong><code>expresión</code></strong> debe ser de un tipo que admita esta sentencia, como <code>int</code>,
+      <code>char</code>, <code>String</code> o un tipo enumerado.
+    </li>
+    <li>Cada <strong><code>case</code></strong> evalúa si el valor de la expresión es igual al <code>valor</code>
+      especificado.</li>
+    <li>La palabra clave <strong><code>break</code></strong> es crucial, ya que detiene la ejecución dentro del bloque
+      <code>switch</code>. Si se omite, el programa continuará ejecutando el código del siguiente <code>case</code>
+      (fenómeno conocido como "fall-through").
+    </li>
+    <li>La sección <strong><code>default</code></strong> es opcional y se ejecuta si la expresión no coincide con
+      ninguno de los <code>case</code> anteriores. Actúa como el bloque <code>else</code> final en una cadena de
+      <code>if-else if</code>.
+    </li>
+  </ul>
+
+  <h4>Ejemplo</h4>
+  <p>
+    Considera un programa que muestra el nombre de un día de la semana basándose en un número del 1 al 7.
+  </p>
+  <div class="code-block">
+    <pre><code>int dia = 3;
+  String nombreDia;
+  
+  switch (dia) {
+      case 1:
+          nombreDia = "Lunes";
+          break;
+      case 2:
+          nombreDia = "Martes";
+          break;
+      case 3:
+          nombreDia = "Miércoles";
+          break;
+      case 4:
+          nombreDia = "Jueves";
+          break;
+      case 5:
+          nombreDia = "Viernes";
+          break;
+      case 6:
+          nombreDia = "Sábado";
+          break;
+      case 7:
+          nombreDia = "Domingo";
+          break;
+      default:
+          nombreDia = "Día inválido";
+  }
+  System.out.println(nombreDia);</code></pre>
+  </div>
+  <p>
+    En este ejemplo, la expresión <code>dia</code> (con valor 3) coincide con <code>case 3</code>, por lo que el
+    programa asigna "Miércoles" a la variable <code>nombreDia</code> y luego el <code>break</code> lo saca del
+    <code>switch</code>. Si el valor de <code>dia</code> hubiera sido 9, se ejecutaría el bloque <code>default</code>.
+  </p>
+  
+  <hr>
+
+  <h2>Preguntas</h2>
+
+</div>
+
+<!-- ----------------- LABERINTO 4 ----------------- -->
+
+<div class="content" id="enunciado8">
+  <h2>Laberinto: Switch (selección discreta)</h2>
+</div>
+
+<!-- ----------------- MICROTEMA 5 ----------------- -->
+<div class="content" id="enunciado9">
+  <h2>While (repetición indefinida, preprueba)</h2>
+
+  <hr>
+
+  <h3>La sentencia <code>while</code></h3>
+  <p>
+    El bucle <code>while</code> es ideal para situaciones donde no se conoce de antemano el número de veces que se
+    necesita repetir un bloque de código. La repetición continúa mientras la condición sea verdadera.
+  </p>
+
+  <h4>Estructura básica</h4>
+  <p>
+    La sintaxis del bucle <code>while</code> es la siguiente:
+  </p>
+  <div class="code-block">
+    <pre><code>while (condición) {
+      // Código a ejecutar repetidamente
+  }</code></pre>
+  </div>
+  <ul>
+    <li>La <strong><code>condición</code></strong> es una expresión booleana que se evalúa al principio de cada
+      iteración del bucle.</li>
+    <li>Si la condición es <code>true</code>, el código dentro de las llaves <code>{}</code> se ejecuta. Al finalizar el
+      bloque, el programa regresa y evalúa la condición nuevamente.</li>
+    <li>Si la condición es <code>false</code> desde el principio, el código dentro del bucle nunca se ejecuta.</li>
+  </ul>
+
+  <h4>Ejemplo</h4>
+  <p>
+    Considera un programa que suma los números ingresados por el usuario hasta que ingrese <code>0</code>.
+  </p>
+  <div class="code-block">
+    <pre><code>import java.util.Scanner;
+  
+  public class SumaIndefinida {
+      public static void main(String[] args) {
+          Scanner entrada = new Scanner(System.in);
+          int numero;
+          int suma = 0;
+  
+          System.out.println("Ingrese un número (0 para terminar):");
+          numero = entrada.nextInt();
+  
+          while (numero != 0) {
+              suma = suma + numero;
+              System.out.println("Ingrese un número (0 para terminar):");
+              numero = entrada.nextInt();
+          }
+  
+          System.out.println("La suma total es: " + suma);
+          entrada.close();
+      }
+  }</code></pre>
+  </div>
+  <p>
+    En este ejemplo, la condición del bucle <code>while (numero != 0)</code> se evalúa antes de cada repetición. El
+    bucle se ejecutará mientras el usuario no ingrese un cero. Este tipo de bucle, controlado por un valor especial
+    (<code>0</code> en este caso) se conoce como "bucle controlado por centinela" (sentinel controlled loop).
+  </p>
+
+  <hr>
+
+  <h2>Preguntas</h2>
+
+</div>
+
+<!-- ----------------- LABERINTO 5 ----------------- -->
+
+<div class="content" id="enunciado10">
+  <h2>Laberinto: While (repetición indefinida, preprueba)</h2>
+</div>
+
+<!-- ----------------- MICROTEMA 6 ----------------- -->
+
+<div class="content" id="enunciado11">
+  <h2>Patrones con while: centinela, validación y acumuladores</h2>
+
+  <hr>
+
+  <h3>Patrón del Centinela</h3>
+  <p>
+    El <strong>patrón del centinela</strong> se utiliza cuando no se sabe de antemano cuántos datos se procesarán. Un
+    <strong>valor centinela</strong> es un valor especial que se introduce para indicar que el bucle debe terminar. Es
+    un valor que no podría ser un dato válido.
+  </p>
+  <p>
+    En este patrón, es fundamental usar una "lectura de cebado" o <strong>priming read</strong>, que es la primera
+    lectura de datos que ocurre fuera del bucle. Esto inicializa la variable de control antes de la primera evaluación
+    de la condición <code>while</code>.
+  </p>
+
+  <h4>Ejemplo</h4>
+  <p>
+    El programa que suma números hasta que se ingresa un <code>0</code> es un ejemplo clásico de un bucle controlado por
+    centinela. Aquí, el <code>0</code> es el valor centinela que detiene la ejecución.
+  </p>
+  <div class="code-block">
+    <pre><code>// Lectura de cebado
+  System.out.println("Ingrese un número (0 para terminar):");
+  numero = entrada.nextInt();
+  
+  // Bucle controlado por el centinela
+  while (numero != 0) {
+      // Procesa el dato
+      // ...
+      // Lectura para la siguiente iteración
+      System.out.println("Ingrese un número (0 para terminar):");
+      numero = entrada.nextInt();
+  }</code></pre>
+  </div>
+  
+  <hr>
+
+  <h3>Patrón del Acumulador</h3>
+  <p>
+    Un <strong>acumulador</strong> es una variable que se utiliza dentro de un bucle para sumar o "acumular" una serie
+    de valores. Se inicializa antes del bucle (generalmente en <code>0</code>) y se actualiza en cada iteración.
+  </p>
+
+  <h4>Ejemplo</h4>
+  <p>
+    En el ejemplo anterior, la variable <code>suma</code> actúa como un acumulador. En cada iteración, se le añade el
+    valor del <code>numero</code> ingresado por el usuario, acumulando el total.
+  </p>
+  <div class="code-block">
+    <pre><code>int suma = 0; // Se inicializa el acumulador
+  
+  while (numero != 0) {
+      suma = suma + numero; // El acumulador se actualiza en cada iteración
+      // ...
+  }</code></pre>
+  </div>
+  
+  <hr>
+
+  <h3>Patrón de Validación</h3>
+  <p>
+    El <strong>patrón de validación</strong> usa un bucle <code>while</code> para garantizar que la entrada del usuario
+    cumpla con ciertos criterios antes de que el programa continúe. Este bucle se repetirá indefinidamente hasta que el
+    usuario ingrese un valor válido.
+  </p>
+
+  <h4>Ejemplo</h4>
+  <p>
+    Supongamos que un programa requiere que el usuario ingrese un número entre 1 y 10.
+  </p>
+  <div class="code-block">
+    <pre><code>import java.util.Scanner;
+  
+  public class Validacion {
+      public static void main(String[] args) {
+          Scanner entrada = new Scanner(System.in);
+          int numero;
+  
+          System.out.println("Ingrese un número entre 1 y 10:");
+          numero = entrada.nextInt();
+  
+          // El bucle se repite hasta que el número sea válido
+          while (numero &lt; 1 || numero &gt; 10) {
+              System.out.println("Número inválido. Por favor, ingrese un número entre 1 y 10:");
+              numero = entrada.nextInt();
+          }
+  
+          System.out.println("El número ingresado es: " + numero);
+          entrada.close();
+      }
+  }</code></pre>
+  </div>
+  <p>
+    En este caso, la condición del bucle <code>while</code> se mantiene verdadera mientras el número sea menor que 1 O
+    mayor que 10, obligando al usuario a reingresar el valor hasta que sea válido.
+  </p>
+
+  <hr>
+
+  <h2>Preguntas</h2>
+
+</div>
+
+<!-- ----------------- LABERINTO 6 ----------------- -->
+
+<div class="content" id="enunciado12">
+  <h2>Laberinto: Patrones con while: centinela, validación y acumuladores</h2>
+</div>
+
+<!-- ----------------- MICROTEMA 7 ----------------- -->
+
+<div class="content" id="enunciado13">
+  <h2>For (repetición definida, contaje)</h2>
+  
+  <hr>
+
+  <h3>La sentencia <code>for</code></h3>
+  <p>El bucle <code>for</code> es una estructura de control de flujo compacta y fácil de leer que condensa la
+    inicialización, la condición de terminación y la expresión de actualización en una sola línea.</p>
+  <p>A diferencia del bucle <code>while</code>, que se utiliza para repeticiones indefinidas, el bucle
+    <code>for</code> es ideal para situaciones donde el número de iteraciones se conoce de antemano. Es la
+    estructura más adecuada para el "conteo" o la iteración sobre una secuencia de valores, como por ejemplo, recorrer
+    un arreglo o repetir una acción un número específico de veces.
+  </p>
+  <h4>Estructura básica</h4>
+  <p>
+    La sintaxis del bucle <code>for</code> es la siguiente:
+  </p>
+  <div class="code-block">
+    <pre><code>for (inicialización; condición; actualización) {
+            // Código a ejecutar en cada iteración
+        }</code></pre>
+  </div>
+  <ul>
+    <li><strong><code>inicialización</code></strong>: Se ejecuta una sola vez al comienzo del bucle. Aquí se declara e
+      inicializa la variable de control (por ejemplo, <code>int i = 0;</code>).</li>
+    <li><strong><code>condición</code></strong>: Se evalúa antes de cada iteración. El bucle continúa mientras esta
+      condición sea <code>true</code>.</li>
+    <li><strong><code>actualización</code></strong>: Se ejecuta al final de cada iteración. Aquí se modifica la variable
+      de control (por ejemplo, <code>i++</code>).</li>
+  </ul>
+
+  <h4>Ejemplo</h4>
+  <p>
+    Considera un programa que imprime los números del 1 al 5.
+  </p>
+  <div class="code-block">
+    <pre><code>for (int i = 1; i <= 5; i++) {
+            System.out.println(i);
+        }</code></pre>
+  </div>
+  <p>
+    En este ejemplo:
+  </p>
+  <ul>
+    <li><strong><code>inicialización</code></strong>: <code>int i = 1;</code> Se establece la variable de control en
+      <code>1</code>.
+    </li>
+    <li><strong><code>condición</code></strong>: <code>i <= 5;</code> El bucle continuará mientras <code>i</code> sea
+      menor o igual a <code>5</code>.</li>
+    <li><strong><code>actualización</code></strong>: <code>i++</code> El valor de <code>i</code> se incrementa en uno al
+      final de cada iteración.</li>
+  </ul>
+  <p>
+    El bucle se ejecutará cinco veces, imprimiendo los números del 1 al 5 en la consola.
+  </p>
+  
+  <hr>
+
+  <h2>Preguntas</h2>
+
+</div>
+
+<!-- ----------------- LABERINTO 7 ----------------- -->
+
+<div class="content" id="enunciado14">
+  <h2>Laberinto: For (repetición definida, contaje)</h2>
+</div>
+
+<!-- ----------------- MICROTEMA 8 ----------------- -->
+<div class="content" id="enunciado15">
+  <h2>For anidados y elección del bucle adecuado</h2>
+
+  <hr>
+
+  <h3>Bucles <code>for</code> Anidados</h3>
+  <p>
+    Un <strong>bucle <code>for</code> anidado</strong> es un bucle que se encuentra dentro de otro bucle. El bucle
+    interno se ejecuta completamente por cada iteración del bucle externo. Esta estructura es fundamental para trabajar
+    con datos que tienen una naturaleza bidimensional, como matrices o tablas, o para generar patrones.
+  </p>
+
+  <h4>Estructura y ejemplo</h4>
+  <p>
+    Considera un programa que crea una cuadrícula de asteriscos de 3x3:
+  </p>
+  <div class="code-block">
+    <pre><code>for (int i = 0; i < 3; i++) {       // Bucle externo para las filas
+      for (int j = 0; j < 3; j++) {   // Bucle interno para las columnas
+          System.out.print("* ");
+      }
+      System.out.println(); // Salto de línea al terminar la fila
+  }</code></pre>
+  </div>
+  <p>
+    En este ejemplo:
+  </p>
+  <ul>
+    <li>El bucle exterior, controlado por la variable <code>i</code>, se ejecuta tres veces (una por cada fila).</li>
+    <li>Por cada iteración del bucle exterior, el bucle interior (controlado por <code>j</code>) se ejecuta tres veces,
+      imprimiendo un asterisco y un espacio.</li>
+  </ul>
+
+  <hr>
+
+  <h3>¿Cuál bucle elegir: <code>for</code> o <code>while</code>?</h3>
+  <p>
+    La elección entre un bucle <code>for</code> y un <code>while</code> depende de si conoces de antemano el número de
+    iteraciones necesarias.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Criterio</th>
+        <th>Bucle <code>for</code></th>
+        <th>Bucle <code>while</code></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Uso principal</strong></td>
+        <td>Para repeticiones con un número de iteraciones conocido.</td>
+        <td>Para repeticiones que dependen de una condición, donde el número de veces no se conoce.</td>
+      </tr>
+      <tr>
+        <td><strong>Tipo de bucle</strong></td>
+        <td>Repetición <strong>definida</strong> (basado en conteo).</td>
+        <td>Repetición <strong>indefinida</strong> (basado en una condición de preprueba).</td>
+      </tr>
+      <tr>
+        <td><strong>Cuándo usarlo</strong></td>
+        <td>Iterar sobre una matriz o arreglo, imprimir un patrón, o realizar una acción un número fijo de veces.</td>
+        <td>Validar la entrada del usuario, procesar datos de un archivo hasta el final, o cuando se usa un valor
+          centinela.</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <hr>
+
+  <h2>Preguntas</h2>
+
+</div>
+
+
+<!-- ----------------- LABERINTO 8 ----------------- -->
+
+<div class="content" id="enunciado16">
+  <h2>Laberinto: For anidados y elección del bucle adecuado</h2>
+</div>
+
+<div class="container">
+
+  <div class="card" id="questionCard">
+
+    <div id="questions"></div>
+  </div>
+
+</div>
+
+
+<!-- Contenedor de la interfaz del laberinto -->
+<div class="laberinto-container hidden" id="laberintoUI">
+  <!-- Canvas del laberinto -->
+  <div id="mapa-container">
+    <div id="p5-container"></div>
+    <button id="runButton" class="run-btn">▶ Ejecutar el programa</button>
+  </div>
+  <!-- Blockly al lado -->
+  <div id="blockly-container">
+    <!--<xml id="toolbox" style="display:none">-->
+    <!--!<block type="controls_ifelse"></block>-->
+    <!--!<block type="controls_repeat_ext"></block>-->
+    <!--!<block type="math_number"></block>-->
+    <!--!<block type="sense_ahead"></block>-->
+    <!--!<block type="move_forward"></block>-->
+    <!--!<block type="turn_left"></block>-->
+    <!--!<block type="turn_right"></block>-->
+    <!--!</xml>-->
+    <div id="blocklyDiv"></div>
+  </div>
+</div>
+
+<!-- Botón de ejecutar -->
+<pre id="salida"></pre>
+
+
+<div class="footer-fixed">
+  <div class="buttons">
+    <button id="prevBtn">Anterior</button>
+    <button id="nextBtn">Siguiente</button>
+  </div>
+  <div class="level-counter" id="levelIndicator">1 / 3</div>
+</div>
