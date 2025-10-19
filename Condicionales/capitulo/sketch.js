@@ -196,7 +196,8 @@ function sketchTema2(p) {
         }
       }
     ],
-    null // Nivel 16
+    null, // Nivel 16
+    null
   ];
 
 
@@ -218,7 +219,8 @@ function sketchTema2(p) {
     13: ['enunciado13'],
     14: ['enunciado14', 'laberintoUI', 'p5Card'],
     15: ['enunciado15'],
-    16: ['enunciado16', 'laberintoUI', 'p5Card']
+    16: ['enunciado16', 'laberintoUI', 'p5Card'],
+    17: ['conclusiones']
   };
 
 
@@ -394,7 +396,8 @@ function sketchTema2(p) {
     13: null,
     14: mapa7,
     15: null,
-    16: mapa8
+    16: mapa8,
+    17: null
   };
 
   // ===== Inicio del jugador: usa "2" si existe; si no, fallback =====
@@ -441,6 +444,8 @@ function sketchTema2(p) {
   <block type="turn_right"></block>
   <block type="controls_ifelse"></block>
   <block type="sense_ahead"></block>
+  <block type="controls_repeat_ext"></block>
+  <block type="math_number"></block>
 </xml>`;
 
   // Laberinto 2: If simple
@@ -456,6 +461,8 @@ function sketchTema2(p) {
   </category>
   <category name="Sensores" colour="180">
     <block type="sense_ahead"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="math_number"></block>
   </category>
 </xml>`;
 
@@ -472,6 +479,8 @@ function sketchTema2(p) {
   </category>
   <category name="Sensores" colour="180">
     <block type="sense_ahead"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="math_number"></block>
   </category>
 </xml>`;
 
@@ -487,6 +496,8 @@ function sketchTema2(p) {
   </category>
   <category name="Sensores" colour="180">
     <block type="sense_ahead"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="math_number"></block>
   </category>
 </xml>`;
 
@@ -503,6 +514,8 @@ function sketchTema2(p) {
   </category>
   <category name="Sensores" colour="180">
     <block type="sense_ahead"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="math_number"></block>
   </category>
 </xml>`;
 
@@ -513,6 +526,8 @@ function sketchTema2(p) {
     <block type="move_forward"></block>
     <block type="turn_left"></block>
     <block type="turn_right"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="math_number"></block>
   </category>
   <category name="Bucles" colour="210">
     <block type="controls_whileUntil"></block>
@@ -531,6 +546,8 @@ function sketchTema2(p) {
     <block type="move_forward"></block>
     <block type="turn_left"></block>
     <block type="turn_right"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="math_number"></block>
   </category>
   <category name="Bucles" colour="210">
     <block type="controls_for"></block>
@@ -545,6 +562,8 @@ function sketchTema2(p) {
     <block type="move_forward"></block>
     <block type="turn_left"></block>
     <block type="turn_right"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="math_number"></block>
   </category>
   <category name="Bucles" colour="210">
     <block type="controls_for"></block>

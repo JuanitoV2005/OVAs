@@ -225,7 +225,6 @@ class QuizNavigator {
     }
   }
 
-  // Avanza al siguiente nivel
   goToNextLevel() {
     this.validateAnswers();  // valida antes de avanzar
     this.currentLevel++;
@@ -293,6 +292,7 @@ class QuizNavigator {
       }
     }
   }
+
 
 
   goToPrevLevel() {
